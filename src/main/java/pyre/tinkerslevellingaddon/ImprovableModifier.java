@@ -69,6 +69,7 @@ import slimeknights.tconstruct.library.modifiers.hook.special.ShearsModifierHook
 import slimeknights.tconstruct.library.modifiers.modules.armor.CoverGroundWalkerModule;
 import slimeknights.tconstruct.library.modifiers.modules.armor.ReplaceBlockWalkerModule;
 import slimeknights.tconstruct.library.modifiers.modules.armor.ToolActionWalkerTransformModule;
+import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
@@ -125,6 +126,26 @@ public class ImprovableModifier extends Modifier implements PlantHarvestModifier
                 ModifierHooks.BLOCK_TRANSFORM, ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.BLOCK_BREAK,
                 ModifierHooks.ON_ATTACKED, ModifierHooks.MELEE_HIT, ModifierHooks.ELYTRA_FLIGHT,
                 ModifierHooks.BOOT_WALK, ModifierHooks.VOLATILE_DATA, ModifierHooks.TOOL_STATS, ModifierHooks.REMOVE);
+        
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.DURABILITY).eachLevel(0.03f));
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.USE_ITEM_SPEED).eachLevel(0.03f));
+        
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.ATTACK_DAMAGE).eachLevel(0.03f));
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.ATTACK_SPEED).eachLevel(0.03f));
+        
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.MINING_SPEED).eachLevel(0.03f));
+        
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.ARMOR).eachLevel(0.03f));
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.ARMOR_TOUGHNESS).eachLevel(0.03f));
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.KNOCKBACK_RESISTANCE).eachLevel(0.03f));
+        
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.BLOCK_AMOUNT).eachLevel(0.03f));
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.BLOCK_ANGLE).eachLevel(0.03f));
+        
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.DRAW_SPEED).eachLevel(0.03f));
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.VELOCITY).eachLevel(0.03f));
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.ACCURACY).eachLevel(0.03f));
+        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.03f));
     }
 
     @Override
