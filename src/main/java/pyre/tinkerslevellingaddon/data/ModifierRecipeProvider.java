@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.util.ModUtil;
@@ -31,16 +32,48 @@ public class ModifierRecipeProvider extends RecipeProvider implements ICondition
         String abilitySalvage = "tools/modifiers/salvage/ability/";
 
         ModifierId improvableId = new ModifierId(ModUtil.getResource("improvable"));
+        
         ModifierRecipeBuilder.modifier(improvableId)
-                .addInput(Items.EXPERIENCE_BOTTLE)
-                .addInput(Items.NETHER_STAR)
-                .addInput(Items.EXPERIENCE_BOTTLE)
-                .addInput(Items.EXPERIENCE_BOTTLE)
-                .addInput(Items.EXPERIENCE_BOTTLE)
-                .setSlots(SlotType.ABILITY, 1)
+                .addInput(Tags.Items.BOOKSHELVES)
                 .setMaxLevel(1)
+                .setSlots(SlotType.ABILITY, 1)
+                .disallowCrystal()
                 .saveSalvage(consumer, prefix(improvableId, abilitySalvage))
-                .save(consumer, prefix(improvableId, abilityFolder));
+                .save(consumer, wrap(improvableId, abilityFolder, "_level_1"));
+
+        ModifierRecipeBuilder.modifier(improvableId)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .setMaxLevel(2)
+                .disallowCrystal()
+                .save(consumer, wrap(improvableId, abilityFolder, "_level_2"));
+
+        ModifierRecipeBuilder.modifier(improvableId)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .setMaxLevel(3)
+                .disallowCrystal()
+                .save(consumer, wrap(improvableId, abilityFolder, "_level_3"));
+
+        ModifierRecipeBuilder.modifier(improvableId)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .setMaxLevel(4)
+                .disallowCrystal()
+                .save(consumer, wrap(improvableId, abilityFolder, "_level_4"));
+
+        ModifierRecipeBuilder.modifier(improvableId)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .addInput(Tags.Items.BOOKSHELVES)
+                .setMaxLevel(5)
+                .disallowCrystal()
+                .save(consumer, wrap(improvableId, abilityFolder, "_level_5"));
     }
 
     @Override

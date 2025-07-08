@@ -85,7 +85,7 @@ public class TooltipEventHandler {
                 getLevelName(level), ModUtil.makeText(level, ChatFormatting.GRAY));
         infoEntries.add(ModUtil.makeTranslation("tooltip", "level", fullLevelName));
 
-        if (ToolLevellingUtil.canLevelUp(level)) {
+        if (ToolLevellingUtil.canLevelUp(level, tool.getModifierLevel(Registration.IMPROVABLE.get().getId()))) {
             MutableComponent xp = ModUtil.makeText(tool.getPersistentData().getInt(ImprovableModifier.EXPERIENCE_KEY), ChatFormatting.GOLD);
             MutableComponent xpNeeded = ModUtil.makeText(ToolLevellingUtil.getXpNeededForLevel(level + 1, ToolLevellingUtil.isBroadTool(tool)), ChatFormatting.GOLD);
             MutableComponent xpValue = ModUtil.makeTranslation("tooltip", "xp.value", ChatFormatting.GRAY, xp, xpNeeded);
@@ -140,7 +140,7 @@ public class TooltipEventHandler {
     private static List<Component> prepareNextLevelInfo(ToolStack tool) {
         List<Component> infoEntries = new ArrayList<>();
         int level = tool.getPersistentData().getInt(ImprovableModifier.LEVEL_KEY);
-        boolean canLevelUp = ToolLevellingUtil.canLevelUp(level);
+        boolean canLevelUp = ToolLevellingUtil.canLevelUp(level, tool.getModifierLevel(Registration.IMPROVABLE.get().getId()));
         boolean knowNextSlot = ToolLevellingUtil.canPredictNextSlot(tool);
         boolean knowNextStat = ToolLevellingUtil.canPredictNextStat(tool);
 

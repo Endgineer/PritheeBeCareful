@@ -1,0 +1,28 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": false,
+  "inputs": [
+    {
+      "tag": "forge:bookshelves"
+    },
+    {
+      "tag": "forge:bookshelves"
+    },
+    {
+      "tag": "forge:bookshelves"
+    },
+    {
+      "tag": "forge:bookshelves"
+    },
+    {
+      "tag": "forge:bookshelves"
+    }
+  ],
+  "level": {
+    "max": 5
+  },
+  "result": "tinkerslevellingaddon:improvable",
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

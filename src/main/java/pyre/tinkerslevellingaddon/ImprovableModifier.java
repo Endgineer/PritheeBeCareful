@@ -66,7 +66,6 @@ import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchMod
 import slimeknights.tconstruct.library.modifiers.hook.special.BlockTransformModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.special.PlantHarvestModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.special.ShearsModifierHook;
-import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.modifiers.modules.armor.CoverGroundWalkerModule;
 import slimeknights.tconstruct.library.modifiers.modules.armor.ReplaceBlockWalkerModule;
 import slimeknights.tconstruct.library.modifiers.modules.armor.ToolActionWalkerTransformModule;
@@ -102,7 +101,7 @@ import java.util.List;
 import static pyre.tinkerslevellingaddon.util.ToolLevellingUtil.addExperience;
 
 @Mod.EventBusSubscriber(modid = TinkersLevellingAddon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ImprovableModifier extends NoLevelsModifier implements PlantHarvestModifierHook, ShearsModifierHook,
+public class ImprovableModifier extends Modifier implements PlantHarvestModifierHook, ShearsModifierHook,
         BlockBreakModifierHook, BlockTransformModifierHook, ProjectileLaunchModifierHook, OnAttackedModifierHook,
         MeleeHitModifierHook, ElytraFlightModifierHook, ArmorWalkModifierHook, ModifierRemovalHook,
         VolatileDataModifierHook, ToolStatsModifierHook {
@@ -113,6 +112,11 @@ public class ImprovableModifier extends NoLevelsModifier implements PlantHarvest
     public static final ResourceLocation LEVEL_KEY = ModUtil.getResource("level");
     public static final ResourceLocation SLOT_HISTORY_KEY = ModUtil.getResource("slot_history");
     public static final ResourceLocation STAT_HISTORY_KEY = ModUtil.getResource("stat_history");
+
+    @Override
+    public Component getDisplayName(int level) {
+        return applyStyle(Component.translatable(getTranslationKey() + "." + String.valueOf(level)));
+    }
     
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {

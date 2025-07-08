@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import pyre.tinkerslevellingaddon.config.Config;
 import pyre.tinkerslevellingaddon.network.LevelUpPacket;
 import pyre.tinkerslevellingaddon.network.Messages;
+import pyre.tinkerslevellingaddon.setup.Registration;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
@@ -306,8 +307,8 @@ public class ToolLevellingUtil {
         return result;
     }
     
-    public static boolean canLevelUp(int level) {
-        return Config.maxLevel.get() == 0 || Config.maxLevel.get() > level;
+    public static boolean canLevelUp(int level, int improvableLevel) {
+        return (Config.maxLevel.get() == 0 || Config.maxLevel.get() > level) && level < 2*improvableLevel;
     }
     
     public static int getXpNeededForLevel(int level, boolean isBroadTool) {
@@ -333,7 +334,7 @@ public class ToolLevellingUtil {
         int experienceNeeded = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroadTool);
         
         while (currentExperience >= experienceNeeded) {
-            if (!ToolLevellingUtil.canLevelUp(currentLevel)) {
+            if (!ToolLevellingUtil.canLevelUp(currentLevel, tool.getModifierLevel(Registration.IMPROVABLE.get().getId()))) {
                 return;
             }
             data.putInt(LEVEL_KEY, ++currentLevel);

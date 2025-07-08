@@ -1,5 +1,10 @@
 {
   "modifier.tinkerslevellingaddon.improvable": "Improvable",
+  "modifier.tinkerslevellingaddon.improvable.1": "Improvable +1",
+  "modifier.tinkerslevellingaddon.improvable.2": "Improvable +2",
+  "modifier.tinkerslevellingaddon.improvable.3": "Improvable +3",
+  "modifier.tinkerslevellingaddon.improvable.4": "Improvable +4",
+  "modifier.tinkerslevellingaddon.improvable.5": "Improvable +5",
   "modifier.tinkerslevellingaddon.improvable.flavor": "Grind! Improve! Overcome!",
   "modifier.tinkerslevellingaddon.improvable.description": "Gain bonus modifier slots from hardworking with your tool",
 

@@ -99,7 +99,7 @@ public class ExperienceCommand {
     private static boolean addXp(ToolStack tool, int count, LivingEntity living) {
         ServerPlayer player = living instanceof ServerPlayer p ? p : null;
     
-        if (ToolLevellingUtil.canLevelUp(tool.getPersistentData().getInt(LEVEL_KEY))) {
+        if (ToolLevellingUtil.canLevelUp(tool.getPersistentData().getInt(LEVEL_KEY), tool.getModifierLevel(Registration.IMPROVABLE.get().getId()))) {
             ToolLevellingUtil.addExperience(tool, count, player);
             return true;
         }
@@ -111,7 +111,7 @@ public class ExperienceCommand {
         boolean isBroad = ToolLevellingUtil.isBroadTool(tool);
         ServerPlayer player = living instanceof ServerPlayer p ? p : null;
         
-        if (ToolLevellingUtil.canLevelUp(currentLevel)) {
+        if (ToolLevellingUtil.canLevelUp(currentLevel, tool.getModifierLevel(Registration.IMPROVABLE.get().getId()))) {
             int neededXp = ToolLevellingUtil.getXpNeededForLevel(currentLevel, isBroad);
             int currentXp = tool.getPersistentData().getInt(EXPERIENCE_KEY);
             int xp = Math.max(1, Math.min(count, neededXp - currentXp));

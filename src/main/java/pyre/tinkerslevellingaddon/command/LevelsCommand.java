@@ -114,7 +114,7 @@ public class LevelsCommand {
         ServerPlayer player = living instanceof ServerPlayer p ? p : null;
     
         for (levelsAdded = 0; levelsAdded < count; levelsAdded++) {
-            if (ToolLevellingUtil.canLevelUp(currentLevel)) {
+            if (ToolLevellingUtil.canLevelUp(currentLevel, tool.getModifierLevel(Registration.IMPROVABLE.get().getId()))) {
                 int xp = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroad);
                 ToolLevellingUtil.addExperience(tool, xp, player);
                 currentLevel++;
