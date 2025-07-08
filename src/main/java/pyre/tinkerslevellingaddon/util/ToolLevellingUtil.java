@@ -19,7 +19,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.*;
 
-import static pyre.tinkerslevellingaddon.ImprovableModifier.*;
+import static pyre.tinkerslevellingaddon.ReinforceModifier.*;
 
 public class ToolLevellingUtil {
     //slot types
@@ -307,8 +307,8 @@ public class ToolLevellingUtil {
         return result;
     }
     
-    public static boolean canLevelUp(int level, int improvableLevel) {
-        return (Config.maxLevel.get() == 0 || Config.maxLevel.get() > level) && level < 2*improvableLevel;
+    public static boolean canLevelUp(int level, int reinforce) {
+        return (Config.maxLevel.get() == 0 || Config.maxLevel.get() > level) && level < 2*reinforce;
     }
     
     public static int getXpNeededForLevel(int level, boolean isBroadTool) {
@@ -334,7 +334,7 @@ public class ToolLevellingUtil {
         int experienceNeeded = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroadTool);
         
         while (currentExperience >= experienceNeeded) {
-            if (!ToolLevellingUtil.canLevelUp(currentLevel, tool.getModifierLevel(Registration.IMPROVABLE.get().getId()))) {
+            if (!ToolLevellingUtil.canLevelUp(currentLevel, tool.getModifierLevel(Registration.REINFORCE.get().getId()))) {
                 return;
             }
             data.putInt(LEVEL_KEY, ++currentLevel);

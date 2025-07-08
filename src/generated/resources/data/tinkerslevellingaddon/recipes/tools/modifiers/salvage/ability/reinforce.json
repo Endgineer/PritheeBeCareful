@@ -1,6 +1,9 @@
 {
   "type": "tconstruct:modifier_salvage",
-  "modifier": "tinkerslevellingaddon:improvable",
+  "modifier": "tinkerslevellingaddon:reinforce",
+  "slots": {
+    "abilities": 1
+  },
   "tools": {
     "tag": "tconstruct:modifiable"
   }

@@ -102,12 +102,12 @@ import java.util.List;
 import static pyre.tinkerslevellingaddon.util.ToolLevellingUtil.addExperience;
 
 @Mod.EventBusSubscriber(modid = TinkersLevellingAddon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ImprovableModifier extends Modifier implements PlantHarvestModifierHook, ShearsModifierHook,
+public class ReinforceModifier extends Modifier implements PlantHarvestModifierHook, ShearsModifierHook,
         BlockBreakModifierHook, BlockTransformModifierHook, ProjectileLaunchModifierHook, OnAttackedModifierHook,
         MeleeHitModifierHook, ElytraFlightModifierHook, ArmorWalkModifierHook, ModifierRemovalHook,
         VolatileDataModifierHook, ToolStatsModifierHook {
     
-    public static final TextColor IMPROVABLE_MODIFIER_COLOR = TextColor.fromRgb(9337340);
+    public static final TextColor REINFORCE_MODIFIER_COLOR = TextColor.fromRgb(9337340);
     
     public static final ResourceLocation EXPERIENCE_KEY = ModUtil.getResource("experience");
     public static final ResourceLocation LEVEL_KEY = ModUtil.getResource("level");
@@ -311,7 +311,7 @@ public class ImprovableModifier extends Modifier implements PlantHarvestModifier
         }
         LivingEntity entity = event.getEntity();
         ItemStack activeStack = entity.getUseItem();
-        if (ModifierUtil.getModifierLevel(activeStack, Registration.IMPROVABLE.get().getId()) <= 0) {
+        if (ModifierUtil.getModifierLevel(activeStack, Registration.REINFORCE.get().getId()) <= 0) {
             return;
         }
         if (!activeStack.isEmpty() && activeStack.is(TinkerTags.Items.MODIFIABLE)
@@ -392,7 +392,7 @@ public class ImprovableModifier extends Modifier implements PlantHarvestModifier
         IToolStackView tool = event.getTool();
         if (Config.enableWarpingXp.get() && event.getEntity() instanceof ServerPlayer player &&
                 event.getEntry().getId().equals(TinkerModifiers.warping.getId()) &&
-                tool.getModifierLevel(Registration.IMPROVABLE.get().getId()) > 0) {
+                tool.getModifierLevel(Registration.REINFORCE.get().getId()) > 0) {
             addExperience((ToolStack) tool, 1 + Config.bonusWarpingXp.get(), player);
         }
     }

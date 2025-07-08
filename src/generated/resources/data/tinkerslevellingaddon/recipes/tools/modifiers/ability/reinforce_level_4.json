@@ -13,15 +13,12 @@
     },
     {
       "tag": "forge:bookshelves"
-    },
-    {
-      "tag": "forge:bookshelves"
     }
   ],
   "level": {
-    "max": 5
+    "max": 4
   },
-  "result": "tinkerslevellingaddon:improvable",
+  "result": "tinkerslevellingaddon:reinforce",
   "tools": {
     "tag": "tconstruct:modifiable"
   }

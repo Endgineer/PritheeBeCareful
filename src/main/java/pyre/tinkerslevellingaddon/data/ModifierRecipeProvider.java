@@ -30,41 +30,41 @@ public class ModifierRecipeProvider extends RecipeProvider implements ICondition
         String abilityFolder = "tools/modifiers/ability/";
         String abilitySalvage = "tools/modifiers/salvage/ability/";
 
-        ModifierId improvableId = new ModifierId(ModUtil.getResource("improvable"));
+        ModifierId reinforceId = new ModifierId(ModUtil.getResource("reinforce"));
         
-        ModifierRecipeBuilder.modifier(improvableId)
+        ModifierRecipeBuilder.modifier(reinforceId)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .setMaxLevel(1)
                 .setSlots(SlotType.ABILITY, 1)
                 .disallowCrystal()
-                .saveSalvage(consumer, prefix(improvableId, abilitySalvage))
-                .save(consumer, wrap(improvableId, abilityFolder, "_level_1"));
+                .saveSalvage(consumer, prefix(reinforceId, abilitySalvage))
+                .save(consumer, wrap(reinforceId, abilityFolder, "_level_1"));
 
-        ModifierRecipeBuilder.modifier(improvableId)
+        ModifierRecipeBuilder.modifier(reinforceId)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .setMaxLevel(2)
                 .disallowCrystal()
-                .save(consumer, wrap(improvableId, abilityFolder, "_level_2"));
+                .save(consumer, wrap(reinforceId, abilityFolder, "_level_2"));
 
-        ModifierRecipeBuilder.modifier(improvableId)
+        ModifierRecipeBuilder.modifier(reinforceId)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .setMaxLevel(3)
                 .disallowCrystal()
-                .save(consumer, wrap(improvableId, abilityFolder, "_level_3"));
+                .save(consumer, wrap(reinforceId, abilityFolder, "_level_3"));
 
-        ModifierRecipeBuilder.modifier(improvableId)
+        ModifierRecipeBuilder.modifier(reinforceId)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .setMaxLevel(4)
                 .disallowCrystal()
-                .save(consumer, wrap(improvableId, abilityFolder, "_level_4"));
+                .save(consumer, wrap(reinforceId, abilityFolder, "_level_4"));
 
-        ModifierRecipeBuilder.modifier(improvableId)
+        ModifierRecipeBuilder.modifier(reinforceId)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .addInput(Tags.Items.BOOKSHELVES)
@@ -72,7 +72,7 @@ public class ModifierRecipeProvider extends RecipeProvider implements ICondition
                 .addInput(Tags.Items.BOOKSHELVES)
                 .setMaxLevel(5)
                 .disallowCrystal()
-                .save(consumer, wrap(improvableId, abilityFolder, "_level_5"));
+                .save(consumer, wrap(reinforceId, abilityFolder, "_level_5"));
     }
 
     @Override

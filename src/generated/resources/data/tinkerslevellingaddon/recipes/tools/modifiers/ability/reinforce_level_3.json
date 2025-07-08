@@ -4,13 +4,18 @@
   "inputs": [
     {
       "tag": "forge:bookshelves"
+    },
+    {
+      "tag": "forge:bookshelves"
+    },
+    {
+      "tag": "forge:bookshelves"
     }
   ],
-  "level": 1,
-  "result": "tinkerslevellingaddon:improvable",
-  "slots": {
-    "abilities": 1
+  "level": {
+    "max": 3
   },
+  "result": "tinkerslevellingaddon:reinforce",
   "tools": {
     "tag": "tconstruct:modifiable"
   }

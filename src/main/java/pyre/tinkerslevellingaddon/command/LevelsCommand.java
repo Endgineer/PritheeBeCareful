@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static pyre.tinkerslevellingaddon.ImprovableModifier.*;
+import static pyre.tinkerslevellingaddon.ReinforceModifier.*;
 import static pyre.tinkerslevellingaddon.command.ModCommands.PERMISSION_GAME_COMMANDS;
 import static pyre.tinkerslevellingaddon.command.ModCommands.TOOL_VALIDATION_ERROR;
 
@@ -58,7 +58,7 @@ public class LevelsCommand {
         }
         
         List<LivingEntity> successes = HeldModifiableItemIterator.apply(context, (living, stack) -> {
-            if (ModifierUtil.getModifierLevel(stack, Registration.IMPROVABLE.get().getId()) <= 0) {
+            if (ModifierUtil.getModifierLevel(stack, Registration.REINFORCE.get().getId()) <= 0) {
                 return false;
             }
             
@@ -114,7 +114,7 @@ public class LevelsCommand {
         ServerPlayer player = living instanceof ServerPlayer p ? p : null;
     
         for (levelsAdded = 0; levelsAdded < count; levelsAdded++) {
-            if (ToolLevellingUtil.canLevelUp(currentLevel, tool.getModifierLevel(Registration.IMPROVABLE.get().getId()))) {
+            if (ToolLevellingUtil.canLevelUp(currentLevel, tool.getModifierLevel(Registration.REINFORCE.get().getId()))) {
                 int xp = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroad);
                 ToolLevellingUtil.addExperience(tool, xp, player);
                 currentLevel++;
