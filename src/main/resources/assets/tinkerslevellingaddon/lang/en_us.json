@@ -53,7 +53,7 @@
   "tooltip.tinkerslevellingaddon.xp": "XP: %s",
   "tooltip.tinkerslevellingaddon.xp.value": "%s / %s",
   "tooltip.tinkerslevellingaddon.xp.unused": "Unused",
-  "tooltip.tinkerslevellingaddon.xp.limited": "Max at %s",
+  "tooltip.tinkerslevellingaddon.xp.limited": "Max for %s",
   "tooltip.tinkerslevellingaddon.level": "Level: %s",
   "tooltip.tinkerslevellingaddon.level.name": "%s [%s]",
   "tooltip.tinkerslevellingaddon.level.0": "Like new",
