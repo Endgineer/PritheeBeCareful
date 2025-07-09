@@ -87,7 +87,8 @@ public class TooltipEventHandler {
                 getLevelName(level), ModUtil.makeText(level, ChatFormatting.GRAY));
         infoEntries.add(ModUtil.makeTranslation("tooltip", "level", fullLevelName));
 
-        if (ToolLevellingUtil.canLevelUp(level, tool.getModifierLevel(Registration.REINFORCE.get().getId()))) {
+        int reinforce = tool.getModifierLevel(Registration.REINFORCE.get().getId());
+        if (ToolLevellingUtil.canLevelUp(level, reinforce)) {
             if (level > 0) {
                 MutableComponent xp = ModUtil.makeText(tool.getPersistentData().getInt(ReinforceModifier.EXPERIENCE_KEY), ChatFormatting.GOLD);
                 MutableComponent xpNeeded = ModUtil.makeText(ToolLevellingUtil.getXpNeededForLevel(level + 1, ToolLevellingUtil.isBroadTool(tool)), ChatFormatting.GOLD);
@@ -96,7 +97,10 @@ public class TooltipEventHandler {
             } else {
                 infoEntries.add(ModUtil.makeTranslation("tooltip","xp", ModUtil.makeTranslation("tooltip", "xp.unused", ChatFormatting.DARK_GRAY)));
             }
+        } else if (level < Config.maxLevel.get()) {
+            infoEntries.add(ModUtil.makeTranslation("tooltip","xp", ModUtil.makeTranslation("tooltip", "xp.limited", ChatFormatting.DARK_GRAY, "+"+String.valueOf(reinforce))));
         }
+        
         return infoEntries;
     }
 
