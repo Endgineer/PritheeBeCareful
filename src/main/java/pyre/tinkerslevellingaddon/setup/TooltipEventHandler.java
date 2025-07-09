@@ -192,24 +192,14 @@ public class TooltipEventHandler {
     }
 
     private static MutableComponent getLevelName(int level) {
-        TextColor levelColor = getLevelColor(level);
-        if(ModUtil.canTranslate("tooltip", "level." + level)) {
-            return ModUtil.makeTranslation("tooltip", "level." + level, levelColor);
-        }
-
-        int i = 1;
-        while(ModUtil.canTranslate("tooltip", "level." + i)) {
-            i++;
-        }
-        int tier = level / i;
-        String suffix = Config.squashLevelPluses.get() && level > 0 ? "+" + tier : "+".repeat(tier);
-        return ModUtil.makeTranslation("tooltip", "level." + (level % i), levelColor)
-                .append(ModUtil.makeText(suffix, levelColor));
+        int tier = level / 10;
+        
+        TextColor tierColor = getTierColor(tier);
+        return ModUtil.makeTranslation("tooltip", "level." + tier, tierColor);
     }
 
-    private static TextColor getLevelColor(int level) {
-        float hue = (0.277777f * level);
-        hue = hue - (int) hue;
-        return TextColor.fromRgb(Color.HSBtoRGB(hue, 0.75f, 0.8f));
+    private static TextColor getTierColor(int tier) {
+        int tierColors[] = { 6441256, 6182737, 9602941, 4474470, 4808516, 4810605, 12130566, 815416, 3224912, 3385291, 14645571, 10195645, 10129883 };
+        return TextColor.fromRgb(tierColors[tier]);
     }
 }

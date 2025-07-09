@@ -1,6 +1,5 @@
 package pyre.tinkerslevellingaddon.network;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
@@ -18,13 +17,7 @@ public class ClientPacketHandler {
             return;
         }
         if (Config.enableLevelUpMessage.get()) {
-            MutableComponent message;
-            if (ModUtil.canTranslate("message", "level_up." + level)) {
-                message = ModUtil.makeTranslation("message", "level_up." + level, toolName);
-            } else {
-                MutableComponent levelComponent = ModUtil.makeText(level, ChatFormatting.GOLD);
-                message = ModUtil.makeTranslation("message", "level_up.generic", toolName, levelComponent);
-            }
+            MutableComponent message = ModUtil.makeTranslation("message", "level_up." + level / 10, toolName);
             message.withStyle(style -> style.withColor(ReinforceModifier.REINFORCE_MODIFIER_COLOR));
             player.displayClientMessage(message, false);
         }
