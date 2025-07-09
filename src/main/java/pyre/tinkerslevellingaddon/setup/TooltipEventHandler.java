@@ -21,7 +21,6 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import static pyre.tinkerslevellingaddon.util.ToolLevellingUtil.NONE;
 
-import java.awt.*;
 import java.util.List;
 import java.util.*;
 import java.util.function.Function;
