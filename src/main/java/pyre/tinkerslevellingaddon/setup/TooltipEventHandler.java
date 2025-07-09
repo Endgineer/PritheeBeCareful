@@ -19,6 +19,8 @@ import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.TooltipUtil;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
+import static pyre.tinkerslevellingaddon.util.ToolLevellingUtil.NONE;
+
 import java.awt.*;
 import java.util.List;
 import java.util.*;
@@ -86,10 +88,14 @@ public class TooltipEventHandler {
         infoEntries.add(ModUtil.makeTranslation("tooltip", "level", fullLevelName));
 
         if (ToolLevellingUtil.canLevelUp(level, tool.getModifierLevel(Registration.REINFORCE.get().getId()))) {
-            MutableComponent xp = ModUtil.makeText(tool.getPersistentData().getInt(ReinforceModifier.EXPERIENCE_KEY), ChatFormatting.GOLD);
-            MutableComponent xpNeeded = ModUtil.makeText(ToolLevellingUtil.getXpNeededForLevel(level + 1, ToolLevellingUtil.isBroadTool(tool)), ChatFormatting.GOLD);
-            MutableComponent xpValue = ModUtil.makeTranslation("tooltip", "xp.value", ChatFormatting.GRAY, xp, xpNeeded);
-            infoEntries.add(ModUtil.makeTranslation("tooltip","xp", xpValue));
+            if (level > 0) {
+                MutableComponent xp = ModUtil.makeText(tool.getPersistentData().getInt(ReinforceModifier.EXPERIENCE_KEY), ChatFormatting.GOLD);
+                MutableComponent xpNeeded = ModUtil.makeText(ToolLevellingUtil.getXpNeededForLevel(level + 1, ToolLevellingUtil.isBroadTool(tool)), ChatFormatting.GOLD);
+                MutableComponent xpValue = ModUtil.makeTranslation("tooltip", "xp.value", ChatFormatting.GRAY, xp, xpNeeded);
+                infoEntries.add(ModUtil.makeTranslation("tooltip","xp", xpValue));
+            } else {
+                infoEntries.add(ModUtil.makeTranslation("tooltip","xp", ModUtil.makeTranslation("tooltip", "xp.unused", ChatFormatting.DARK_GRAY)));
+            }
         }
         return infoEntries;
     }
@@ -148,9 +154,11 @@ public class TooltipEventHandler {
             infoEntries.add(TOOLTIP_NEXT_LEVEL);
             if (knowNextSlot) {
                 String nextSlot = ToolLevellingUtil.getSlot(tool, level + 1);
-                MutableComponent slot = ModUtil.makeTranslation("tooltip", "slot." + nextSlot,
+                if (!nextSlot.equals(NONE)) {
+                    MutableComponent slot = ModUtil.makeTranslation("tooltip", "slot." + nextSlot,
                         ToolLevellingUtil.getSlotColor(nextSlot));
-                infoEntries.add(ModUtil.makeTranslation("tooltip", "info.next_level.slot", slot));
+                    infoEntries.add(ModUtil.makeTranslation("tooltip", "info.next_level.slot", slot));
+                }
             }
             if (knowNextStat) {
                 String nextStat = ToolLevellingUtil.getStat(tool, level + 1);

@@ -15,13 +15,44 @@ import static pyre.tinkerslevellingaddon.util.ToolLevellingUtil.*;
 
 public class Config {
 
-    private static final List<String> DEFAULT_TOOLS_SLOTS_ORDER = List.of(UPGRADE, UPGRADE, UPGRADE, ABILITY, UPGRADE);
+    private static final List<String> DEFAULT_TOOLS_SLOTS_ORDER = List.of(
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, ABILITY,
+        NONE, NONE, NONE, NONE, NONE, UPGRADE
+    );
+    
     private static final List<String> DEFAULT_TOOLS_SLOTS_RANDOM_POOL = List.of(UPGRADE, UPGRADE, UPGRADE, UPGRADE, ABILITY);
-    private static final List<String> DEFAULT_RANGED_SLOTS_ORDER = List.of(UPGRADE, UPGRADE, UPGRADE, ABILITY, UPGRADE);
+    
+    private static final List<String> DEFAULT_RANGED_SLOTS_ORDER = List.of(
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, ABILITY,
+        NONE, NONE, NONE, NONE, NONE, UPGRADE
+    );
+
     private static final List<String> DEFAULT_RANGED_SLOTS_RANDOM_POOL = List.of(UPGRADE, UPGRADE, UPGRADE, UPGRADE, ABILITY);
-    private static final List<String> DEFAULT_ARMOR_SLOTS_ORDER = List.of(UPGRADE, DEFENSE, UPGRADE, ABILITY, DEFENSE);
+    
+    private static final List<String> DEFAULT_ARMOR_SLOTS_ORDER = List.of(
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, DEFENSE,
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, ABILITY,
+        NONE, NONE, NONE, NONE, NONE, DEFENSE
+    );
+
     private static final List<String> DEFAULT_ARMOR_SLOTS_RANDOM_POOL = List.of(UPGRADE, UPGRADE, DEFENSE, DEFENSE, ABILITY);
-    private static final List<String> DEFAULT_STAFF_SLOTS_ORDER = List.of(UPGRADE, UPGRADE, UPGRADE, DEFENSE, ABILITY);
+    
+    private static final List<String> DEFAULT_STAFF_SLOTS_ORDER = List.of(
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, UPGRADE,
+        NONE, NONE, NONE, NONE, NONE, DEFENSE,
+        NONE, NONE, NONE, NONE, NONE, ABILITY
+    );
+
     private static final List<String> DEFAULT_STAFF_SLOTS_RANDOM_POOL = List.of(UPGRADE, UPGRADE, UPGRADE, DEFENSE, ABILITY);
 
     private static final List<String> DEFAULT_TOOLS_STATS_ORDER = List.of(DURABILITY, ATTACK_DAMAGE, ATTACK_SPEED, MINING_SPEED);
@@ -33,6 +64,8 @@ public class Config {
     private static final List<String> DEFAULT_STAFF_STATS_ORDER = List.of(DURABILITY, DRAW_SPEED, VELOCITY, ACCURACY, PROJECTILE_DAMAGE, ARMOR);
     private static final List<String> DEFAULT_STAFF_STATS_RANDOM_POOL = List.of(DURABILITY, DRAW_SPEED, VELOCITY, ACCURACY, PROJECTILE_DAMAGE, ARMOR);
 
+    private static final List<Integer> DEFAULT_MAX_LEVEL_AT_REINFORCE = List.of(6, 22, 47, 80, 120);
+    
     public static final ForgeConfigSpec SERVER_CONFIG;
     public static final ForgeConfigSpec CLIENT_CONFIG;
 
@@ -56,11 +89,16 @@ public class Config {
     public static ForgeConfigSpec.EnumValue<GainingMethod> armorStatGainingMethod;
     public static ForgeConfigSpec.EnumValue<GainingMethod> staffSlotGainingMethod;
     public static ForgeConfigSpec.EnumValue<GainingMethod> staffStatGainingMethod;
-    public static ForgeConfigSpec.IntValue maxLevel;
-    public static ForgeConfigSpec.IntValue baseExperience;
-    public static ForgeConfigSpec.DoubleValue requiredXpMultiplier;
-    public static ForgeConfigSpec.DoubleValue broadToolRequiredXpMultiplier;
 
+    public static ForgeConfigSpec.IntValue maxLevel;
+    public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> maxLevelAtReinforce;
+    public static ForgeConfigSpec.DoubleValue broadToolRequiredXpMultiplier;
+    public static ForgeConfigSpec.DoubleValue valueM;
+    public static ForgeConfigSpec.DoubleValue valueN;
+    public static ForgeConfigSpec.DoubleValue valueA;
+    public static ForgeConfigSpec.DoubleValue valueB;
+    public static ForgeConfigSpec.DoubleValue valueC;
+    
     //general.slots
     private static ForgeConfigSpec.ConfigValue<List<? extends String>> toolsSlotTypeRandomPool;
     private static ForgeConfigSpec.ConfigValue<List<? extends String>> toolsSlotTypeOrder;
@@ -215,21 +253,37 @@ public class Config {
 
         statsConfig(builder);
 
-        maxLevel = builder.comment("Maximum tool level that could be achieved. If set to 0 there is no upper limit.")
+        maxLevel = builder.comment("Maximum tool level that could be achieved.")
                 .translation("config.tinkerslevellingaddon.general.max_level")
-                .defineInRange("maxLevel", 5, 0, Integer.MAX_VALUE);
+                .defineInRange("maxLevel", 120, 1, 120);
 
-        baseExperience = builder.comment("Base amount of experience required to reach next level.")
-                .translation("config.tinkerslevellingaddon.general.base_experience")
-                .defineInRange("baseExperience", 500, 1, Integer.MAX_VALUE);
-
-        requiredXpMultiplier = builder.comment("How much the amount of experience required to reach next level will be multiplied per level.")
-                .translation("config.tinkerslevellingaddon.general.required_xp_multiplier")
-                .defineInRange("requiredXpMultiplier", 2D, 1D, 10D);
+        maxLevelAtReinforce = builder.comment("Maximum level at each reinforce level.")
+                .translation("config.tinkerslevellingaddon.general.max_level_at_reinforce")
+                .defineList("maxLevelAtReinforce", DEFAULT_MAX_LEVEL_AT_REINFORCE, l -> ((Integer) l).intValue() <= 120);
 
         broadToolRequiredXpMultiplier = builder.comment("Additional multiplier for broad tools for experience required to level up.")
                 .translation("config.tinkerslevellingaddon.general.broad_tool_required_xp_multiplier")
                 .defineInRange("broadToolRequiredXpMultiplier", 3D, 1D, 10D);
+
+        valueM = builder.comment("Coefficient to the exponential term of the starting experience at level equation.")
+                .translation("config.tinkerslevellingaddon.general.value_m")
+                .defineInRange("valueM", 795.533676764, -Double.MAX_VALUE, Double.MAX_VALUE);
+
+        valueN = builder.comment("Rate of the exponential term of the starting experience at level equation.")
+                .translation("config.tinkerslevellingaddon.general.value_n")
+                .defineInRange("valueN", 0.142857142857, -Double.MAX_VALUE, Double.MAX_VALUE);
+
+        valueA = builder.comment("Coefficient to the quadratic term of the starting experience at level equation.")
+                .translation("config.tinkerslevellingaddon.general.value_a")
+                .defineInRange("valueA", 0.125, -Double.MAX_VALUE, Double.MAX_VALUE);
+
+        valueB = builder.comment("Coefficient to the linear term of the starting experience at level equation.")
+                .translation("config.tinkerslevellingaddon.general.value_b")
+                .defineInRange("valueB", -0.234, -Double.MAX_VALUE, Double.MAX_VALUE);
+
+        valueC = builder.comment("Offset of the starting experience at level equation.")
+                .translation("config.tinkerslevellingaddon.general.value_c")
+                .defineInRange("valueC", -795.533676764, -Double.MAX_VALUE, Double.MAX_VALUE);
 
         builder.pop();
     }
@@ -241,49 +295,49 @@ public class Config {
                         "If empty default pool will be used (" + String.join(", ", DEFAULT_TOOLS_SLOTS_RANDOM_POOL) + "). 80% chance for upgrade and 20% chance for ability.",
                         "Allowed values: " + String.join(", ", getToolSlotTypes()))
                 .translation("config.tinkerslevellingaddon.general.slots.tools_slot_type_random_pool")
-                .defineList("toolsSlotTypeRandomPool", DEFAULT_TOOLS_SLOTS_RANDOM_POOL, t -> getToolSlotTypes().contains(t));
+                .defineList("toolsSlotTypeRandomPool", DEFAULT_TOOLS_SLOTS_RANDOM_POOL, t -> t.toString().equals(NONE) || getToolSlotTypes().contains(t));
 
         toolsSlotTypeOrder = builder.comment("List of modifier slot types (in order) that will be awarded when leveling up tools. If level is higher than list size the mod will start over.",
                         "If empty default order will be used (" + String.join(", ", DEFAULT_TOOLS_SLOTS_ORDER) + ").",
                         "Allowed values: " + String.join(", ", getToolSlotTypes()))
                 .translation("config.tinkerslevellingaddon.general.slots.tools_slot_type_order")
-                .defineList("toolsSlotTypeOrder", DEFAULT_TOOLS_SLOTS_ORDER, t -> getToolSlotTypes().contains(t));
+                .defineList("toolsSlotTypeOrder", DEFAULT_TOOLS_SLOTS_ORDER, t -> t.toString().equals(NONE) || getToolSlotTypes().contains(t));
     
         rangedSlotTypeRandomPool = builder.comment("Set of modifier slot types from which random slot will be awarded when leveling up ranged weapons.",
                         "If empty default pool will be used (" + String.join(", ", DEFAULT_RANGED_SLOTS_RANDOM_POOL) + "). 80% chance for upgrade and 20% chance for ability.",
                         "Allowed values: " + String.join(", ", getToolSlotTypes()))
                 .translation("config.tinkerslevellingaddon.general.slots.ranged_slot_type_random_pool")
-                .defineList("rangedSlotTypeRandomPool", DEFAULT_RANGED_SLOTS_RANDOM_POOL, t -> getRangedSlotTypes().contains(t));
+                .defineList("rangedSlotTypeRandomPool", DEFAULT_RANGED_SLOTS_RANDOM_POOL, t -> t.toString().equals(NONE) || getRangedSlotTypes().contains(t));
     
         rangedSlotTypeOrder = builder.comment("List of modifier slot types (in order) that will be awarded when leveling up ranged weapons. If level is higher than list size the mod will start over.",
                         "If empty default order will be used (" + String.join(", ", DEFAULT_RANGED_SLOTS_ORDER) + ").",
                         "Allowed values: " + String.join(", ", getToolSlotTypes()))
                 .translation("config.tinkerslevellingaddon.general.slots.ranged_slot_type_order")
-                .defineList("rangedSlotTypeOrder", DEFAULT_RANGED_SLOTS_ORDER, t -> getRangedSlotTypes().contains(t));
+                .defineList("rangedSlotTypeOrder", DEFAULT_RANGED_SLOTS_ORDER, t -> t.toString().equals(NONE) || getRangedSlotTypes().contains(t));
 
         armorSlotTypeRandomPool = builder.comment("Set of modifier slot types from which random slot will be awarded when leveling up armor.",
                         "If empty default pool will be used (" + String.join(", ", DEFAULT_ARMOR_SLOTS_RANDOM_POOL) + ").",
                         "Allowed values: " + String.join(", ", getArmorSlotTypes()))
                 .translation("config.tinkerslevellingaddon.general.modifiers.armor_slot_type_random_pool")
-                .defineList("armorSlotTypeRandomPool", DEFAULT_ARMOR_SLOTS_RANDOM_POOL, t -> getArmorSlotTypes().contains(t));
+                .defineList("armorSlotTypeRandomPool", DEFAULT_ARMOR_SLOTS_RANDOM_POOL, t -> t.toString().equals(NONE) || getArmorSlotTypes().contains(t));
 
         armorSlotTypeOrder = builder.comment("List of modifier slot types (in order) that will be awarded when leveling up armor. If level is higher than list size the mod will start over.",
                         "If empty default order will be used (" + String.join(", ", DEFAULT_ARMOR_SLOTS_ORDER) + ").",
                         "Allowed values: " + String.join(", ", getArmorSlotTypes()))
                 .translation("config.tinkerslevellingaddon.general.slots.armor_slot_type_order")
-                .defineList("armorSlotTypeOrder", DEFAULT_ARMOR_SLOTS_ORDER, t -> getArmorSlotTypes().contains(t));
+                .defineList("armorSlotTypeOrder", DEFAULT_ARMOR_SLOTS_ORDER, t -> t.toString().equals(NONE) || getArmorSlotTypes().contains(t));
         
         staffSlotTypeRandomPool = builder.comment("Set of modifier slot types from which random slot will be awarded when leveling up staffs.",
                         "If empty default pool will be used (" + String.join(", ", DEFAULT_STAFF_SLOTS_RANDOM_POOL) + ").",
                         "Allowed values: " + String.join(", ", getArmorSlotTypes()))
                 .translation("config.tinkerslevellingaddon.general.modifiers.staff_slot_type_random_pool")
-                .defineList("staffSlotTypeRandomPool", DEFAULT_STAFF_SLOTS_RANDOM_POOL, t -> getStaffSlotTypes().contains(t));
+                .defineList("staffSlotTypeRandomPool", DEFAULT_STAFF_SLOTS_RANDOM_POOL, t -> t.toString().equals(NONE) || getStaffSlotTypes().contains(t));
         
         staffSlotTypeOrder = builder.comment("List of modifier slot types (in order) that will be awarded when leveling up staffs. If level is higher than list size the mod will start over.",
                         "If empty default order will be used (" + String.join(", ", DEFAULT_STAFF_SLOTS_ORDER) + ").",
                         "Allowed values: " + String.join(", ", getStaffSlotTypes()))
                 .translation("config.tinkerslevellingaddon.general.slots.staff_slot_type_order")
-                .defineList("staffSlotTypeOrder", DEFAULT_STAFF_SLOTS_ORDER, t -> getStaffSlotTypes().contains(t));
+                .defineList("staffSlotTypeOrder", DEFAULT_STAFF_SLOTS_ORDER, t -> t.toString().equals(NONE) || getStaffSlotTypes().contains(t));
 
         builder.pop();
     }

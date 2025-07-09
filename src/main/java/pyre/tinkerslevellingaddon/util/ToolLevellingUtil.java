@@ -23,6 +23,7 @@ import static pyre.tinkerslevellingaddon.ReinforceModifier.*;
 
 public class ToolLevellingUtil {
     //slot types
+    public static final String NONE = "none";
     public static final String UPGRADE = "upgrade";
     public static final String ABILITY = "ability";
     public static final String SOUL = "soul";
@@ -308,18 +309,21 @@ public class ToolLevellingUtil {
     }
     
     public static boolean canLevelUp(int level, int reinforce) {
-        return (Config.maxLevel.get() == 0 || Config.maxLevel.get() > level) && level < 2*reinforce;
+        return reinforce > 0 && level < Config.maxLevelAtReinforce.get().get(reinforce-1) && level < Config.maxLevel.get();
     }
     
     public static int getXpNeededForLevel(int level, boolean isBroadTool) {
-        int experienceNeeded = Config.baseExperience.get();
-        if (level > 1) {
-            experienceNeeded = (int) (getXpNeededForLevel(level - 1, false) * Config.requiredXpMultiplier.get());
-        }
+        int prevLevel = level-1;
+        if (prevLevel == 0) return 0;
+        
+        int startingXpPrevLevel = (int) Math.round(Config.valueM.get()*Math.pow(2, Config.valueN.get()*(prevLevel-1)) + Config.valueA.get()*Math.pow(prevLevel,2) + Config.valueB.get()*prevLevel + Config.valueC.get());
+        int xpDeficit = (int) Math.round(Config.valueM.get()*Math.pow(2, Config.valueN.get()*(level-1)) + Config.valueA.get()*Math.pow(level,2) + Config.valueB.get()*level + Config.valueC.get()) - startingXpPrevLevel;
+        
         if (isBroadTool) {
-            experienceNeeded *= Config.broadToolRequiredXpMultiplier.get();
+            xpDeficit *= Config.broadToolRequiredXpMultiplier.get();
         }
-        return experienceNeeded;
+        
+        return xpDeficit;
     }
     
     public static void addExperience(ToolStack tool, int amount, ServerPlayer player) {
@@ -342,7 +346,7 @@ public class ToolLevellingUtil {
             experienceNeeded = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroadTool);
             
             String slotName = ToolLevellingUtil.getSlot(tool, currentLevel);
-            if (slotName != null) {
+            if (slotName != null && !slotName.equals(NONE)) {
                 appendHistory(SLOT_HISTORY_KEY, slotName, data);
             }
             String statName = ToolLevellingUtil.getStat(tool, currentLevel);
