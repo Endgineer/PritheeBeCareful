@@ -81,14 +81,21 @@ public class TooltipEventHandler {
     private static List<Component> prepareGeneralInfo(ToolStack tool) {
         List<Component> infoEntries = new ArrayList<>();
         int level = tool.getPersistentData().getInt(ReinforceModifier.LEVEL_KEY);
+        int reinforce = tool.getPersistentData().getInt(ReinforceModifier.REINFORCE_KEY);
+        
+        boolean unreinforced = reinforce == 0;
+        MutableComponent unavailable = ModUtil.makeText("-", TextColor.fromLegacyFormat(ChatFormatting.DARK_GRAY));
+        
+        MutableComponent reinforceValue = ModUtil.makeText("+"+String.valueOf(reinforce), ReinforceModifier.REINFORCE_MODIFIER_COLOR);
+        infoEntries.add(ModUtil.makeTranslation("tooltip","reinforce", unreinforced ? unavailable : reinforceValue));
         
         MutableComponent fullLevelName = ModUtil.makeTranslation("tooltip", "level.name", ChatFormatting.GRAY,
                 getLevelName(level), ModUtil.makeText(level, ChatFormatting.GRAY));
-        infoEntries.add(ModUtil.makeTranslation("tooltip", "level", fullLevelName));
-
-        int reinforce = tool.getModifierLevel(Registration.REINFORCE.get().getId());
+        infoEntries.add(ModUtil.makeTranslation("tooltip", "level", unreinforced ? unavailable : fullLevelName));
         
-        if (level == 0) {
+        if (unreinforced) {
+            infoEntries.add(ModUtil.makeTranslation("tooltip","xp", unavailable));
+        } else if (level == 0) {
             infoEntries.add(ModUtil.makeTranslation("tooltip","xp", ModUtil.makeTranslation("tooltip", "xp.unused", ChatFormatting.DARK_GRAY)));
         } else if (level == Config.maxLevel.get()) {
             infoEntries.add(ModUtil.makeTranslation("tooltip","xp", ModUtil.makeTranslation("tooltip", "xp.maxed", ChatFormatting.DARK_GRAY)));
@@ -150,7 +157,8 @@ public class TooltipEventHandler {
     private static List<Component> prepareNextLevelInfo(ToolStack tool) {
         List<Component> infoEntries = new ArrayList<>();
         int level = tool.getPersistentData().getInt(ReinforceModifier.LEVEL_KEY);
-        boolean canLevelUp = ToolLevellingUtil.canLevelUp(level, tool.getModifierLevel(Registration.REINFORCE.get().getId()));
+        int reinforce = tool.getPersistentData().getInt(ReinforceModifier.REINFORCE_KEY);
+        boolean canLevelUp = ToolLevellingUtil.canLevelUp(level, reinforce);
         boolean knowNextSlot = ToolLevellingUtil.canPredictNextSlot(tool);
         boolean knowNextStat = ToolLevellingUtil.canPredictNextStat(tool);
 

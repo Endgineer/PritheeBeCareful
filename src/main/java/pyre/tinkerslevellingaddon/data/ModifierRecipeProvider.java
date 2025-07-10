@@ -10,7 +10,6 @@ import pyre.tinkerslevellingaddon.util.ModUtil;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.ModifierRecipeBuilder;
-import slimeknights.tconstruct.library.tools.SlotType;
 
 import java.util.function.Consumer;
 
@@ -28,51 +27,14 @@ public class ModifierRecipeProvider extends RecipeProvider implements ICondition
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         String abilityFolder = "tools/modifiers/ability/";
-        String abilitySalvage = "tools/modifiers/salvage/ability/";
-
+        
         ModifierId reinforceId = new ModifierId(ModUtil.getResource("reinforce"));
         
         ModifierRecipeBuilder.modifier(reinforceId)
                 .addInput(Tags.Items.BOOKSHELVES)
                 .setMaxLevel(1)
-                .setSlots(SlotType.ABILITY, 1)
                 .disallowCrystal()
-                .saveSalvage(consumer, prefix(reinforceId, abilitySalvage))
-                .save(consumer, wrap(reinforceId, abilityFolder, "_level_1"));
-
-        ModifierRecipeBuilder.modifier(reinforceId)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .setMaxLevel(2)
-                .disallowCrystal()
-                .save(consumer, wrap(reinforceId, abilityFolder, "_level_2"));
-
-        ModifierRecipeBuilder.modifier(reinforceId)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .setMaxLevel(3)
-                .disallowCrystal()
-                .save(consumer, wrap(reinforceId, abilityFolder, "_level_3"));
-
-        ModifierRecipeBuilder.modifier(reinforceId)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .setMaxLevel(4)
-                .disallowCrystal()
-                .save(consumer, wrap(reinforceId, abilityFolder, "_level_4"));
-
-        ModifierRecipeBuilder.modifier(reinforceId)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .addInput(Tags.Items.BOOKSHELVES)
-                .setMaxLevel(5)
-                .disallowCrystal()
-                .save(consumer, wrap(reinforceId, abilityFolder, "_level_5"));
+                .save(consumer, prefix(reinforceId, abilityFolder));
     }
 
     @Override

@@ -43,6 +43,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 import pyre.tinkerslevellingaddon.config.Config;
+import pyre.tinkerslevellingaddon.hook.ReinforcedScalingStatBoostModule;
 import pyre.tinkerslevellingaddon.setup.Registration;
 import pyre.tinkerslevellingaddon.util.ModUtil;
 import pyre.tinkerslevellingaddon.util.ToolLevellingUtil;
@@ -69,7 +70,6 @@ import slimeknights.tconstruct.library.modifiers.hook.special.ShearsModifierHook
 import slimeknights.tconstruct.library.modifiers.modules.armor.CoverGroundWalkerModule;
 import slimeknights.tconstruct.library.modifiers.modules.armor.ReplaceBlockWalkerModule;
 import slimeknights.tconstruct.library.modifiers.modules.armor.ToolActionWalkerTransformModule;
-import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
@@ -113,10 +113,12 @@ public class ReinforceModifier extends Modifier implements PlantHarvestModifierH
     public static final ResourceLocation LEVEL_KEY = ModUtil.getResource("level");
     public static final ResourceLocation SLOT_HISTORY_KEY = ModUtil.getResource("slot_history");
     public static final ResourceLocation STAT_HISTORY_KEY = ModUtil.getResource("stat_history");
+    public static final ResourceLocation REINFORCE_KEY = ModUtil.getResource("reinforce");
+    public static final ResourceLocation MATERIAL_KEY = ModUtil.getResource("material");
 
     @Override
     public Component getDisplayName(int level) {
-        return applyStyle(Component.translatable(getTranslationKey() + "." + String.valueOf(level)));
+        return applyStyle(Component.translatable(getTranslationKey()));
     }
     
     @Override
@@ -127,25 +129,7 @@ public class ReinforceModifier extends Modifier implements PlantHarvestModifierH
                 ModifierHooks.ON_ATTACKED, ModifierHooks.MELEE_HIT, ModifierHooks.ELYTRA_FLIGHT,
                 ModifierHooks.BOOT_WALK, ModifierHooks.VOLATILE_DATA, ModifierHooks.TOOL_STATS, ModifierHooks.REMOVE);
         
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.DURABILITY).eachLevel(0.03f));
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.USE_ITEM_SPEED).eachLevel(0.03f));
-        
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.ATTACK_DAMAGE).eachLevel(0.03f));
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.ATTACK_SPEED).eachLevel(0.03f));
-        
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.MINING_SPEED).eachLevel(0.03f));
-        
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.ARMOR).eachLevel(0.03f));
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.ARMOR_TOUGHNESS).eachLevel(0.03f));
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.KNOCKBACK_RESISTANCE).eachLevel(0.03f));
-        
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.BLOCK_AMOUNT).eachLevel(0.03f));
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.BLOCK_ANGLE).eachLevel(0.03f));
-        
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.DRAW_SPEED).eachLevel(0.03f));
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.VELOCITY).eachLevel(0.03f));
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.ACCURACY).eachLevel(0.03f));
-        hookBuilder.addModule(StatBoostModule.multiplyBase(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.03f));
+        hookBuilder.addModule(new ReinforcedScalingStatBoostModule());
     }
 
     @Override
@@ -153,12 +137,30 @@ public class ReinforceModifier extends Modifier implements PlantHarvestModifierH
         return 300;
     }
 
+    @Nullable
+    public static ToolStack reinforce(ItemStack stack) {
+        if (ModifierUtil.getModifierLevel(stack, Registration.REINFORCE.getId()) <= 0) return null;
+
+        ToolStack tool = ToolStack.copyFrom(stack);
+        ToolDataNBT persistentData = tool.getPersistentData();
+        
+        int currentReinforce = persistentData.getInt(REINFORCE_KEY);
+        if (currentReinforce == 5) {
+            return null;
+        }
+        
+        persistentData.putInt(REINFORCE_KEY, Math.min(currentReinforce+1, 5));
+        return tool;
+    }
+    
     @Override
     public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(EXPERIENCE_KEY);
         tool.getPersistentData().remove(LEVEL_KEY);
         tool.getPersistentData().remove(SLOT_HISTORY_KEY);
         tool.getPersistentData().remove(STAT_HISTORY_KEY);
+        tool.getPersistentData().remove(REINFORCE_KEY);
+        tool.getPersistentData().remove(MATERIAL_KEY);
         return null;
     }
 

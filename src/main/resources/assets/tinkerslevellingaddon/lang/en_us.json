@@ -1,10 +1,5 @@
 {
-  "modifier.tinkerslevellingaddon.reinforce": "Reinforce",
-  "modifier.tinkerslevellingaddon.reinforce.1": "Reinforce +1",
-  "modifier.tinkerslevellingaddon.reinforce.2": "Reinforce +2",
-  "modifier.tinkerslevellingaddon.reinforce.3": "Reinforce +3",
-  "modifier.tinkerslevellingaddon.reinforce.4": "Reinforce +4",
-  "modifier.tinkerslevellingaddon.reinforce.5": "Reinforce +5",
+  "modifier.tinkerslevellingaddon.reinforce": "Reinforceable",
   "modifier.tinkerslevellingaddon.reinforce.flavor": "Grind! Reinforce! Overcome!",
   "modifier.tinkerslevellingaddon.reinforce.description": "Gain bonus modifier slots from hardworking with your tool",
 
@@ -55,6 +50,7 @@
   "tooltip.tinkerslevellingaddon.xp.unused": "Unused",
   "tooltip.tinkerslevellingaddon.xp.maxed": "MAXED",
   "tooltip.tinkerslevellingaddon.xp.limited": "Max for %s",
+  "tooltip.tinkerslevellingaddon.reinforce": "Reinforce: %s",
   "tooltip.tinkerslevellingaddon.level": "Level: %s",
   "tooltip.tinkerslevellingaddon.level.name": "%s [%s]",
   "tooltip.tinkerslevellingaddon.level.0": "Bronze",

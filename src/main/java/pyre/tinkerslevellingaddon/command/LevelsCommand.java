@@ -109,12 +109,15 @@ public class LevelsCommand {
     
     private static int addLevel(ToolStack tool, int count, LivingEntity living) {
         int levelsAdded;
+        
         int currentLevel = tool.getPersistentData().getInt(LEVEL_KEY);
+        int currentReinforce = tool.getPersistentData().getInt(REINFORCE_KEY);
+        
         boolean isBroad = ToolLevellingUtil.isBroadTool(tool);
         ServerPlayer player = living instanceof ServerPlayer p ? p : null;
     
         for (levelsAdded = 0; levelsAdded < count; levelsAdded++) {
-            if (ToolLevellingUtil.canLevelUp(currentLevel, tool.getModifierLevel(Registration.REINFORCE.get().getId()))) {
+            if (ToolLevellingUtil.canLevelUp(currentLevel, currentReinforce)) {
                 int xp = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroad);
                 ToolLevellingUtil.addExperience(tool, xp, player);
                 currentLevel++;

@@ -4,10 +4,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import pyre.tinkerslevellingaddon.ReinforceModifier;
 import pyre.tinkerslevellingaddon.config.Config;
 import pyre.tinkerslevellingaddon.network.LevelUpPacket;
 import pyre.tinkerslevellingaddon.network.Messages;
-import pyre.tinkerslevellingaddon.setup.Registration;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
@@ -333,12 +333,13 @@ public class ToolLevellingUtil {
         
         ModDataNBT data = tool.getPersistentData();
         int currentLevel = data.getInt(LEVEL_KEY);
+        int reinforce = tool.getPersistentData().getInt(ReinforceModifier.REINFORCE_KEY);
         int currentExperience = data.getInt(EXPERIENCE_KEY) + amount;
         boolean isBroadTool = ToolLevellingUtil.isBroadTool(tool);
         int experienceNeeded = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroadTool);
         
         while (currentExperience >= experienceNeeded) {
-            if (!ToolLevellingUtil.canLevelUp(currentLevel, tool.getModifierLevel(Registration.REINFORCE.get().getId()))) {
+            if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) {
                 return;
             }
             data.putInt(LEVEL_KEY, ++currentLevel);

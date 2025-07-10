@@ -23,6 +23,7 @@ import java.util.List;
 
 import static pyre.tinkerslevellingaddon.ReinforceModifier.EXPERIENCE_KEY;
 import static pyre.tinkerslevellingaddon.ReinforceModifier.LEVEL_KEY;
+import static pyre.tinkerslevellingaddon.ReinforceModifier.REINFORCE_KEY;
 import static pyre.tinkerslevellingaddon.command.ModCommands.PERMISSION_GAME_COMMANDS;
 
 public class ExperienceCommand {
@@ -99,19 +100,24 @@ public class ExperienceCommand {
     private static boolean addXp(ToolStack tool, int count, LivingEntity living) {
         ServerPlayer player = living instanceof ServerPlayer p ? p : null;
     
-        if (ToolLevellingUtil.canLevelUp(tool.getPersistentData().getInt(LEVEL_KEY), tool.getModifierLevel(Registration.REINFORCE.get().getId()))) {
+        int currentLevel = tool.getPersistentData().getInt(LEVEL_KEY);
+        int currentReinforce = tool.getPersistentData().getInt(REINFORCE_KEY);
+        if (ToolLevellingUtil.canLevelUp(currentLevel, currentReinforce)) {
             ToolLevellingUtil.addExperience(tool, count, player);
             return true;
         }
+        
         return false;
     }
     
     private static boolean setXp(ToolStack tool, int count, LivingEntity living) {
         int currentLevel = tool.getPersistentData().getInt(LEVEL_KEY);
+        int currentReinforce = tool.getPersistentData().getInt(REINFORCE_KEY);
+        
         boolean isBroad = ToolLevellingUtil.isBroadTool(tool);
         ServerPlayer player = living instanceof ServerPlayer p ? p : null;
         
-        if (ToolLevellingUtil.canLevelUp(currentLevel, tool.getModifierLevel(Registration.REINFORCE.get().getId()))) {
+        if (ToolLevellingUtil.canLevelUp(currentLevel, currentReinforce)) {
             int neededXp = ToolLevellingUtil.getXpNeededForLevel(currentLevel, isBroad);
             int currentXp = tool.getPersistentData().getInt(EXPERIENCE_KEY);
             int xp = Math.max(1, Math.min(count, neededXp - currentXp));

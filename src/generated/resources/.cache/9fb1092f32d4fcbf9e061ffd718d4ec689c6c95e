@@ -1,7 +1,2 @@
-// 1.20.1	2025-07-08T15:33:51.4310627	Recipes
-776dfb47796d417fbb3176730a9d95aeabb34cc8 data/tinkerslevellingaddon/recipes/tools/modifiers/ability/reinforce_level_1.json
-ae171130636736a8e2bb0a4f6adc03102a9b22f1 data/tinkerslevellingaddon/recipes/tools/modifiers/ability/reinforce_level_2.json
-f661cb6dc74bbe0b3cd5a4b471f04b20af17e59c data/tinkerslevellingaddon/recipes/tools/modifiers/ability/reinforce_level_3.json
-de33be21ac803dcaf6b5104e760c718574f34ba2 data/tinkerslevellingaddon/recipes/tools/modifiers/ability/reinforce_level_4.json
-02f9f6997c776c57d714e3281d24b0162a84cf2a data/tinkerslevellingaddon/recipes/tools/modifiers/ability/reinforce_level_5.json
-75cd93cee2b09e52c8104274605ff5568a27b57f data/tinkerslevellingaddon/recipes/tools/modifiers/salvage/ability/reinforce.json
+// 1.20.1	2025-07-09T23:59:04.820539	Recipes
+849488f2aa1121743fd8526783c14cc65ac7c154 data/tinkerslevellingaddon/recipes/tools/modifiers/ability/reinforce.json
