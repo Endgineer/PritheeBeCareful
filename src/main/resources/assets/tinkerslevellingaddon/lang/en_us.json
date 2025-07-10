@@ -158,6 +158,9 @@
   "command.tinkerslevellingaddon.levels.success.set.single": "Set level to %s on %s's item.",
   "command.tinkerslevellingaddon.levels.success.set.multiple": "Set level to %s on %s entities.",
 
+  "command.tinkerslevellingaddon.reinforce.success.add": "Added reinforce (subject to clamping) to the item.",
+  "command.tinkerslevellingaddon.reinforce.success.set": "Set reinforce (subject to clamping) on the item.",
+  
   "command.tinkerslevellingaddon.xp.failure.add.already_max_level": "Cannot add XP, %s is already max level and cannot gain experience.",
   "command.tinkerslevellingaddon.xp.failure.set.already_max_level": "Cannot set XP, %s is already max level and cannot gain experience.",
 

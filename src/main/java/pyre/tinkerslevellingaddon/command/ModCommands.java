@@ -37,6 +37,7 @@ public class ModCommands {
         // sub commands
         register(builder, "levels", LevelsCommand::register);
         register(builder, "xp", ExperienceCommand::register);
+        register(builder, "reinforce", ReinforceCommand::register);
         
         // register final command
         event.getDispatcher().register(builder);
