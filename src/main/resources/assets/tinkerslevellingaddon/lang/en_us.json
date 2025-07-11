@@ -5,6 +5,8 @@
 
   "key.tinkerslevellingaddon.alt": "Alt",
 
+  "block.tinkerslevellingaddon.reinforcement_anvil": "Reinforcement Anvil",
+  
   "tooltip.tinkerslevellingaddon.hold_alt": "Hold %s for level info",
 
   "tooltip.tinkerslevellingaddon.info.slots": "Modifier slots gained",

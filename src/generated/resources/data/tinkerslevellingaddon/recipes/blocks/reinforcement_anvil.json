@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "create:railway_casing"
+    },
+    "s": {
+      "tag": "tconstruct:seared_blocks"
+    }
+  },
+  "pattern": [
+    "ccc",
+    " s ",
+    "sss"
+  ],
+  "result": {
+    "item": "tinkerslevellingaddon:reinforcement_anvil"
+  },
+  "show_notification": true
+}

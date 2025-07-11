@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "tinkerslevellingaddon:block/reinforcement_anvil", "y":  90 },
+    "facing=south": { "model": "tinkerslevellingaddon:block/reinforcement_anvil", "y": 270 },
+    "facing=west":  { "model": "tinkerslevellingaddon:block/reinforcement_anvil" },
+    "facing=east":  { "model": "tinkerslevellingaddon:block/reinforcement_anvil", "y": 180 }
+  }
+}

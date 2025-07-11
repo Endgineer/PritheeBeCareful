@@ -1,2 +1,4 @@
-// 1.20.1	2025-07-09T23:59:04.820539	Recipes
+// 1.20.1	2025-07-11T02:48:03.0528892	Recipes
+0337f9b487137d57ec985b66e83453c1a7c90eda data/tinkerslevellingaddon/advancements/recipes/decorations/blocks/reinforcement_anvil.json
+3a9f8e1450ab04407d2d3e95f15b1e013e46b8b7 data/tinkerslevellingaddon/recipes/blocks/reinforcement_anvil.json
 849488f2aa1121743fd8526783c14cc65ac7c154 data/tinkerslevellingaddon/recipes/tools/modifiers/ability/reinforce.json

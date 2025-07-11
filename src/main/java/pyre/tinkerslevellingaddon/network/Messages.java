@@ -1,7 +1,9 @@
 package pyre.tinkerslevellingaddon.network;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
@@ -32,6 +34,12 @@ public class Messages {
                 .encoder(LevelUpPacket::toBytes)
                 .consumerMainThread(LevelUpPacket::handle)
                 .add();
+        
+        net.messageBuilder(AnvilClangPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(AnvilClangPacket::new)
+                .encoder(AnvilClangPacket::toBytes)
+                .consumerMainThread(AnvilClangPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {
@@ -40,5 +48,9 @@ public class Messages {
 
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
+    }
+
+    public static <MSG> void sendAnvilClang(Level level, BlockPos blockPos, boolean isHitEffective) {
+        INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(blockPos)), new AnvilClangPacket(blockPos, isHitEffective));
     }
 }
