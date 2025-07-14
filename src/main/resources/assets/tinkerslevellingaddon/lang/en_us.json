@@ -7,7 +7,11 @@
 
   "item.tinkerslevellingaddon.reinforce_item": "%1$s %2$s %3$s Reinforce Item",
   "item.tinkerslevellingaddon.titanite_shard": "Titanite Shard",
+  
+  "block.tinkerslevellingaddon.reinforcement_anvil": "Reinforcement Anvil",
 
+  "itemGroup.tinkerslevellingaddon.creative_mode_tab": "Tinkers Levelling Addon",
+  
   "forging.tinkerslevellingaddon.gear.dagger": "Dagger",
   "forging.tinkerslevellingaddon.gear.sword": "Sword",
   "forging.tinkerslevellingaddon.gear.axe": "Axe",
@@ -46,8 +50,6 @@
   
   "tooltip.tinkerslevellingaddon.titanite_shard.where": "Fragments of the world's great deep.",
   "tooltip.tinkerslevellingaddon.titanite_shard.what": "Capable of reinforcing metal.",
-  
-  "block.tinkerslevellingaddon.reinforcement_anvil": "Reinforcement Anvil",
 
   "tooltip.tinkerslevellingaddon.reinforce_item.temperature": "Temperature",
   "tooltip.tinkerslevellingaddon.reinforce_item.progress": "Progress",
