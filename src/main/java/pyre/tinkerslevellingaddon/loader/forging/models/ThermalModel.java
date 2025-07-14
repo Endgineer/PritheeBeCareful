@@ -21,13 +21,13 @@ public class ThermalModel {
     }
 
     public static double getReinforceItemTemperature(ItemStack reinforceItemStack, double ambientTemperature) {
-        if (!(reinforceItemStack.getItem() instanceof ReinforceItem) || !reinforceItemStack.hasTag()) return 0;
+        if (!ReinforceItem.isValidReinforceItem(reinforceItemStack)) return Integer.MIN_VALUE;
         
         CompoundTag tag = reinforceItemStack.getTag();
         double reinforceItemTemperaturePreviousSecond = tag.getDouble(ReinforceItem.TEMPERATURE);
         Double volumetricHeatCapacity = ForgingMaterialSpec.getVolumetricHeatCapacity(tag.getString(ReinforceItem.MATERIAL), tag.getInt(ReinforceItem.REINFORCE));
         
-        if (volumetricHeatCapacity == null) return 0;
+        if (volumetricHeatCapacity == null) return Integer.MIN_VALUE;
         
         return reinforceItemTemperaturePreviousSecond + (HEAT_TRANSFER_CONST / volumetricHeatCapacity.doubleValue()) * (ambientTemperature - reinforceItemTemperaturePreviousSecond);
     }

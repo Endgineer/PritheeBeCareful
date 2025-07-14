@@ -276,7 +276,7 @@ public class Config {
 
         ambientTemperature = builder.comment("The assumed ambient temperature (C) of the environment.")
                 .translation("config.tinkerslevellingaddon.general.ambient_temperature")
-                .defineInRange("ambientTemperature", 20.0, 10.0, 30.0);
+                .defineInRange("ambientTemperature", 20.0, 0.0, 30.0);
 
         thermalRelaxation = builder.comment("The higher this coefficient, the faster the forge will heat and cool.")
                 .translation("config.tinkerslevellingaddon.general.thermal_relaxation")

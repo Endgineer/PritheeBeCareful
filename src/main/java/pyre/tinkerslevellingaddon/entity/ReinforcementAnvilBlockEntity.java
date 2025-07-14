@@ -115,7 +115,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
 
         String material = ForgingMaterialSpec.getRegisteredReinforceMaterial(handstack);
         
-        if (handitem instanceof ReinforceItem) {
+        if (ReinforceItem.isValidReinforceItem(handstack)) {
             if (slotstack_b.is(TinkerTags.Items.MODIFIABLE)) {
                 CompoundTag tag = handstack.getTag();
                 if (tag.getInt(ReinforceItem.STATUS) != ReinforceItem.ReinforceStatus.FINISHED.ordinal()) return false;
@@ -155,7 +155,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                 return true;
             }
         } else if (handitem instanceof TitaniteShardItem) {
-            if (slotitem_b instanceof ReinforceItem) {
+            if (ReinforceItem.isValidReinforceItem(slotstack_b)) {
                 CompoundTag slottag_b = slotstack_b.getTag();
                 
                 int reinforce = slottag_b.getInt(ReinforceItem.REINFORCE);
@@ -179,27 +179,44 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                     Messages.sendAnvilMulticlang(level, worldPosition);
                     return true;
                 }
-            } else  {
+            } else {
                 ReinforcingGearSpec gearSpec = ReinforcingGearSpec.getReinforcingGearSpec(slotitem_a, slotitem_b, slotitem_c);
-                String slotstack_a_material = ForgingMaterialSpec.getRegisteredReinforceMaterial(slotstack_a);
-                String slotstack_b_material = ForgingMaterialSpec.getRegisteredReinforceMaterial(slotstack_b);
-                String slotstack_c_material = ForgingMaterialSpec.getRegisteredReinforceMaterial(slotstack_c);
                 
-                boolean slot_b_valid_material = slot_b_empty || slotstack_b_material != null;
-                boolean slot_a_valid_material = slot_a_empty || slotstack_a_material.equals(slotstack_b_material);
-                boolean slot_c_valid_material = slot_c_empty || slotstack_c_material.equals(slotstack_b_material);
+                String consensusMaterial = null;
                 
-                if (gearSpec != null && slot_b_valid_material && slot_a_valid_material && slot_c_valid_material) {
+                if (!slot_b_empty) {
+                    consensusMaterial = ForgingMaterialSpec.getRegisteredReinforceMaterial(slotstack_b);
+                }
+                
+                if (!slot_a_empty) {
+                    String slotstack_a_material = ForgingMaterialSpec.getRegisteredReinforceMaterial(slotstack_a);
+                    if (consensusMaterial == null) {
+                        consensusMaterial = slotstack_a_material;
+                    } else if (!slotstack_a_material.equals(consensusMaterial)) {
+                        return false;
+                    }
+                }
+                
+                if (!slot_c_empty) {
+                    String slotstack_c_material = ForgingMaterialSpec.getRegisteredReinforceMaterial(slotstack_c);
+                    if (consensusMaterial == null) {
+                        consensusMaterial = slotstack_c_material;
+                    } else if (!slotstack_c_material.equals(consensusMaterial)) {
+                        return false;
+                    }
+                }
+                
+                if (gearSpec != null) {
                     int materialCost = gearSpec.getMaterialCost();
                     
                     CompoundTag tag = new CompoundTag();
-                    tag.putString(ReinforceItem.MATERIAL, slotstack_b_material);
+                    tag.putString(ReinforceItem.MATERIAL, consensusMaterial);
                     tag.putInt(ReinforceItem.COUNT, materialCost);
                     tag.putString(ReinforceItem.GEAR, gearSpec.getResultingGear());
                     tag.putInt(ReinforceItem.REINFORCE, 1);
                     tag.putDouble(ReinforceItem.TEMPERATURE, Config.ambientTemperature.get());
-                    tag.putInt(ReinforceItem.PROGRESS, ForgingMaterialSpec.getExperienceCostTotal(slotstack_b_material, 1, materialCost));
-                    tag.putDouble(ReinforceItem.EXPERIENCE, ForgingMaterialSpec.getExperienceCostPerTrip(slotstack_b_material, 1, materialCost));
+                    tag.putInt(ReinforceItem.PROGRESS, ForgingMaterialSpec.getExperienceCostTotal(consensusMaterial, 1, materialCost));
+                    tag.putDouble(ReinforceItem.EXPERIENCE, ForgingMaterialSpec.getExperienceCostPerTrip(consensusMaterial, 1, materialCost));
                     tag.putInt("CustomModelData", 0);
                     tag.putInt(ReinforceItem.STATUS, ReinforceItem.ReinforceStatus.UNTOUCHED.ordinal());
                     tag.putInt(ReinforceItem.CLOCK, 0);
@@ -225,9 +242,8 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         player.getCooldowns().addCooldown(AllItems.WRENCH.get(), 20);
         
         ItemStack slotstack = this.getItem(SLOT_B);
-        Item slotitem = slotstack.getItem();
         
-        if (slotitem instanceof ReinforceItem && slotstack.hasTag()) {
+        if (ReinforceItem.isValidReinforceItem(slotstack)) {
             CompoundTag tag = slotstack.getTag();
             String material = tag.getString(ReinforceItem.MATERIAL);
             int reinforce = tag.getInt(ReinforceItem.REINFORCE);
@@ -267,7 +283,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         ItemStack slotstack = this.getItem(SLOT_B);
         double resultTemperature = ThermalModel.getReinforceItemTemperature(slotstack, Config.ambientTemperature.get());
         
-        if (resultTemperature > 0) {
+        if (resultTemperature > Integer.MIN_VALUE) {
             ItemStack result = slotstack.copy();
             CompoundTag tag = result.getTag();
             int clock = tag.getInt(ReinforceItem.CLOCK);
@@ -318,7 +334,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         Item slotitem_b = slotstack_b.getItem();
         Item slotitem_c = slotstack_c.getItem();
 
-        if (slotitem_b instanceof ModifiableItem || slotitem_b instanceof ReinforceItem) {
+        if (slotitem_b instanceof ModifiableItem || ReinforceItem.isValidReinforceItem(slotstack_b)) {
             this.displayTooltipInfo(tooltip, slotstack_b, slotitem_b);
             return true;
         }

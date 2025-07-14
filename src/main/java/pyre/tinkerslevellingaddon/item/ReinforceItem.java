@@ -37,10 +37,28 @@ public class ReinforceItem extends Item {
         ReinforceItem.addMetalStats(components, itemstack);
         super.appendHoverText(itemstack, level, components, flag);
     }
+
+    public static boolean isValidReinforceItem(ItemStack stack) {
+        if (!(stack.getItem() instanceof ReinforceItem)) return false;
+        if (!stack.hasTag()) return false;
+
+        CompoundTag tag = stack.getTag();
+        if (!tag.contains(MATERIAL)) return false;
+        if (!tag.contains(GEAR)) return false;
+        if (!tag.contains(COUNT)) return false;
+        if (!tag.contains(REINFORCE)) return false;
+        if (!tag.contains(TEMPERATURE)) return false;
+        if (!tag.contains(PROGRESS)) return false;
+        if (!tag.contains(EXPERIENCE)) return false;
+        if (!tag.contains(STATUS)) return false;
+        if (!tag.contains(CLOCK)) return false;
+
+        return true;
+    }
     
     public static boolean addMetalStats(List<Component> tooltip, ItemStack itemstack) {
-        if(itemstack == null || itemstack.isEmpty() || !itemstack.hasTag()) return false;
-
+        if (!ReinforceItem.isValidReinforceItem(itemstack)) return false;
+        
         CompoundTag tag = itemstack.getTag();
         String material = tag.getString(ReinforceItem.MATERIAL);
         int count = tag.getInt(ReinforceItem.COUNT);
