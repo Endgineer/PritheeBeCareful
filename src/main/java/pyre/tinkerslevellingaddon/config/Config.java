@@ -90,6 +90,13 @@ public class Config {
     public static ForgeConfigSpec.EnumValue<GainingMethod> staffSlotGainingMethod;
     public static ForgeConfigSpec.EnumValue<GainingMethod> staffStatGainingMethod;
 
+    //general.forging
+    public static ForgeConfigSpec.DoubleValue temperatureLimit;
+    public static ForgeConfigSpec.DoubleValue ambientTemperature;
+    public static ForgeConfigSpec.DoubleValue thermalRelaxation;
+    public static ForgeConfigSpec.DoubleValue heatTransfer;
+    
+    //general.leveling
     public static ForgeConfigSpec.IntValue maxLevel;
     public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> maxLevelAtReinforce;
     public static ForgeConfigSpec.DoubleValue broadToolRequiredXpMultiplier;
@@ -233,6 +240,10 @@ public class Config {
                 .translation("config.tinkerslevellingaddon.general.staff_slot_gaining_method")
                 .defineEnum("staffSlotGainingMethod", GainingMethod.PREDEFINED_ORDER, EnumGetMethod.NAME_IGNORECASE, GainingMethod.values());
 
+        levelingConfig(builder);
+
+        forgingConfig(builder);
+        
         slotsConfig(builder);
 
         toolsStatGainingMethod = builder.comment("Method of gaining stats for tools.")
@@ -252,6 +263,34 @@ public class Config {
                 .defineEnum("staffStatGainingMethod", GainingMethod.NONE, EnumGetMethod.NAME_IGNORECASE, GainingMethod.values());
 
         statsConfig(builder);
+        
+        builder.pop();
+    }
+
+    private static void forgingConfig(ForgeConfigSpec.Builder builder) {
+        builder.comment("Forging settings").push("forging");
+
+        temperatureLimit = builder.comment("The maximum temperature (C) that the forge can reach.")
+                .translation("config.tinkerslevellingaddon.general.temperature_limit")
+                .defineInRange("temperatureLimit", 4000.0, 1000.0, 5000.0);
+
+        ambientTemperature = builder.comment("The assumed ambient temperature (C) of the environment.")
+                .translation("config.tinkerslevellingaddon.general.ambient_temperature")
+                .defineInRange("ambientTemperature", 20.0, 10.0, 30.0);
+
+        thermalRelaxation = builder.comment("The higher this coefficient, the faster the forge will heat and cool.")
+                .translation("config.tinkerslevellingaddon.general.thermal_relaxation")
+                .defineInRange("thermalRelaxation", 0.00014, 0, Double.MAX_VALUE);
+
+        heatTransfer = builder.comment("The higher this coefficient, the faster all materials will heat and cool.")
+                .translation("config.tinkerslevellingaddon.general.heat_transfer")
+                .defineInRange("heatTransfer", 325355, 0, Double.MAX_VALUE);
+
+        builder.pop();
+    }
+
+    private static void levelingConfig(ForgeConfigSpec.Builder builder) {
+        builder.comment("Leveling settings").push("leveling");
 
         maxLevel = builder.comment("Maximum tool level that could be achieved.")
                 .translation("config.tinkerslevellingaddon.general.max_level")

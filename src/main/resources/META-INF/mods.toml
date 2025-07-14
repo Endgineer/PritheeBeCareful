@@ -18,19 +18,27 @@ Tinkers' Construct addon that adds tool leveling system.
     modId="forge"
     mandatory=true
     versionRange="${forge_range}"
-    ordering="NONE"
+    ordering="AFTER"
     side="BOTH"
 
 [[dependencies.tinkerslevellingaddon]]
     modId="minecraft"
     mandatory=true
     versionRange="${minecraft_range}"
-    ordering="NONE"
+    ordering="AFTER"
     side="BOTH"
 
 [[dependencies.tinkerslevellingaddon]]
     modId="tconstruct"
     mandatory=true
     versionRange="${tinkers_range}"
-    ordering="NONE"
+    ordering="AFTER"
+    side="BOTH"
+
+
+[[dependencies.tinkerslevellingaddon]]
+    modId="create"
+    mandatory=true
+    versionRange="[0.5.1.j,)"
+    ordering="AFTER"
     side="BOTH"

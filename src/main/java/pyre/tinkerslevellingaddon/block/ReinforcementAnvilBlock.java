@@ -18,6 +18,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -97,5 +99,10 @@ public class ReinforcementAnvilBlock extends TableBlock {
     
     public static final DirectionProperty getFacing() {
         return FACING;
+    }
+    
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return level.isClientSide ? null : (blockLevel, blockPos, blockState, blockEntity) -> { ((ReinforcementAnvilBlockEntity) blockEntity).tick(); };
     }
 }

@@ -40,6 +40,12 @@ public class Messages {
                 .encoder(AnvilClangPacket::toBytes)
                 .consumerMainThread(AnvilClangPacket::handle)
                 .add();
+
+        net.messageBuilder(AnvilMulticlangPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(AnvilMulticlangPacket::new)
+                .encoder(AnvilMulticlangPacket::toBytes)
+                .consumerMainThread(AnvilMulticlangPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {
@@ -50,7 +56,11 @@ public class Messages {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
 
-    public static <MSG> void sendAnvilClang(Level level, BlockPos blockPos, boolean isHitEffective) {
-        INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(blockPos)), new AnvilClangPacket(blockPos, isHitEffective));
+    public static <MSG> void sendAnvilClang(Level level, BlockPos blockPos, int hitEffectiveness, int takenXpPoints) {
+        INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(blockPos)), new AnvilClangPacket(blockPos, hitEffectiveness, takenXpPoints));
+    }
+
+    public static <MSG> void sendAnvilMulticlang(Level level, BlockPos blockPos) {
+        INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(blockPos)), new AnvilMulticlangPacket(blockPos));
     }
 }

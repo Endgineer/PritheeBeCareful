@@ -12,66 +12,80 @@ import net.minecraftforge.network.NetworkEvent;
 
 public class AnvilClangPacket {
     private final BlockPos blockPos;
-    private final boolean isHitEffective;
+    private final int hitEffectiveness;
+    private final int takenXpPoints;
     
-    public AnvilClangPacket(BlockPos blockPos, boolean isHitEffective) {
+    public AnvilClangPacket(BlockPos blockPos, int hitEffectiveness, int takenXpPoints) {
         this.blockPos = blockPos;
-        this.isHitEffective = isHitEffective;
+        this.hitEffectiveness = hitEffectiveness;
+        this.takenXpPoints = takenXpPoints;
     }
 
     public AnvilClangPacket(FriendlyByteBuf buffer) {
         this.blockPos = buffer.readBlockPos();
-        this.isHitEffective = buffer.readBoolean();
+        this.hitEffectiveness = buffer.readInt();
+        this.takenXpPoints = buffer.readInt();
     }
 
     public void toBytes(FriendlyByteBuf buffer) {
         buffer.writeBlockPos(this.blockPos);
-        buffer.writeBoolean(this.isHitEffective);
+        buffer.writeInt(this.hitEffectiveness);
+        buffer.writeInt(this.takenXpPoints);
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         supplier.get().enqueueWork(() -> {
             Minecraft mc = Minecraft.getInstance();
             if (mc.level != null) {
-                if (this.isHitEffective) {
-                    for (int i = 0; i < 10; i++) {
-                        double offsetX = (mc.level.random.nextDouble() - 0.5) * 0.1;
-                        double offsetY = (mc.level.random.nextDouble() - 0.5) * 0.1;
-                        double offsetZ = (mc.level.random.nextDouble() - 0.5) * 0.1;
+                if (this.hitEffectiveness > 0) {
+                    for (int i = 0; i < hitEffectiveness/2; i++) {
+                        double xPos = this.blockPos.getX() + 0.5;
+                        double yPos = this.blockPos.getY() + 1.015625;
+                        double zPos = this.blockPos.getZ() + 0.5;
+
+                        double xVel = mc.level.random.nextDouble();
+                        double yVel = mc.level.random.nextDouble();
+                        double zVel = mc.level.random.nextDouble();
                         
-                        double x = this.blockPos.getX() + 0.5D + (mc.level.random.nextDouble() - 0.5) * 0.1;
-                        double y = this.blockPos.getY() + 1.0D + (mc.level.random.nextDouble() - 0.5) * 0.1;
-                        double z = this.blockPos.getZ() + 0.5D + (mc.level.random.nextDouble() - 0.5) * 0.1;
-                        
-                        mc.level.addParticle(
-                            ParticleTypes.CRIT,
-                            x, y, z,
-                            offsetX, offsetY, offsetZ
-                        );
+                        mc.level.addParticle(ParticleTypes.CRIT, xPos, yPos, zPos, xVel, yVel, zVel);
+                        mc.level.addParticle(ParticleTypes.CRIT, xPos, yPos, zPos, -xVel, yVel, -zVel);
                     }
                     
                     mc.level.playLocalSound(
                         this.blockPos.getX() + 0.5,
                         this.blockPos.getY() + 1.0,
                         this.blockPos.getZ() + 0.5,
-                        SoundEvents.EXPERIENCE_ORB_PICKUP,
-                        SoundSource.PLAYERS,
+                        SoundEvents.ANVIL_PLACE,
+                        SoundSource.BLOCKS,
                         1.0F,
+                        1.25F,
+                        false
+                    );
+                    
+                    for (int j = 0; j < this.takenXpPoints; j++) {
+                        mc.level.playLocalSound(
+                            this.blockPos.getX() + 0.5,
+                            this.blockPos.getY() + 1.0,
+                            this.blockPos.getZ() + 0.5,
+                            SoundEvents.EXPERIENCE_ORB_PICKUP,
+                            SoundSource.PLAYERS,
+                            1.0F,
+                            1.0F,
+                            false
+                        );
+                    }
+                } else {
+                    mc.level.playLocalSound(
+                        this.blockPos.getX() + 0.5,
+                        this.blockPos.getY() + 1.0,
+                        this.blockPos.getZ() + 0.5,
+                        SoundEvents.ANVIL_PLACE,
+                        SoundSource.BLOCKS,
                         1.0F,
+                        1.75F,
                         false
                     );
                 }
-                
-                mc.level.playLocalSound(
-                    this.blockPos.getX() + 0.5,
-                    this.blockPos.getY() + 1.0,
-                    this.blockPos.getZ() + 0.5,
-                    SoundEvents.ANVIL_PLACE,
-                    SoundSource.BLOCKS,
-                    1.0F,
-                    5.0F,
-                    false
-                );
             }
         });
         

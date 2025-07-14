@@ -138,18 +138,18 @@ public class ReinforceModifier extends Modifier implements PlantHarvestModifierH
     }
 
     @Nullable
-    public static ToolStack reinforce(ItemStack stack) {
+    public static ToolStack reinforce(ItemStack stack, int targetReinforceLevel) {
         if (ModifierUtil.getModifierLevel(stack, Registration.REINFORCE.getId()) <= 0) return null;
 
         ToolStack tool = ToolStack.copyFrom(stack);
         ToolDataNBT persistentData = tool.getPersistentData();
         
         int currentReinforce = persistentData.getInt(REINFORCE_KEY);
-        if (currentReinforce == 5) {
+        if (currentReinforce == 5 || targetReinforceLevel != currentReinforce+1) {
             return null;
         }
         
-        persistentData.putInt(REINFORCE_KEY, Math.min(currentReinforce+1, 5));
+        persistentData.putInt(REINFORCE_KEY, currentReinforce+1);
         return tool;
     }
     
