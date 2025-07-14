@@ -157,27 +157,29 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         } else if (handitem instanceof TitaniteShardItem) {
             if (ReinforceItem.isValidReinforceItem(slotstack_b)) {
                 CompoundTag slottag_b = slotstack_b.getTag();
-                
-                int reinforce = slottag_b.getInt(ReinforceItem.REINFORCE);
-                if (reinforce < 5 && slottag_b.getInt(ReinforceItem.STATUS) == ReinforceItem.ReinforceStatus.UNTOUCHED.ordinal()) {
-                    ItemStack result = slotstack_b.copy();
-                    int resultReinforce = reinforce+1;
-                    
-                    CompoundTag tag = result.getTag();
-                    
-                    String resultMaterial = tag.getString(ReinforceItem.MATERIAL);
-                    int resultCount = tag.getInt(ReinforceItem.COUNT);
-                    
-                    tag.putInt(ReinforceItem.REINFORCE, resultReinforce);
-                    tag.putInt(ReinforceItem.PROGRESS, ForgingMaterialSpec.getExperienceCostTotal(resultMaterial, resultReinforce, resultCount));
-                    tag.putDouble(ReinforceItem.EXPERIENCE, ForgingMaterialSpec.getExperienceCostPerTrip(resultMaterial, resultReinforce, resultCount));
-                    result.setTag(tag);
-                    
-                    player.setItemInHand(InteractionHand.MAIN_HAND, handstack.copyWithCount(handstack.getCount()-1));
-                    this.setItem(SLOT_B, result);
-                    
-                    Messages.sendAnvilMulticlang(level, worldPosition);
-                    return true;
+
+                if (slottag_b.getInt(ReinforceItem.STATUS) == ReinforceItem.ReinforceStatus.UNTOUCHED.ordinal()) {
+                    int reinforce = slottag_b.getInt(ReinforceItem.REINFORCE);
+                    if (reinforce < 5) {
+                        ItemStack result = slotstack_b.copy();
+                        int resultReinforce = reinforce+1;
+                        
+                        CompoundTag tag = result.getTag();
+                        
+                        String resultMaterial = tag.getString(ReinforceItem.MATERIAL);
+                        int resultCount = tag.getInt(ReinforceItem.COUNT);
+                        
+                        tag.putInt(ReinforceItem.REINFORCE, resultReinforce);
+                        tag.putInt(ReinforceItem.PROGRESS, ForgingMaterialSpec.getExperienceCostTotal(resultMaterial, resultReinforce, resultCount));
+                        tag.putDouble(ReinforceItem.EXPERIENCE, ForgingMaterialSpec.getExperienceCostPerTrip(resultMaterial, resultReinforce, resultCount));
+                        result.setTag(tag);
+                        
+                        player.setItemInHand(InteractionHand.MAIN_HAND, handstack.copyWithCount(handstack.getCount()-1));
+                        this.setItem(SLOT_B, result);
+                        
+                        Messages.sendAnvilMulticlang(level, worldPosition);
+                        return true;
+                    }
                 }
             } else {
                 ReinforcingGearSpec gearSpec = ReinforcingGearSpec.getReinforcingGearSpec(slotitem_a, slotitem_b, slotitem_c);
