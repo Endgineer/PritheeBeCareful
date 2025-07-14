@@ -9,6 +9,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import pyre.tinkerslevellingaddon.exception.InvalidForgingMaterialSpecException;
 import pyre.tinkerslevellingaddon.loader.forging.models.MalleabilityModel;
@@ -20,12 +24,14 @@ public class ForgingMaterialSpec {
     private static HashMap<String, ForgingMaterialSpec> MATERIAL_SPECS = new HashMap<>();
     
     public static void registerForgingMaterialSpec(String material, JsonElement jsonelement) throws Exception {
-        JsonArray jsonarray = jsonelement.getAsJsonArray();
+        JsonObject jsonobject = jsonelement.getAsJsonObject();
+        
+        JsonArray jsonarray = jsonobject.get("reinforces").getAsJsonArray();
         if (jsonarray.size() != 5) {
             throw new InvalidForgingMaterialSpecException("Must specify exactly 5 reinforce specs.");
         }
         
-        ForgingMaterialSpec.MATERIAL_SPECS.put(material, new ForgingMaterialSpec(jsonarray));
+        ForgingMaterialSpec.MATERIAL_SPECS.put(material, new ForgingMaterialSpec(jsonobject.get("ingot_tag").getAsString(), jsonarray));
     }
     
     @Nullable
@@ -97,9 +103,19 @@ public class ForgingMaterialSpec {
         return materialReinforceSpec.getMalleability(temperature);
     }
     
+    public static boolean match(String material, ItemStack stack) {
+        ForgingMaterialSpec materialSpec = ForgingMaterialSpec.MATERIAL_SPECS.get(material);
+        if (materialSpec == null) return false;
+        
+        return !stack.isEmpty() && stack.is(materialSpec.materialIngot);
+    }
+    
     private MaterialReinforceSpec[] materialReinforceSpecs;
-
-    private ForgingMaterialSpec(JsonArray materialReinforceSpecs) {
+    private TagKey<Item> materialIngot;
+    
+    private ForgingMaterialSpec(String ingotTag, JsonArray materialReinforceSpecs) {
+        this.materialIngot = TagKey.create(Registries.ITEM, new ResourceLocation(ingotTag));
+        
         this.materialReinforceSpecs = new MaterialReinforceSpec[5];
         for(int i = 0; i < 5; i++) {
             JsonObject materialReinforceSpec = materialReinforceSpecs.get(i).getAsJsonObject();
@@ -189,6 +205,10 @@ public class ForgingMaterialSpec {
 
         public double getBreakdownPoint() {
             return this.malleabilityModel.getBreakdownTemperature();
+        }
+
+        public boolean canFold(double temperature) {
+            return temperature >= this.malleabilityModel.getFoldingTemperature();
         }
     }
 }
