@@ -1,32 +1,35 @@
-[
-  {
-    "base_xp_cost": 45,
-    "xp_conductance": { "min": 3, "max": 7 },
-    "volumetric_heat_capacity": { "density": 8900, "specific_heat": 420 },
-    "temperatures": { "hammering": 600, "folding": 900, "quenching": 950, "breakdown": 1200, "melting": 1495 }
-  },
-  {
-    "base_xp_cost": 30,
-    "xp_conductance": { "min": 3, "max": 7 },
-    "volumetric_heat_capacity": { "density": 8900, "specific_heat": 420 },
-    "temperatures": { "hammering": 600, "folding": 900, "quenching": 950, "breakdown": 1200, "melting": 1495 }
-  },
-  {
-    "base_xp_cost": 22,
-    "xp_conductance": { "min": 3, "max": 7 },
-    "volumetric_heat_capacity": { "density": 8900, "specific_heat": 420 },
-    "temperatures": { "hammering": 600, "folding": 900, "quenching": 950, "breakdown": 1200, "melting": 1495 }
-  },
-  {
-    "base_xp_cost": 14,
-    "xp_conductance": { "min": 3, "max": 7 },
-    "volumetric_heat_capacity": { "density": 8900, "specific_heat": 420 },
-    "temperatures": { "hammering": 600, "folding": 900, "quenching": 950, "breakdown": 1200, "melting": 1495 }
-  },
-  {
-    "base_xp_cost": 10,
-    "xp_conductance": { "min": 3, "max": 7 },
-    "volumetric_heat_capacity": { "density": 8900, "specific_heat": 420 },
-    "temperatures": { "hammering": 600, "folding": 900, "quenching": 950, "breakdown": 1200, "melting": 1495 }
-  }
-]
+{
+  "ingot_tag": "forge:ingots/cobalt",
+  "reinforces": [
+    {
+      "base_xp_cost": 45,
+      "xp_conductance": { "min": 3, "max": 7 },
+      "volumetric_heat_capacity": { "density": 8900, "specific_heat": 420 },
+      "temperatures": { "hammering": 600, "folding": 900, "quenching": 950, "breakdown": 1200, "melting": 1495 }
+    },
+    {
+      "base_xp_cost": 30,
+      "xp_conductance": { "min": 3, "max": 7 },
+      "volumetric_heat_capacity": { "density": 8900, "specific_heat": 420 },
+      "temperatures": { "hammering": 600, "folding": 900, "quenching": 950, "breakdown": 1200, "melting": 1495 }
+    },
+    {
+      "base_xp_cost": 22,
+      "xp_conductance": { "min": 3, "max": 7 },
+      "volumetric_heat_capacity": { "density": 8900, "specific_heat": 420 },
+      "temperatures": { "hammering": 600, "folding": 900, "quenching": 950, "breakdown": 1200, "melting": 1495 }
+    },
+    {
+      "base_xp_cost": 14,
+      "xp_conductance": { "min": 3, "max": 7 },
+      "volumetric_heat_capacity": { "density": 8900, "specific_heat": 420 },
+      "temperatures": { "hammering": 600, "folding": 900, "quenching": 950, "breakdown": 1200, "melting": 1495 }
+    },
+    {
+      "base_xp_cost": 10,
+      "xp_conductance": { "min": 3, "max": 7 },
+      "volumetric_heat_capacity": { "density": 8900, "specific_heat": 420 },
+      "temperatures": { "hammering": 600, "folding": 900, "quenching": 950, "breakdown": 1200, "melting": 1495 }
+    }
+  ]
+}
