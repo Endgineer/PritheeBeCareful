@@ -1,0 +1,95 @@
+{
+  "ingot_tag": "forge:ingots/pig_iron",
+  "reinforces": [
+    {
+      "base_xp_cost": 45,
+      "temperatures": {
+        "breakdown": 1100,
+        "folding": 1000,
+        "hammering": 750,
+        "melting": 1150,
+        "quenching": 1050
+      },
+      "volumetric_heat_capacity": {
+        "density": 7200,
+        "specific_heat": 460
+      },
+      "xp_conductance": {
+        "max": 7,
+        "min": 3
+      }
+    },
+    {
+      "base_xp_cost": 30,
+      "temperatures": {
+        "breakdown": 1100,
+        "folding": 1000,
+        "hammering": 750,
+        "melting": 1150,
+        "quenching": 1050
+      },
+      "volumetric_heat_capacity": {
+        "density": 7200,
+        "specific_heat": 460
+      },
+      "xp_conductance": {
+        "max": 7,
+        "min": 3
+      }
+    },
+    {
+      "base_xp_cost": 22,
+      "temperatures": {
+        "breakdown": 1100,
+        "folding": 1000,
+        "hammering": 750,
+        "melting": 1150,
+        "quenching": 1050
+      },
+      "volumetric_heat_capacity": {
+        "density": 7200,
+        "specific_heat": 460
+      },
+      "xp_conductance": {
+        "max": 7,
+        "min": 3
+      }
+    },
+    {
+      "base_xp_cost": 14,
+      "temperatures": {
+        "breakdown": 1100,
+        "folding": 1000,
+        "hammering": 750,
+        "melting": 1150,
+        "quenching": 1050
+      },
+      "volumetric_heat_capacity": {
+        "density": 7200,
+        "specific_heat": 460
+      },
+      "xp_conductance": {
+        "max": 7,
+        "min": 3
+      }
+    },
+    {
+      "base_xp_cost": 10,
+      "temperatures": {
+        "breakdown": 1100,
+        "folding": 1000,
+        "hammering": 750,
+        "melting": 1150,
+        "quenching": 1050
+      },
+      "volumetric_heat_capacity": {
+        "density": 7200,
+        "specific_heat": 460
+      },
+      "xp_conductance": {
+        "max": 7,
+        "min": 3
+      }
+    }
+  ]
+}

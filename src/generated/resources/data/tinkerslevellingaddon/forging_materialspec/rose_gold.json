@@ -1,0 +1,95 @@
+{
+  "ingot_tag": "forge:ingots/rose_gold",
+  "reinforces": [
+    {
+      "base_xp_cost": 45,
+      "temperatures": {
+        "breakdown": 1014,
+        "folding": 634,
+        "hammering": 423,
+        "melting": 1057,
+        "quenching": 846
+      },
+      "volumetric_heat_capacity": {
+        "density": 14130,
+        "specific_heat": 250
+      },
+      "xp_conductance": {
+        "max": 7,
+        "min": 3
+      }
+    },
+    {
+      "base_xp_cost": 30,
+      "temperatures": {
+        "breakdown": 1014,
+        "folding": 634,
+        "hammering": 423,
+        "melting": 1057,
+        "quenching": 846
+      },
+      "volumetric_heat_capacity": {
+        "density": 14130,
+        "specific_heat": 250
+      },
+      "xp_conductance": {
+        "max": 7,
+        "min": 3
+      }
+    },
+    {
+      "base_xp_cost": 22,
+      "temperatures": {
+        "breakdown": 1014,
+        "folding": 634,
+        "hammering": 423,
+        "melting": 1057,
+        "quenching": 846
+      },
+      "volumetric_heat_capacity": {
+        "density": 14130,
+        "specific_heat": 250
+      },
+      "xp_conductance": {
+        "max": 7,
+        "min": 3
+      }
+    },
+    {
+      "base_xp_cost": 14,
+      "temperatures": {
+        "breakdown": 1014,
+        "folding": 634,
+        "hammering": 423,
+        "melting": 1057,
+        "quenching": 846
+      },
+      "volumetric_heat_capacity": {
+        "density": 14130,
+        "specific_heat": 250
+      },
+      "xp_conductance": {
+        "max": 7,
+        "min": 3
+      }
+    },
+    {
+      "base_xp_cost": 10,
+      "temperatures": {
+        "breakdown": 1014,
+        "folding": 634,
+        "hammering": 423,
+        "melting": 1057,
+        "quenching": 846
+      },
+      "volumetric_heat_capacity": {
+        "density": 14130,
+        "specific_heat": 250
+      },
+      "xp_conductance": {
+        "max": 7,
+        "min": 3
+      }
+    }
+  ]
+}
