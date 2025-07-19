@@ -30,6 +30,9 @@ import pyre.tinkerslevellingaddon.loader.forging.models.ThermalModel;
 import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpec;
 import pyre.tinkerslevellingaddon.network.Messages;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.materials.definition.MaterialId;
+import slimeknights.tconstruct.library.materials.definition.MaterialVariant;
+import slimeknights.tconstruct.library.tools.definition.module.material.MaterialRepairToolHook;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
@@ -119,6 +122,22 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
             if (slotstack_b.is(TinkerTags.Items.MODIFIABLE)) {
                 CompoundTag tag = handstack.getTag();
                 if (tag.getInt(ReinforceItem.STATUS) != ReinforceItem.ReinforceStatus.FINISHED.ordinal()) return false;
+                
+                if (slotstack_b.isDamaged()) return false;
+                if (!ForgeRegistries.ITEMS.getKey(slotitem_b).getPath().equals(tag.getString(ReinforceItem.GEAR))) return false;
+
+                boolean materialMatches = false;
+                ToolStack toolstack = ToolStack.from(slotstack_b);
+                String reinforceMaterial = tag.getString(ReinforceItem.MATERIAL);
+                for (MaterialVariant materialVariant : toolstack.getMaterials()) {
+                    MaterialId materialId = materialVariant.getId();
+                    if (materialId.getPath().equals(reinforceMaterial) && MaterialRepairToolHook.canRepairWith(toolstack, materialId)) {
+                        materialMatches = true;
+                        break;
+                    }
+                }
+                
+                if (!materialMatches) return false;
                 
                 int targetReinforceLevel = tag.getInt(ReinforceItem.REINFORCE);
                 ToolStack gearstack = ReinforceModifier.reinforce(slotstack_b, targetReinforceLevel);
