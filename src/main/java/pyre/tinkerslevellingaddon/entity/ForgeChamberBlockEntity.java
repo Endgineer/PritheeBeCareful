@@ -223,7 +223,7 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
         Lang.translate(TinkersLevellingAddon.MOD_ID+".forge_chamber").forGoggles(tooltip);
         
         if (this.level.getBlockState(this.getBlockPos()).getValue(ForgeChamberBlock.CONNECTED)) {
-            tooltip.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".forge.forge_temperature", String.valueOf((int) this.temperature)).withStyle(ChatFormatting.DARK_GRAY));
+            tooltip.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".forge.forge_temperature", String.valueOf((int) this.temperature)).withStyle(ChatFormatting.GRAY));
 
             ItemStack fuelstack = this.getItem(FUEL_SLOT);
             int totalFuel = this.fuel + fuelstack.getCount()*ForgeHooks.getBurnTime(fuelstack, RecipeType.BLASTING);
@@ -233,11 +233,11 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
             int mm = (fueltimeSeconds / 60) % 60;
             int hh = fueltimeSeconds / 3600;
             
-            tooltip.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".forge.fuel_time", String.format("%02d", hh), String.format("%02d", mm), String.format("%02d", ss)).withStyle(ChatFormatting.DARK_GRAY));
+            tooltip.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".forge.fuel_time", String.format("%02d", hh), String.format("%02d", mm), String.format("%02d", ss)).withStyle(ChatFormatting.GRAY));
             
             ItemStack itemstack = this.getItem(ITEM_SLOT);
             if (ReinforceItem.isValidReinforceItem(itemstack)) {
-                tooltip.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".forge.item_temperature", String.valueOf((int) itemstack.getTag().getDouble(ReinforceItem.TEMPERATURE))).withStyle(ChatFormatting.DARK_GRAY));
+                tooltip.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".forge.item_temperature", String.valueOf((int) itemstack.getTag().getDouble(ReinforceItem.TEMPERATURE))).withStyle(ChatFormatting.GRAY));
             }
         }
 
