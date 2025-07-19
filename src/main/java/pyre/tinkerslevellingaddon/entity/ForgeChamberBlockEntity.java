@@ -61,7 +61,7 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
     private double temperature = ThermalModel.AMBIENT_TEMPERATURE;
     
     public ForgeChamberBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(PbcBlockEntities.FORGE_CHAMBER_BLOCK_ENTITY.get(), blockPos, blockState, Component.literal("forge_chamber"), false, 2);
+        super(PbcBlockEntities.FORGE_CHAMBER_BLOCK_ENTITY.get(), blockPos, blockState, Component.translatable("gui."+TinkersLevellingAddon.MOD_ID+".forge_chamber"), false, 2);
         this.itemHandler = new InvWrapper(this);
     }
 

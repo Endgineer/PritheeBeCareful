@@ -51,7 +51,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
     public static final int SLOT_C = 2;
     
     public ReinforcementAnvilBlockEntity(BlockPos pos, BlockState state) {
-        super(PbcBlockEntities.REINFORCEMENT_ANVIL_BLOCK_ENTITY.get(), pos, state, Component.literal("reinforcement_anvil"), 3, 1);
+        super(PbcBlockEntities.REINFORCEMENT_ANVIL_BLOCK_ENTITY.get(), pos, state, Component.translatable("gui."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil"), 3, 1);
         this.itemHandler = new InvWrapper(this);
     }
     

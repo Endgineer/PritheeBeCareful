@@ -13,7 +13,11 @@
   "block.tinkerslevellingaddon.forge_hearth": "Forge Hearth",
   "block.tinkerslevellingaddon.forge_throat": "Forge Throat",
 
+  "gui.tinkerslevellingaddon.reinforcement_anvil": "Reinforcement Anvil",
   "gui.tinkerslevellingaddon.forge_chamber": "Forge",
+  "gui.tinkerslevellingaddon.forge_throat": "Forge",
+  "gui.tinkerslevellingaddon.forge_hearth": "Forge",
+  
   "create.tinkerslevellingaddon.forge_chamber": "Forge",
   
   "multiblock.tinkerslevellingaddon.forge.all_missing": "Missing forge throat (above) and forge hearth (below).",

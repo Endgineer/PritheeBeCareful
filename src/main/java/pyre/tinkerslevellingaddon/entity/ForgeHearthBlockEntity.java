@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
+import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.block.ForgeHearthBlock;
 import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
 import pyre.tinkerslevellingaddon.core.PbcBlocks;
@@ -23,7 +24,7 @@ public class ForgeHearthBlockEntity extends NameableBlockEntity {
     public static final BlockEntityTicker<ForgeHearthBlockEntity> SERVER_TICKER = (blockLevel, blockPos, blockState, blockEntity) -> blockEntity.tick(blockLevel, blockPos, blockState);
     
     public ForgeHearthBlockEntity(BlockPos pos, BlockState state) {
-        super(PbcBlockEntities.FORGE_HEARTH_BLOCK_ENTITY.get(), pos, state, Component.literal("forge_hearth"));
+        super(PbcBlockEntities.FORGE_HEARTH_BLOCK_ENTITY.get(), pos, state, Component.translatable("gui."+TinkersLevellingAddon.MOD_ID+".forge_hearth"));
     }
     
     @Nullable
