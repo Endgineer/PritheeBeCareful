@@ -7,6 +7,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.entity.ForgeChamberBlockEntity;
+import pyre.tinkerslevellingaddon.entity.ForgeHearthBlockEntity;
+import pyre.tinkerslevellingaddon.entity.ForgeThroatBlockEntity;
 import pyre.tinkerslevellingaddon.entity.ReinforcementAnvilBlockEntity;
 
 public class PbcBlockEntities {
@@ -18,6 +20,14 @@ public class PbcBlockEntities {
 
     public static final RegistryObject<BlockEntityType<ForgeChamberBlockEntity>> FORGE_CHAMBER_BLOCK_ENTITY = BLOCKENTITIES.register("forge_chamber_block_entity",
         () -> BlockEntityType.Builder.of(ForgeChamberBlockEntity::new, PbcBlocks.FORGE_CHAMBER.get()).build(null)
+    );
+
+    public static final RegistryObject<BlockEntityType<ForgeThroatBlockEntity>> FORGE_THROAT_BLOCK_ENTITY = BLOCKENTITIES.register("forge_throat_block_entity",
+        () -> BlockEntityType.Builder.of(ForgeThroatBlockEntity::new, PbcBlocks.FORGE_THROAT.get()).build(null)
+    );
+    
+    public static final RegistryObject<BlockEntityType<ForgeHearthBlockEntity>> FORGE_HEARTH_BLOCK_ENTITY = BLOCKENTITIES.register("forge_hearth_block_entity",
+        () -> BlockEntityType.Builder.of(ForgeHearthBlockEntity::new, PbcBlocks.FORGE_HEARTH.get()).build(null)
     );
     
     public static void register(IEventBus eventBus) {
