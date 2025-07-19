@@ -25,6 +25,7 @@ import pyre.tinkerslevellingaddon.core.PbcCreativeModeTabs;
 import pyre.tinkerslevellingaddon.core.PbcItems;
 import pyre.tinkerslevellingaddon.core.PbcMenus;
 import pyre.tinkerslevellingaddon.data.PbcBlockTagsProvider;
+import pyre.tinkerslevellingaddon.data.PbcLootTableProvider;
 import pyre.tinkerslevellingaddon.data.PbcRecipeProvider;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpecManager;
 import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpecManager;
@@ -70,5 +71,6 @@ public class TinkersLevellingAddon {
         
         generator.addProvider(event.includeServer(), new PbcRecipeProvider(packOutput));
         generator.addProvider(event.includeServer(), new PbcBlockTagsProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new PbcLootTableProvider(packOutput));
     }
 }
