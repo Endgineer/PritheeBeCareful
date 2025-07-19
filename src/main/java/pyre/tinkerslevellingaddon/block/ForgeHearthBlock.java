@@ -39,7 +39,6 @@ public class ForgeHearthBlock extends Block implements EntityBlock {
                 .instrument(NoteBlockInstrument.BASEDRUM)
                 .requiresCorrectToolForDrops()
                 .strength(8.0F, 28F)
-                .emissiveRendering((state, level, pos) -> state.getValue(ACTIVE))
                 .lightLevel(s -> s.getValue(ACTIVE) ? 8 : 0)
                 .noOcclusion());
 
