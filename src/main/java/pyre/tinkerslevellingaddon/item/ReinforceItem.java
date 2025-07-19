@@ -116,7 +116,7 @@ public class ReinforceItem extends Item {
         CompoundTag tag = itemstack.getTag();
 
         if(tag == null) {
-            return Component.literal(I18n.get("item."+TinkersLevellingAddon.MOD_ID+".reinforce_item", "", "", "").strip());
+            return Component.translatable(("item."+TinkersLevellingAddon.MOD_ID+".reinforce_item"));
         }
         
         String material = tag.getString(ReinforceItem.MATERIAL);

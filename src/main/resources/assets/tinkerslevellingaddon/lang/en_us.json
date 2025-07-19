@@ -5,6 +5,7 @@
 
   "key.tinkerslevellingaddon.alt": "Alt",
 
+  "item.tinkerslevellingaddon.reinforce_item": "Invalid Reinforce Item",
   "item.tinkerslevellingaddon.reinforce_item.0": "%1$s %2$s %3$s Reinforce Item (New)",
   "item.tinkerslevellingaddon.reinforce_item.1": "%1$s %2$s %3$s Reinforce Item (Unf)",
   "item.tinkerslevellingaddon.reinforce_item.2": "%1$s %2$s %3$s Reinforce Item (Fin)",
