@@ -122,10 +122,11 @@ public class ReinforceItem extends Item {
         String material = tag.getString(ReinforceItem.MATERIAL);
         String gear = tag.getString(ReinforceItem.GEAR);
         String reinforce = "+"+String.valueOf(tag.getInt(ReinforceItem.REINFORCE));
+        String status = String.valueOf(tag.getInt(ReinforceItem.STATUS));
         
         return Component.literal(
             I18n.get(
-                "item."+TinkersLevellingAddon.MOD_ID+".reinforce_item",
+                "item."+TinkersLevellingAddon.MOD_ID+".reinforce_item." + status,
                 Component.translatable("forging."+TinkersLevellingAddon.MOD_ID+".material."+material).getString(),
                 Component.translatable("forging."+TinkersLevellingAddon.MOD_ID+".gear."+gear).getString(),
                 reinforce

@@ -5,7 +5,9 @@
 
   "key.tinkerslevellingaddon.alt": "Alt",
 
-  "item.tinkerslevellingaddon.reinforce_item": "%1$s %2$s %3$s Reinforce Item",
+  "item.tinkerslevellingaddon.reinforce_item.0": "%1$s %2$s %3$s Reinforce Item (New)",
+  "item.tinkerslevellingaddon.reinforce_item.1": "%1$s %2$s %3$s Reinforce Item (Unf)",
+  "item.tinkerslevellingaddon.reinforce_item.2": "%1$s %2$s %3$s Reinforce Item (Fin)",
   "item.tinkerslevellingaddon.titanite_shard": "Titanite Shard",
   
   "block.tinkerslevellingaddon.reinforcement_anvil": "Reinforcement Anvil",
