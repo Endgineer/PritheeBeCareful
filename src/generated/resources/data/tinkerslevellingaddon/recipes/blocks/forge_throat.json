@@ -2,23 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "c": {
-      "item": "create:railway_casing"
+    "b": {
+      "item": "create:brass_ingot"
     },
     "s": {
-      "tag": "tconstruct:seared_blocks"
+      "tag": "tconstruct:seared_bricks"
     },
     "t": {
       "item": "tinkerslevellingaddon:titanite_shard"
     }
   },
   "pattern": [
-    "ccc",
-    "tst",
-    "sss"
+    "sbs",
+    "sts",
+    "s s"
   ],
   "result": {
-    "item": "tinkerslevellingaddon:reinforcement_anvil"
+    "item": "tinkerslevellingaddon:forge_throat"
   },
   "show_notification": true
 }

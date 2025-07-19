@@ -1,0 +1,285 @@
+{
+  "render_type": "minecraft:cutout",
+  "parent": "block/block",
+  "textures": {
+    "grillhole": "tinkerslevellingaddon:block/forge_grill_inactive",
+    "grill": "tinkerslevellingaddon:block/forge_grill",
+    "bricks": "tconstruct:block/smeltery/seared/bricks",
+    "porthole": "tinkerslevellingaddon:block/forge_port_inactive",
+    "port": "tinkerslevellingaddon:block/forge_port",
+    "vent": "tinkerslevellingaddon:block/forge_vent_inactive",
+    "particle": "#bricks"
+  },
+  "elements": [
+    {
+      "name": "brick",
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#grillhole", "cullface": "north" },
+        "east":  {"uv": [0, 0, 16, 16], "texture": "#bricks", "cullface": "east"  },
+        "south": {"uv": [0, 0, 16, 16], "texture": "#porthole", "cullface": "south" },
+        "west":  {"uv": [0, 0, 16, 16], "texture": "#bricks", "cullface": "west"  }
+      }
+    },
+    {
+      "name": "vent_top_1",
+      "from": [0, 16, 0],
+      "to":   [16, 16, 2],
+      "faces": { "up": { "uv": [0, 0, 16, 2], "texture": "#vent" } }
+    },
+    {
+      "name": "vent_top_2",
+      "from": [0, 16, 14],
+      "to":   [16, 16, 16],
+      "faces": { "up": { "uv": [0, 14, 16, 16], "texture": "#vent" } }
+    },
+    {
+      "name": "vent_top_3",
+      "from": [0, 16, 2],
+      "to":   [2, 16, 14],
+      "faces": { "up": { "uv": [0, 2, 2, 14], "texture": "#vent" } }
+    },
+    {
+      "name": "vent_top_4",
+      "from": [14, 16, 2],
+      "to":   [16, 16, 14],
+      "faces": { "up": { "uv": [14, 2, 16, 14], "texture": "#vent" } }
+    },
+    {
+      "name": "vent_bot_1",
+      "from": [0, 0, 0],
+      "to":   [16, 0, 2],
+      "faces": { "down": { "uv": [0, 14, 16, 16], "texture": "#vent" } }
+    },
+    {
+      "name": "vent_bot_2",
+      "from": [0, 0, 14],
+      "to":   [16, 0, 16],
+      "faces": { "down": { "uv": [0, 0, 16, 2], "texture": "#vent" } }
+    },
+    {
+      "name": "vent_bot_3",
+      "from": [0, 0, 2],
+      "to":   [2, 0, 14],
+      "faces": { "down": { "uv": [0, 2, 2, 14], "texture": "#vent" } }
+    },
+    {
+      "name": "vent_bot_4",
+      "from": [14, 0, 2],
+      "to":   [16, 0, 14],
+      "faces": { "down": { "uv": [14, 2, 16, 14], "texture": "#vent" } }
+    },
+    {
+      "name": "grill_top",
+      "from": [4, 7, -1],
+      "to": [12, 8, 0],
+      "faces": {
+        "north": {"uv": [ 4,  8,  12,  9], "texture": "#grill", "cullface": "north"},
+        "east":  {"uv": [  4,  8,   5,  9], "texture": "#grill", "cullface": "north"},
+        "west":  {"uv": [ 11,  8,  12,  9], "texture": "#grill", "cullface": "north"},
+        "up":    {"uv": [ 4,  8,  12,  9], "texture": "#grill", "cullface": "north", "rotation": 180},
+        "down":  {"uv": [ 4,  8,  12,  9], "texture": "#grill", "cullface": "north", "rotation": 180}
+      }
+    },
+    {
+      "name": "grill_bar_1",
+      "from": [10, 3, -1],
+      "to": [12, 7, 0],
+      "faces": {
+        "north": {"uv": [ 4,  9,  6, 13], "texture": "#grill", "cullface": "north"},
+        "east":  {"uv": [ 4,  9,  5, 13], "texture": "#grill", "cullface": "north"},
+        "west":  {"uv": [ 5,  9,  6, 13], "texture": "#grill", "cullface": "north"}
+      }
+    },
+    {
+      "name": "grill_bar_2",
+      "from": [8, 3, -1],
+      "to": [9, 7, 0],
+      "faces": {
+        "north": {"uv": [ 7,  9,  8, 13], "texture": "#grill", "cullface": "north"},
+        "east":  {"uv": [ 7,  9,  8, 13], "texture": "#grill", "cullface": "north"},
+        "west":  {"uv": [ 7,  9,  8, 13], "texture": "#grill", "cullface": "north"}
+      }
+    },
+    {
+      "name": "grill_bar_3",
+      "from": [6, 3, -1],
+      "to": [7, 7, 0],
+      "faces": {
+        "north": {"uv": [ 9,  9,  10, 13], "texture": "#grill", "cullface": "north"},
+        "east":  {"uv": [ 9,  9,  10, 13], "texture": "#grill", "cullface": "north"},
+        "west":  {"uv": [ 9,  9,  10, 13], "texture": "#grill", "cullface": "north"}
+      }
+    },
+    {
+      "name": "grill_bar_4",
+      "from": [4, 3, -1],
+      "to": [5, 7, 0],
+      "faces": {
+        "north": {"uv": [ 11,  9,  12, 13], "texture": "#grill", "cullface": "north"},
+        "east":  {"uv": [ 11,  9,  12, 13], "texture": "#grill", "cullface": "north"},
+        "west":  {"uv": [ 11,  9,  12, 13], "texture": "#grill", "cullface": "north"}
+      }
+    },
+    {
+      "name": "grill_bot",
+      "from": [4, 2, -1],
+      "to": [12, 3, 0],
+      "faces": {
+        "north": {"uv": [ 4,  13,  12,  14], "texture": "#grill", "cullface": "north"},
+        "east":  {"uv": [  4,  13,   5,  14], "texture": "#grill", "cullface": "north"},
+        "west":  {"uv": [ 11,  13,  12,  14], "texture": "#grill", "cullface": "north"},
+        "up":    {"uv": [ 4,  13,  12,  14], "texture": "#grill", "cullface": "north", "rotation": 180},
+        "down":  {"uv": [ 4,  13,  12,  14], "texture": "#grill", "cullface": "north", "rotation": 180}
+      }
+    },
+    {
+      "name": "grill_handle",
+      "from": [12, 4, -1],
+      "to": [13, 6, 0],
+      "faces": {
+        "north": {"uv": [3, 10, 4, 12], "texture": "#grill", "cullface": "north"},
+        "east":  {"uv": [3, 10, 4, 12], "texture": "#grill", "cullface": "north"},
+        "up":    {"uv": [3, 10, 4, 11], "texture": "#grill", "cullface": "north"},
+        "down":  {"uv": [3, 11, 4, 12], "texture": "#grill", "cullface": "north"}
+      }
+    },
+    {
+      "name": "port_bottom",
+      "from": [4, 10, 16],
+      "to":   [12, 12, 17],
+      "faces": {
+        "south": { "uv": [4, 4, 12, 6], "texture": "#port", "cullface": "south" },
+        "east":  { "uv": [11, 4, 12, 6], "texture": "#port" },
+        "west":  { "uv": [4, 4, 5, 6], "texture": "#port" },
+        "down":  { "uv": [4, 5, 12, 6], "texture": "#port" },
+        "up":  { "uv": [4, 4, 12, 5], "texture": "#port" }
+      }
+    },
+    {
+      "name": "port_top",
+      "from": [4, 4, 16],
+      "to":   [12, 6, 17],
+      "faces": {
+        "south": { "uv": [4, 10, 12, 12], "texture": "#port", "cullface": "south" },
+        "east":  { "uv": [11, 10, 12, 12], "texture": "#port" },
+        "west":  { "uv": [4, 10, 5, 12], "texture": "#port" },
+        "down":    { "uv": [4, 11, 12, 12], "texture": "#port" },
+        "up":  { "uv": [4, 10, 12, 11], "texture": "#port" }
+      }
+    },
+    {
+      "name": "port_left",
+      "from": [4, 6, 16],
+      "to":   [6, 10, 17],
+      "faces": {
+        "south": { "uv": [4, 6, 6, 10], "texture": "#port", "cullface": "south" },
+        "east":  { "uv": [5, 6, 6, 10], "texture": "#port" },
+        "west":  { "uv": [4, 6, 5, 10], "texture": "#port" },
+        "up":    { "uv": [4, 9, 6, 10], "texture": "#port" },
+        "down":  { "uv": [4, 6, 6, 7], "texture": "#port" }
+      }
+    },
+    {
+      "name": "port_right",
+      "from": [10, 6, 16],
+      "to":   [12, 10, 17],
+      "faces": {
+        "south": { "uv": [10, 6, 12, 10], "texture": "#port", "cullface": "south" },
+        "east":  { "uv": [11, 6, 12, 10], "texture": "#port" },
+        "west":  { "uv": [10, 6, 11, 10], "texture": "#port" },
+        "up":    { "uv": [10, 9, 12, 10], "texture": "#port" },
+        "down":  { "uv": [10, 6, 12, 7], "texture": "#port" }
+      }
+    },
+    {
+      "name": "exhaust_opening",
+      "from": [3, 15, 3],
+      "to":   [13, 15, 13],
+      "faces": {
+        "up": { "uv": [3, 3, 13, 13], "texture": "#vent" }
+      }
+    },
+    {
+      "name": "intake_opening",
+      "from": [3, 1, 3],
+      "to":   [13, 1, 13],
+      "faces": {
+        "down": { "uv": [3, 3, 13, 13], "texture": "#vent" }
+      }
+    },
+    {
+      "name": "exhaust_1",
+      "from": [2, 15, 2],
+      "to":   [14, 16, 3],
+      "faces": {
+        "up":   { "uv": [2, 13, 14, 14], "texture": "#vent" },
+        "south": { "uv": [2, 13, 14, 14], "texture": "#vent" }
+      }
+    },
+    {
+      "name": "exhaust_2",
+      "from": [2, 15, 13],
+      "to":   [14, 16, 14],
+      "faces": {
+        "up":    { "uv": [2, 2, 14, 3], "texture": "#vent" },
+        "north": { "uv": [2, 2, 14, 3], "texture": "#vent" }
+      }
+    },
+    {
+      "name": "exhaust_3",
+      "from": [2, 15, 3],
+      "to":   [3, 16, 13],
+      "faces": {
+        "up":  { "uv": [2, 3, 3, 13], "texture": "#vent" },
+        "east": { "uv": [2, 3, 3, 13], "texture": "#vent", "rotation": 90 }
+      }
+    },
+    {
+      "name": "exhaust_4",
+      "from": [13, 15, 3],
+      "to":   [14, 16, 13],
+      "faces": {
+        "up":   { "uv": [13, 3, 14, 13], "texture": "#vent" },
+        "west": { "uv": [13, 3, 14, 13], "texture": "#vent", "rotation": 90 }
+      }
+    },
+    {
+      "name": "intake_1",
+      "from": [2, 0, 2],
+      "to":   [14, 1, 3],
+      "faces": {
+        "down": { "uv": [2, 13, 14, 14], "texture": "#vent" },
+        "south": { "uv": [2, 13, 14, 14], "texture": "#vent" }
+      }
+    },
+    {
+      "name": "intake_2",
+      "from": [2, 0, 13],
+      "to":   [14, 1, 14],
+      "faces": {
+        "down": { "uv": [2, 2, 14, 3], "texture": "#vent" },
+        "north": { "uv": [2, 2, 14, 3], "texture": "#vent", "rotation": 180 }
+      }
+    },
+    {
+      "name": "intake_3",
+      "from": [2, 0, 3],
+      "to":   [3, 1, 13],
+      "faces": {
+        "down": { "uv": [2, 3, 3, 13], "texture": "#vent" },
+        "east": { "uv": [2, 3, 3, 13], "texture": "#vent", "rotation": 270 }
+      }
+    },
+    {
+      "name": "intake_4",
+      "from": [13, 0, 3],
+      "to":   [14, 1, 13],
+      "faces": {
+        "down": { "uv": [13, 3, 14, 13], "texture": "#vent" },
+        "west": { "uv": [13, 3, 14, 13], "texture": "#vent", "rotation": 90 }
+      }
+    }
+  ]
+}

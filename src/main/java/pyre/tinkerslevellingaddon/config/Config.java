@@ -91,8 +91,6 @@ public class Config {
     public static ForgeConfigSpec.EnumValue<GainingMethod> staffStatGainingMethod;
 
     //general.forging
-    public static ForgeConfigSpec.DoubleValue temperatureLimit;
-    public static ForgeConfigSpec.DoubleValue ambientTemperature;
     public static ForgeConfigSpec.DoubleValue thermalRelaxation;
     public static ForgeConfigSpec.DoubleValue heatTransfer;
     
@@ -270,21 +268,13 @@ public class Config {
     private static void forgingConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Forging settings").push("forging");
 
-        temperatureLimit = builder.comment("The maximum temperature (C) that the forge can reach.")
-                .translation("config.tinkerslevellingaddon.general.temperature_limit")
-                .defineInRange("temperatureLimit", 4000.0, 1000.0, 5000.0);
-
-        ambientTemperature = builder.comment("The assumed ambient temperature (C) of the environment.")
-                .translation("config.tinkerslevellingaddon.general.ambient_temperature")
-                .defineInRange("ambientTemperature", 20.0, 0.0, 30.0);
-
         thermalRelaxation = builder.comment("The higher this coefficient, the faster the forge will heat and cool.")
                 .translation("config.tinkerslevellingaddon.general.thermal_relaxation")
                 .defineInRange("thermalRelaxation", 0.00014, 0, Double.MAX_VALUE);
 
         heatTransfer = builder.comment("The higher this coefficient, the faster all materials will heat and cool.")
                 .translation("config.tinkerslevellingaddon.general.heat_transfer")
-                .defineInRange("heatTransfer", 325355, 0, Double.MAX_VALUE);
+                .defineInRange("heatTransfer", 8192, 0, Double.MAX_VALUE);
 
         builder.pop();
     }

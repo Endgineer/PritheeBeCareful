@@ -22,13 +22,12 @@ public class MalleabilityModel {
         this.temperature_quenching_point = temperature_quenching_point;
         
         double A = Math.log(1.0 / MALLEABILITY_TOLERANCE - 1.0);
-        double B = Math.log(1.0 / (1.0-MALLEABILITY_TOLERANCE) - 1.0);
-
-        this.malleability_recrystallization_temperature = (A * temperature_folding_point - B * temperature_hammering_point) / (A - B);
+        
+        this.malleability_recrystallization_temperature = (temperature_folding_point + temperature_hammering_point) / 2.0;
         this.malleability_rise_steepness = -A / (temperature_hammering_point - this.malleability_recrystallization_temperature);
-
-        this.malleability_softening_temperature = (B * temperature_melting_point - A * temperature_breakdown_point) / (B - A);
-        this.malleability_fall_steepness = -B / (temperature_breakdown_point - this.malleability_softening_temperature);
+        
+        this.malleability_softening_temperature = (temperature_melting_point + temperature_breakdown_point) / 2.0;
+        this.malleability_fall_steepness = -A / (temperature_breakdown_point - this.malleability_softening_temperature);
     }
 
     public double getMalleabilityAt(double temperature) {

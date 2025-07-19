@@ -18,6 +18,7 @@ import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
 import pyre.tinkerslevellingaddon.core.PbcBlocks;
 import pyre.tinkerslevellingaddon.core.PbcCreativeModeTabs;
 import pyre.tinkerslevellingaddon.core.PbcItems;
+import pyre.tinkerslevellingaddon.core.PbcMenus;
 import pyre.tinkerslevellingaddon.data.PbcRecipeProvider;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpecManager;
 import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpecManager;
@@ -38,6 +39,7 @@ public class TinkersLevellingAddon {
         PbcBlocks.register(modEventBus);
         PbcBlockEntities.register(modEventBus);
         PbcCreativeModeTabs.register(modEventBus);
+        PbcMenus.register(modEventBus);
         
         Config.init();
         Registration.init();

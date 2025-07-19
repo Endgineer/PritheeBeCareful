@@ -1,5 +1,7 @@
 package pyre.tinkerslevellingaddon.loader.forging.models;
 
+import com.simibubi.create.infrastructure.config.AllConfigs;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import pyre.tinkerslevellingaddon.config.Config;
@@ -7,14 +9,16 @@ import pyre.tinkerslevellingaddon.item.ReinforceItem;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec;
 
 public class ThermalModel {
-    private static final double TEMPERATURE_LIMIT = Config.temperatureLimit.get();
-    private static final double AMBIENT_TEMPERATURE = Config.ambientTemperature.get();
+    public static final double AMBIENT_TEMPERATURE = 20;
+    private static final double FANNED_TEMPERATURE_LIMIT = 4000;
+    private static final double UNFANNED_TEMPERATURE_LIMIT = 700;
     private static final double FORGE_THERMAL_SLOPE = Math.exp(-Config.thermalRelaxation.get());
     private static final double HEAT_TRANSFER_CONST = Config.heatTransfer.get();
     
-    public static double getForgeTemperature(double temperaturePreviousSecond, boolean isForgeOn) {
+    public static double getForgeTemperature(double temperaturePreviousSecond, boolean isForgeOn, double blastingSpeed) {
         if (isForgeOn) {
-            return TEMPERATURE_LIMIT - (TEMPERATURE_LIMIT - temperaturePreviousSecond) * FORGE_THERMAL_SLOPE;
+            final double ACTUAL_TEMPERATURE_LIMIT = (FANNED_TEMPERATURE_LIMIT-UNFANNED_TEMPERATURE_LIMIT) * Math.max(0, blastingSpeed/AllConfigs.server().kinetics.maxRotationSpeed.get()) + UNFANNED_TEMPERATURE_LIMIT;
+            return ACTUAL_TEMPERATURE_LIMIT - (ACTUAL_TEMPERATURE_LIMIT - temperaturePreviousSecond) * FORGE_THERMAL_SLOPE;
         } else {
             return AMBIENT_TEMPERATURE + (temperaturePreviousSecond - AMBIENT_TEMPERATURE) * FORGE_THERMAL_SLOPE;
         }

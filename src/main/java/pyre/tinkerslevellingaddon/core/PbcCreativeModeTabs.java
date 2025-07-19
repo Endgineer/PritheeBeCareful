@@ -18,6 +18,9 @@ public class PbcCreativeModeTabs {
             .icon(() -> new ItemStack(PbcBlocks.REINFORCEMENT_ANVIL.get()))
             .displayItems((parameters, output) -> {
                 output.accept(PbcBlocks.REINFORCEMENT_ANVIL.get());
+                output.accept(PbcBlocks.FORGE_CHAMBER.get());
+                output.accept(PbcBlocks.FORGE_HEARTH.get());
+                output.accept(PbcBlocks.FORGE_THROAT.get());
                 output.accept(PbcItems.REINFORCE_ITEM.get());
                 output.accept(PbcItems.TITANITE_SHARD.get());
             }).build()

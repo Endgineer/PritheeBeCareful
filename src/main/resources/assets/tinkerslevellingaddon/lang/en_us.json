@@ -9,7 +9,17 @@
   "item.tinkerslevellingaddon.titanite_shard": "Titanite Shard",
   
   "block.tinkerslevellingaddon.reinforcement_anvil": "Reinforcement Anvil",
+  "block.tinkerslevellingaddon.forge_chamber": "Forge Chamber",
+  "block.tinkerslevellingaddon.forge_hearth": "Forge Hearth",
+  "block.tinkerslevellingaddon.forge_throat": "Forge Throat",
 
+  "gui.tinkerslevellingaddon.forge_chamber": "Forge",
+  "create.tinkerslevellingaddon.forge_chamber": "Forge",
+  
+  "multiblock.tinkerslevellingaddon.forge.all_missing": "Missing forge throat (above) and forge hearth (below).",
+  "multiblock.tinkerslevellingaddon.forge.top_missing": "Missing forge throat (above).",
+  "multiblock.tinkerslevellingaddon.forge.bot_missing": "Missing forge hearth (below).",
+  
   "itemGroup.tinkerslevellingaddon.creative_mode_tab": "Tinkers Levelling Addon",
   
   "forging.tinkerslevellingaddon.gear.dagger": "Dagger",
@@ -47,6 +57,10 @@
   "forging.tinkerslevellingaddon.material.hepatizon": "Hepatizon",
   "forging.tinkerslevellingaddon.material.zinc": "Zinc",
   "forging.tinkerslevellingaddon.material.brass": "Brass",
+  
+  "tooltip.tinkerslevellingaddon.forge.forge_temperature": "Temperature: %s \u00B0C",
+  "tooltip.tinkerslevellingaddon.forge.item_temperature": "Item: %s \u00B0C",
+  "tooltip.tinkerslevellingaddon.forge.fuel_time": "Fuel: %s:%s:%s",
   
   "tooltip.tinkerslevellingaddon.titanite_shard.where": "Fragments of the world's great deep.",
   "tooltip.tinkerslevellingaddon.titanite_shard.what": "Capable of reinforcing metal.",

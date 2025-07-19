@@ -88,6 +88,14 @@ public class ForgingMaterialSpec {
     }
     
     @Nullable
+    public static Double getMeltingPoint(String material, int reinforce) {
+        MaterialReinforceSpec materialReinforceSpec = getMaterialReinforceSpec(material, reinforce);
+        if (materialReinforceSpec == null) return null;
+        
+        return materialReinforceSpec.getMeltingPoint();
+    }
+    
+    @Nullable
     public static Integer getCustomModelData(String material, int reinforce, double temperature) {
         MaterialReinforceSpec materialReinforceSpec = getMaterialReinforceSpec(material, reinforce);
         if (materialReinforceSpec == null) return null;
@@ -205,6 +213,10 @@ public class ForgingMaterialSpec {
 
         public double getBreakdownPoint() {
             return this.malleabilityModel.getBreakdownTemperature();
+        }
+
+        public double getMeltingPoint() {
+            return this.malleabilityModel.getMeltingTemperature();
         }
 
         public boolean canFold(double temperature) {

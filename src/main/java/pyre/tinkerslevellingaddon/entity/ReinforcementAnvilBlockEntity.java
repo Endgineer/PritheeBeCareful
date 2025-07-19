@@ -21,7 +21,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import pyre.tinkerslevellingaddon.ReinforceModifier;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.block.ReinforcementAnvilBlock;
-import pyre.tinkerslevellingaddon.config.Config;
 import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
 import pyre.tinkerslevellingaddon.item.ReinforceItem;
 import pyre.tinkerslevellingaddon.item.TitaniteShardItem;
@@ -131,6 +130,10 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                 Messages.sendAnvilMulticlang(level, worldPosition);
                 return true;
             } else if (slot_a_empty && slot_b_empty && slot_c_empty) {
+                CompoundTag tag = handstack.getTag();
+                tag.putInt(ReinforceItem.CLOCK, 0);
+                handstack.setTag(tag);
+                
                 player.setItemInHand(hand, ItemStack.EMPTY);
                 this.setItem(SLOT_B, handstack);
                 return true;
@@ -255,7 +258,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                     tag.putInt(ReinforceItem.COUNT, materialCost);
                     tag.putString(ReinforceItem.GEAR, gearSpec.getResultingGear());
                     tag.putInt(ReinforceItem.REINFORCE, 1);
-                    tag.putDouble(ReinforceItem.TEMPERATURE, Config.ambientTemperature.get());
+                    tag.putDouble(ReinforceItem.TEMPERATURE, ThermalModel.AMBIENT_TEMPERATURE);
                     tag.putInt(ReinforceItem.PROGRESS, ForgingMaterialSpec.getExperienceCostTotal(consensusMaterial, 1, materialCost));
                     tag.putDouble(ReinforceItem.EXPERIENCE, ForgingMaterialSpec.getExperienceCostPerTrip(consensusMaterial, 1, materialCost));
                     tag.putInt("CustomModelData", 0);
@@ -322,7 +325,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
 
     public void tick() {
         ItemStack slotstack = this.getItem(SLOT_B);
-        double resultTemperature = ThermalModel.getReinforceItemTemperature(slotstack, Config.ambientTemperature.get());
+        double resultTemperature = ThermalModel.getReinforceItemTemperature(slotstack, ThermalModel.AMBIENT_TEMPERATURE);
         
         if (resultTemperature > Integer.MIN_VALUE) {
             ItemStack result = slotstack.copy();

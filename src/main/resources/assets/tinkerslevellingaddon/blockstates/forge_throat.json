@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "active=false,facing=north": { "model": "tinkerslevellingaddon:block/forge_throat_inactive" },
+    "active=false,facing=south": { "model": "tinkerslevellingaddon:block/forge_throat_inactive", "y": 180 },
+    "active=false,facing=west":  { "model": "tinkerslevellingaddon:block/forge_throat_inactive", "y": 270 },
+    "active=false,facing=east":  { "model": "tinkerslevellingaddon:block/forge_throat_inactive", "y": 90 },
+    
+    "active=true,facing=north": { "model": "tinkerslevellingaddon:block/forge_throat_active" },
+    "active=true,facing=south": { "model": "tinkerslevellingaddon:block/forge_throat_active", "y": 180 },
+    "active=true,facing=west":  { "model": "tinkerslevellingaddon:block/forge_throat_active", "y": 270 },
+    "active=true,facing=east":  { "model": "tinkerslevellingaddon:block/forge_throat_active", "y": 90 }
+  }
+}

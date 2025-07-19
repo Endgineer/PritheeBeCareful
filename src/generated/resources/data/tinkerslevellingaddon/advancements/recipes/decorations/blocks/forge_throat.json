@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tinkerslevellingaddon:blocks/reinforcement_anvil"
+        "recipe": "tinkerslevellingaddon:blocks/forge_throat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "tinkerslevellingaddon:blocks/reinforcement_anvil"
+      "tinkerslevellingaddon:blocks/forge_throat"
     ]
   },
   "sends_telemetry_event": false

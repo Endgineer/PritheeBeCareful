@@ -10,12 +10,19 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
+import pyre.tinkerslevellingaddon.block.ForgeChamberBlock;
+import pyre.tinkerslevellingaddon.block.ForgeHearthBlock;
+import pyre.tinkerslevellingaddon.block.ForgeThroatBlock;
 import pyre.tinkerslevellingaddon.block.ReinforcementAnvilBlock;
 
 public class PbcBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, TinkersLevellingAddon.MOD_ID);
 
-    public static final RegistryObject<ReinforcementAnvilBlock> REINFORCEMENT_ANVIL = registerBlock("reinforcement_anvil", () -> new ReinforcementAnvilBlock());
+    public static final RegistryObject<Block> REINFORCEMENT_ANVIL = registerBlock("reinforcement_anvil", () -> new ReinforcementAnvilBlock());
+
+    public static final RegistryObject<Block> FORGE_CHAMBER = registerBlock("forge_chamber", () -> new ForgeChamberBlock());
+    public static final RegistryObject<Block> FORGE_HEARTH = registerBlock("forge_hearth", () -> new ForgeHearthBlock());
+    public static final RegistryObject<Block> FORGE_THROAT = registerBlock("forge_throat", () -> new ForgeThroatBlock());
     
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> object = BLOCKS.register(name, block);

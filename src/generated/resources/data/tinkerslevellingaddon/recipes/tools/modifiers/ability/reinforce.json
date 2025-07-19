@@ -3,7 +3,7 @@
   "allow_crystal": false,
   "inputs": [
     {
-      "tag": "forge:bookshelves"
+      "item": "tinkerslevellingaddon:titanite_shard"
     }
   ],
   "level": 1,
