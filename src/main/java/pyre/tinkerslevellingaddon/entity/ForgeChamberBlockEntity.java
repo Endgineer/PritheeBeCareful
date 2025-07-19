@@ -65,6 +65,33 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
         this.itemHandler = new InvWrapper(this);
     }
 
+    public ItemStack acceptFuelStack(ItemStack stack, boolean simulate) {
+        if (!this.getBlockState().getValue(ForgeChamberBlock.CONNECTED)) return stack;
+        
+        ItemStack fuelstack = this.getItem(FUEL_SLOT);
+        
+        if (fuelstack.isEmpty()) {
+            if (!simulate) {
+                this.setItem(FUEL_SLOT, stack);
+            }
+            
+            return ItemStack.EMPTY;
+        } else if (fuelstack.is(stack.getItem())) {
+            int stackFuelCount = stack.getCount();
+            int currentFuelCount = fuelstack.getCount();
+            int remainingFuelAllowed = this.stackSizeLimit - currentFuelCount;
+            int actualFuelAdded = Math.min(stackFuelCount, remainingFuelAllowed);
+            
+            if (!simulate) {
+                this.setItem(FUEL_SLOT, fuelstack.copyWithCount(currentFuelCount + actualFuelAdded));
+            }
+            
+            return stack.copyWithCount(stackFuelCount - actualFuelAdded);
+        }
+        
+        return stack;
+    }
+    
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
