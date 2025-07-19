@@ -69,9 +69,9 @@
   "tooltip.tinkerslevellingaddon.forge.item_temperature": "Item: %s \u00B0C",
   "tooltip.tinkerslevellingaddon.forge.fuel_time": "Fuel: %s:%s:%s",
   
-  "tooltip.tinkerslevellingaddon.titanite_shard.where": "Fragments of the world's great deep.",
-  "tooltip.tinkerslevellingaddon.titanite_shard.what": "Capable of reinforcing metal.",
-
+  "tooltip.tinkerslevellingaddon.titanite_shard.description": "Fragments of the world's great deep.",
+  "tooltip.tinkerslevellingaddon.titanite_shard.usage": "Capable of reinforcing metal.",
+  
   "tooltip.tinkerslevellingaddon.reinforce_item.temperature": "Temperature",
   "tooltip.tinkerslevellingaddon.reinforce_item.progress": "Progress",
   "tooltip.tinkerslevellingaddon.reinforce_item.experience": "Experience",

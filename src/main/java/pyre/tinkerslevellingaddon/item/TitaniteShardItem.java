@@ -20,8 +20,8 @@ public class TitaniteShardItem extends Item {
     
     @Override
     public void appendHoverText(ItemStack itemstack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
-        components.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".titanite_shard.what").withStyle(ChatFormatting.DARK_GRAY));
-        components.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".titanite_shard.where").withStyle(ChatFormatting.DARK_GRAY));
+        components.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".titanite_shard.description").withStyle(ChatFormatting.DARK_GRAY));
+        components.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".titanite_shard.usage").withStyle(ChatFormatting.DARK_GRAY));
         super.appendHoverText(itemstack, level, components, flag);
     }
 }
