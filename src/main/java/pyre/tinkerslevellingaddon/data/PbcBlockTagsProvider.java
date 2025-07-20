@@ -28,5 +28,8 @@ public class PbcBlockTagsProvider extends BlockTagsProvider {
         
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(PbcBlocks.FORGE_THROAT.get());
         tag(BlockTags.NEEDS_IRON_TOOL).add(PbcBlocks.FORGE_THROAT.get());
+        
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(PbcBlocks.QUENCHING_BASIN.get());
+        tag(BlockTags.NEEDS_IRON_TOOL).add(PbcBlocks.QUENCHING_BASIN.get());
     }
 }

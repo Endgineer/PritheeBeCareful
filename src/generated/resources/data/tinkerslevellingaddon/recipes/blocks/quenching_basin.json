@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "create:brass_ingot"
+    },
+    "s": {
+      "tag": "tconstruct:seared_bricks"
+    },
+    "t": {
+      "item": "tinkerslevellingaddon:titanite_shard"
+    }
+  },
+  "pattern": [
+    "s s",
+    "btb",
+    "sss"
+  ],
+  "result": {
+    "item": "tinkerslevellingaddon:quenching_basin"
+  },
+  "show_notification": true
+}

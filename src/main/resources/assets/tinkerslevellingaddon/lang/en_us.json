@@ -15,7 +15,8 @@
   "block.tinkerslevellingaddon.forge_chamber": "Forge Chamber",
   "block.tinkerslevellingaddon.forge_hearth": "Forge Hearth",
   "block.tinkerslevellingaddon.forge_throat": "Forge Throat",
-
+  "block.tinkerslevellingaddon.quenching_basin": "Quenching Basin",
+  
   "gui.tinkerslevellingaddon.reinforcement_anvil": "Reinforcement Anvil",
   "gui.tinkerslevellingaddon.forge_chamber": "Forge",
   "gui.tinkerslevellingaddon.forge_throat": "Forge",

@@ -45,6 +45,7 @@ public class PbcRecipeProvider extends RecipeProvider implements IConditionBuild
         ResourceLocation forgeChamberId = ModUtil.getResource("forge_chamber");
         ResourceLocation forgeHearthId = ModUtil.getResource("forge_hearth");
         ResourceLocation forgeThroatId = ModUtil.getResource("forge_throat");
+        ResourceLocation quenchingBasinId = ModUtil.getResource("quenching_basin");
         
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, PbcBlocks.REINFORCEMENT_ANVIL.get())
                 .define('c', AllBlocks.RAILWAY_CASING.get())
@@ -85,6 +86,16 @@ public class PbcRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("s s")
                 .unlockedBy("has_item", has(PbcItems.TITANITE_SHARD.get()))
                 .save(consumer, prefix(forgeThroatId, blocksFolder));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, PbcBlocks.QUENCHING_BASIN.get())
+                .define('b', AllItems.BRASS_INGOT.get())
+                .define('t', PbcItems.TITANITE_SHARD.get())
+                .define('s', TinkerTags.Items.SEARED_BRICKS)
+                .pattern("s s")
+                .pattern("btb")
+                .pattern("sss")
+                .unlockedBy("has_item", has(PbcItems.TITANITE_SHARD.get()))
+                .save(consumer, prefix(quenchingBasinId, blocksFolder));
     }
     
     @Override

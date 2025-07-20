@@ -1,10 +1,12 @@
-// 1.20.1	2025-07-18T17:22:28.6825889	Recipes
+// 1.20.1	2025-07-19T16:20:46.7758503	Recipes
 50cac603320ab276cb5bb49f12967a27dcf0df17 data/tinkerslevellingaddon/advancements/recipes/decorations/blocks/forge_chamber.json
 ade0f72299b485ec0f9174b0adeaffc5b21cdacf data/tinkerslevellingaddon/advancements/recipes/decorations/blocks/forge_hearth.json
 d6f1735a75350846f131a603e8c2ca965e8738e7 data/tinkerslevellingaddon/advancements/recipes/decorations/blocks/forge_throat.json
+0b32dbc8a982bf13c7d8cffee300c35c3a40a724 data/tinkerslevellingaddon/advancements/recipes/decorations/blocks/quenching_basin.json
 8cbeb1501d12aeae81e523c06f0321df07a04f28 data/tinkerslevellingaddon/advancements/recipes/decorations/blocks/reinforcement_anvil.json
 6025f214961a80de74f687b3c18813b637616a74 data/tinkerslevellingaddon/recipes/blocks/forge_chamber.json
 34ea50b571fce7158e986a880dda262e79c71a40 data/tinkerslevellingaddon/recipes/blocks/forge_hearth.json
 65db9ed814ce01e6d8e36bed06c75322519bee48 data/tinkerslevellingaddon/recipes/blocks/forge_throat.json
+3d11c7e8a42a55d410528f4b26cd1a190af47493 data/tinkerslevellingaddon/recipes/blocks/quenching_basin.json
 f6d26599d491c252a6707dd7ce658b96c39fc2f1 data/tinkerslevellingaddon/recipes/blocks/reinforcement_anvil.json
 abc2a7eeb44cbb03fcb3e8fdcc7b833e46ce8138 data/tinkerslevellingaddon/recipes/tools/modifiers/ability/reinforce.json

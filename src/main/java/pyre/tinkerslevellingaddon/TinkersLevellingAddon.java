@@ -34,6 +34,7 @@ import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpecManager;
 import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpecProvider;
 import pyre.tinkerslevellingaddon.network.Messages;
 import pyre.tinkerslevellingaddon.setup.Registration;
+import pyre.tinkerslevellingaddon.setup.Spouting;
 
 @Mod(TinkersLevellingAddon.MOD_ID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -55,7 +56,8 @@ public class TinkersLevellingAddon {
         Registration.init();
         Messages.register();
         ModCommands.init();
-    
+        Spouting.addCustomSpoutInteraction();
+        
         MinecraftForge.EVENT_BUS.addListener(TinkersLevellingAddon::onAddReloadListeners);
         MinecraftForge.EVENT_BUS.register(this);
     }

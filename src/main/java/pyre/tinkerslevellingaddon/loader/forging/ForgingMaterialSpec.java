@@ -96,6 +96,14 @@ public class ForgingMaterialSpec {
     }
     
     @Nullable
+    public static Boolean canQuench(String material, int reinforce, double temperature) {
+        MaterialReinforceSpec materialReinforceSpec = getMaterialReinforceSpec(material, reinforce);
+        if (materialReinforceSpec == null) return null;
+        
+        return materialReinforceSpec.canQuench(temperature);
+    }
+    
+    @Nullable
     public static Integer getCustomModelData(String material, int reinforce, double temperature) {
         MaterialReinforceSpec materialReinforceSpec = getMaterialReinforceSpec(material, reinforce);
         if (materialReinforceSpec == null) return null;
@@ -221,6 +229,10 @@ public class ForgingMaterialSpec {
 
         public boolean canFold(double temperature) {
             return temperature >= this.malleabilityModel.getFoldingTemperature();
+        }
+
+        public boolean canQuench(double temperature) {
+            return temperature >= this.malleabilityModel.getQuenchingTemperature();
         }
     }
 }

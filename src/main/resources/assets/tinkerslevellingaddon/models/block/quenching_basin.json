@@ -1,0 +1,9 @@
+{
+  "parent": "tconstruct:block/template/basin",
+  "textures": {
+    "top":    "tinkerslevellingaddon:block/quenching_basin_top",
+    "side":   "tinkerslevellingaddon:block/quenching_basin_side",
+    "bottom": "tinkerslevellingaddon:block/quenching_basin_bottom",
+		"particle": "tconstruct:block/smeltery/seared/bricks"
+  }
+}

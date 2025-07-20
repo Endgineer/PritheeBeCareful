@@ -19,6 +19,7 @@ public class PbcBlockLootSubProvider extends BlockLootSubProvider {
         this.dropSelf(PbcBlocks.FORGE_CHAMBER.get());
         this.dropSelf(PbcBlocks.FORGE_HEARTH.get());
         this.dropSelf(PbcBlocks.FORGE_THROAT.get());
+        this.dropSelf(PbcBlocks.QUENCHING_BASIN.get());
     }
 
     @Override

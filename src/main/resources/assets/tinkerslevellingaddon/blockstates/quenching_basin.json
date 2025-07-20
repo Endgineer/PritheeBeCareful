@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "level=0,facing=north": { "model": "tinkerslevellingaddon:block/quenching_basin" },
+    "level=0,facing=south": { "model": "tinkerslevellingaddon:block/quenching_basin", "render_type": "translucent", "y": 180 },
+    "level=0,facing=west":  { "model": "tinkerslevellingaddon:block/quenching_basin", "render_type": "translucent", "y": 270 },
+    "level=0,facing=east":  { "model": "tinkerslevellingaddon:block/quenching_basin", "render_type": "translucent", "y":  90 },
+    
+    "level=1,facing=north": { "model": "tinkerslevellingaddon:block/quenching_basin_1" },
+    "level=1,facing=south": { "model": "tinkerslevellingaddon:block/quenching_basin_1", "render_type": "translucent", "y": 180 },
+    "level=1,facing=west":  { "model": "tinkerslevellingaddon:block/quenching_basin_1", "render_type": "translucent", "y": 270 },
+    "level=1,facing=east":  { "model": "tinkerslevellingaddon:block/quenching_basin_1", "render_type": "translucent", "y":  90 },
+    
+    "level=2,facing=north": { "model": "tinkerslevellingaddon:block/quenching_basin_2" },
+    "level=2,facing=south": { "model": "tinkerslevellingaddon:block/quenching_basin_2", "render_type": "translucent", "y": 180 },
+    "level=2,facing=west":  { "model": "tinkerslevellingaddon:block/quenching_basin_2", "render_type": "translucent", "y": 270 },
+    "level=2,facing=east":  { "model": "tinkerslevellingaddon:block/quenching_basin_2", "render_type": "translucent", "y":  90 },
+    
+    "level=3,facing=north": { "model": "tinkerslevellingaddon:block/quenching_basin_3" },
+    "level=3,facing=south": { "model": "tinkerslevellingaddon:block/quenching_basin_3", "render_type": "translucent", "y": 180 },
+    "level=3,facing=west":  { "model": "tinkerslevellingaddon:block/quenching_basin_3", "render_type": "translucent", "y": 270 },
+    "level=3,facing=east":  { "model": "tinkerslevellingaddon:block/quenching_basin_3", "render_type": "translucent", "y":  90 },
+    
+    "level=4,facing=north": { "model": "tinkerslevellingaddon:block/quenching_basin_4" },
+    "level=4,facing=south": { "model": "tinkerslevellingaddon:block/quenching_basin_4", "render_type": "translucent", "y": 180 },
+    "level=4,facing=west":  { "model": "tinkerslevellingaddon:block/quenching_basin_4", "render_type": "translucent", "y": 270 },
+    "level=4,facing=east":  { "model": "tinkerslevellingaddon:block/quenching_basin_4", "render_type": "translucent", "y":  90 }
+  }
+}

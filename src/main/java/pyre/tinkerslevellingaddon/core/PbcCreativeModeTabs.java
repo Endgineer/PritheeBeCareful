@@ -21,6 +21,7 @@ public class PbcCreativeModeTabs {
                 output.accept(PbcBlocks.FORGE_CHAMBER.get());
                 output.accept(PbcBlocks.FORGE_HEARTH.get());
                 output.accept(PbcBlocks.FORGE_THROAT.get());
+                output.accept(PbcBlocks.QUENCHING_BASIN.get());
                 output.accept(PbcItems.REINFORCE_ITEM.get());
                 output.accept(PbcItems.TITANITE_SHARD.get());
             }).build()
