@@ -1,6 +1,8 @@
 package pyre.tinkerslevellingaddon;
 
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.api.behaviour.spouting.BlockSpoutingBehaviour;
+import com.simibubi.create.compat.tconstruct.SpoutCasting;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -12,6 +14,7 @@ import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.concurrent.CompletableFuture;
@@ -34,7 +37,6 @@ import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpecManager;
 import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpecProvider;
 import pyre.tinkerslevellingaddon.network.Messages;
 import pyre.tinkerslevellingaddon.setup.Registration;
-import pyre.tinkerslevellingaddon.setup.Spouting;
 
 @Mod(TinkersLevellingAddon.MOD_ID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -56,12 +58,18 @@ public class TinkersLevellingAddon {
         Registration.init();
         Messages.register();
         ModCommands.init();
-        Spouting.addCustomSpoutInteraction();
         
+        modEventBus.addListener(this::onCommonSetup);
         MinecraftForge.EVENT_BUS.addListener(TinkersLevellingAddon::onAddReloadListeners);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    private void onCommonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            BlockSpoutingBehaviour.BY_BLOCK.register(PbcBlocks.QUENCHING_BASIN.get(), SpoutCasting.INSTANCE);
+        });
+    }
+    
     private static void onAddReloadListeners(AddReloadListenerEvent event) {
         event.addListener(new ForgingMaterialSpecManager());
         event.addListener(new ReinforcingGearSpecManager());

@@ -44,9 +44,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.simibubi.create.AllItems;
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.content.equipment.goggles.IHaveHoveringInformation;
-import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
 
 public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements IHaveGoggleInformation, IHaveHoveringInformation {
     public static final int SLOT_A = 0;
@@ -379,8 +378,6 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
     }
 
     private void displayTooltipInfo(List<Component> tooltip, ItemStack stack, Item item) {
-        Lang.itemName(stack).forGoggles(tooltip);
-        
         boolean isAdvanced = Minecraft.getInstance().options.advancedItemTooltips;
         TooltipFlag flag = isAdvanced ? TooltipFlag.Default.ADVANCED : TooltipFlag.Default.NORMAL;
         

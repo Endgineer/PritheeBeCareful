@@ -7,13 +7,12 @@ import javax.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.content.equipment.goggles.IHaveHoveringInformation;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlockEntity;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
-import com.simibubi.create.foundation.utility.Lang;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -171,7 +170,7 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
                 FanProcessingType fanProcessingType = encasedFanBlockEntity.getAirCurrent().getTypeAt(0);
                 if (fanProcessingType.equals(AllFanProcessingTypes.BLASTING)) {
                     blastingSpeed = encasedFanBlockEntity.getSpeed();
-                } else if (fanProcessingType.equals(AllFanProcessingTypes.NONE)) {
+                } else if (!fanProcessingType.equals(AllFanProcessingTypes.SPLASHING)) {
                     blastingSpeed = 0.42*encasedFanBlockEntity.getSpeed();
                 }
             }
@@ -247,8 +246,6 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        Lang.translate(TinkersLevellingAddon.MOD_ID+".forge_chamber").forGoggles(tooltip);
-        
         if (this.level.getBlockState(this.getBlockPos()).getValue(ForgeChamberBlock.CONNECTED)) {
             tooltip.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".forge.forge_temperature", String.valueOf((int) this.temperature)).withStyle(ChatFormatting.GRAY));
 

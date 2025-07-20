@@ -1,10 +1,9 @@
 package pyre.tinkerslevellingaddon.setup;
 
-import com.simibubi.create.api.behaviour.BlockSpoutingBehaviour;
+import com.simibubi.create.api.behaviour.spouting.BlockSpoutingBehaviour;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -14,11 +13,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
-import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.block.QuenchingBasinBlock;
 import pyre.tinkerslevellingaddon.core.PbcBlocks;
 
-public class Spouting extends BlockSpoutingBehaviour {
+public enum Spouting implements BlockSpoutingBehaviour {
+    INSTANCE;
+    
     @Override
     public int fillBlock(Level level, BlockPos pos, SpoutBlockEntity spout, FluidStack fluid, boolean simulate) {
         if (!fluid.getFluid().isSame(Fluids.WATER)) return 0;
@@ -36,9 +36,5 @@ public class Spouting extends BlockSpoutingBehaviour {
         }
         
         return 250;
-    }
-    
-    public static void addCustomSpoutInteraction() {
-        BlockSpoutingBehaviour.addCustomSpoutInteraction(new ResourceLocation(TinkersLevellingAddon.MOD_ID, "spouting"), new Spouting());
     }
 }
