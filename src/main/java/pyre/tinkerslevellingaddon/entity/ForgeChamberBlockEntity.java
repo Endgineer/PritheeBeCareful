@@ -13,6 +13,7 @@ import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.fan.EncasedFanBlockEntity;
 import com.simibubi.create.content.kinetics.fan.processing.AllFanProcessingTypes;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
+import com.simibubi.create.foundation.utility.CreateLang;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -246,6 +247,8 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        CreateLang.translate(TinkersLevellingAddon.MOD_ID+".forge_chamber").forGoggles(tooltip);
+        
         if (this.level.getBlockState(this.getBlockPos()).getValue(ForgeChamberBlock.CONNECTED)) {
             tooltip.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".forge.forge_temperature", String.valueOf((int) this.temperature)).withStyle(ChatFormatting.GRAY));
 
