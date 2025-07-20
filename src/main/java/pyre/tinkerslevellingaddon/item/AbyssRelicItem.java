@@ -38,15 +38,13 @@ public class AbyssRelicItem extends Item {
         return BASE_EXPERIENCE_AT_LEVEL[skillLevel-1]*Math.pow(2, relicSize);
     }
     
-    public static int rollSize(double depthPressure) {
-        double raritiesIncluded = 1 + 4 * depthPressure;
+    public static int rollSize(double layer) {
+        double commonChance = 0.58684 / Math.min(1, 3-layer);
+        double normalChance = 0.24564 / Math.min(1, 4-layer);
+        double uncommonChance = 0.10364 / Math.min(1, 5-layer);
+        double rareChance = 0.06234 / Math.min(1, 6-layer);
+        double superrareChance = 0.00154 / Math.min(1, 7-layer);
         
-        double commonChance = 0.58684;
-        double normalChance = 0.24564 * Math.max(0, Math.min(raritiesIncluded, 2) - 1);
-        double uncommonChance = 0.10364 * Math.max(0, Math.min(raritiesIncluded, 3) - 2);
-        double rareChance = 0.06234 * Math.max(0, Math.min(raritiesIncluded, 4) - 3);
-        double superrareChance = 0.00154 * Math.max(0, Math.min(raritiesIncluded, 5) - 4);
-
         double total = commonChance + normalChance + uncommonChance + rareChance + superrareChance;
         commonChance /= total;
         normalChance /= total;
