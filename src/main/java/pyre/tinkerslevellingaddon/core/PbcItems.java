@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
+import pyre.tinkerslevellingaddon.item.AbyssRelicItem;
 import pyre.tinkerslevellingaddon.item.ReinforceItem;
 import pyre.tinkerslevellingaddon.item.TitaniteShardItem;
 
@@ -14,6 +15,7 @@ public class PbcItems {
 
     public static final RegistryObject<ReinforceItem> REINFORCE_ITEM = ITEMS.register("reinforce_item", () -> new ReinforceItem());
     public static final RegistryObject<TitaniteShardItem> TITANITE_SHARD = ITEMS.register("titanite_shard", () -> new TitaniteShardItem());
+    public static final RegistryObject<AbyssRelicItem> ABYSS_RELIC = ITEMS.register("abyss_relic", () -> new AbyssRelicItem());
     
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

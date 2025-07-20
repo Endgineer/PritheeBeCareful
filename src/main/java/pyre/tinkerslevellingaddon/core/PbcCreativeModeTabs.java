@@ -24,6 +24,7 @@ public class PbcCreativeModeTabs {
                 output.accept(PbcBlocks.QUENCHING_BASIN.get());
                 output.accept(PbcItems.REINFORCE_ITEM.get());
                 output.accept(PbcItems.TITANITE_SHARD.get());
+                output.accept(PbcItems.ABYSS_RELIC.get());
             }).build()
     );
 
