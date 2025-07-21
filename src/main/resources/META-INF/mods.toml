@@ -42,3 +42,11 @@ Tinkers' Construct addon that adds tool leveling system.
     versionRange="[6.0.6,)"
     ordering="AFTER"
     side="BOTH"
+
+
+[[dependencies.tinkerslevellingaddon]]
+    modId="curseoftheabyss"
+    mandatory=false
+    versionRange="[1.20.1-2.3.0,)"
+    ordering="AFTER"
+    side="BOTH"
