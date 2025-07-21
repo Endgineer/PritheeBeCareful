@@ -263,9 +263,7 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
             tooltip.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".forge.fuel_time", String.format("%02d", hh), String.format("%02d", mm), String.format("%02d", ss)).withStyle(ChatFormatting.GRAY));
             
             ItemStack itemstack = this.getItem(ITEM_SLOT);
-            if (ReinforceItem.isValidReinforceItem(itemstack)) {
-                tooltip.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".forge.item_temperature", String.valueOf((int) itemstack.getTag().getDouble(ReinforceItem.TEMPERATURE))).withStyle(ChatFormatting.GRAY));
-            }
+            ReinforceItem.addMetalStats(tooltip, itemstack);
         }
 
         return true;

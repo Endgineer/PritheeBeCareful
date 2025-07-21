@@ -219,6 +219,18 @@ public class ForgingMaterialSpec {
             return this.volumetricHeatCapacity;
         }
 
+        public double getHammeringPoint() {
+            return this.malleabilityModel.getHammeringTemperature();
+        }
+
+        public double getFoldingPoint() {
+            return this.malleabilityModel.getFoldingTemperature();
+        }
+
+        public double getQuenchingPoint() {
+            return this.malleabilityModel.getQuenchingTemperature();
+        }
+
         public double getBreakdownPoint() {
             return this.malleabilityModel.getBreakdownTemperature();
         }

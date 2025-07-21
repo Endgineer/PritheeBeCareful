@@ -14,6 +14,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec;
+import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec.MaterialReinforceSpec;
 
 public class ReinforceItem extends Item {
     public static enum ReinforceStatus { UNTOUCHED, FORGING, FINISHED };
@@ -67,12 +68,20 @@ public class ReinforceItem extends Item {
         int progress = tag.getInt(ReinforceItem.PROGRESS);
         double experience = tag.getDouble(ReinforceItem.EXPERIENCE);
 
-        int maxProgress = ForgingMaterialSpec.getExperienceCostTotal(material, reinforce, count);
-        double maxTemperature = ForgingMaterialSpec.getBreakdownPoint(material, reinforce);
+        MaterialReinforceSpec reinforceSpec = ForgingMaterialSpec.getMaterialReinforceSpec(material, reinforce);
+        
+        int maxProgress = reinforceSpec.getExperienceCostTotal(count);
+        double maxTemperature = reinforceSpec.getBreakdownPoint();
         
         String progressPercentage = String.valueOf((int) (100 * (maxProgress - progress) / maxProgress))+"%";
         String temperaturePercentage = String.valueOf((int) (100 * temperature / maxTemperature))+"%";
-        String malleabilityPercentage = String.valueOf((int) (100 * ForgingMaterialSpec.getMalleabilityAt(material, reinforce, temperature)))+"%";
+        String malleabilityPercentage = String.valueOf((int) (100 * reinforceSpec.getMalleability(temperature)))+"%";
+        
+        double hammeringPoint = reinforceSpec.getHammeringPoint();
+        double foldingPoint = reinforceSpec.getFoldingPoint();
+        double quenchingPoint = reinforceSpec.getQuenchingPoint();
+        double breakdownPoint = reinforceSpec.getBreakdownPoint();
+        double meltingPoint = reinforceSpec.getMeltingPoint();
         
         tooltip.add(
             Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".reinforce_item.progress").append(":").withStyle(ChatFormatting.GRAY)
@@ -106,6 +115,19 @@ public class ReinforceItem extends Item {
                 .append(Component.literal(" ")
                 .append(malleabilityPercentage)
                 .withStyle(ChatFormatting.WHITE))
+        );
+        
+        tooltip.add(
+            Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".reinforce_item.points").append(":").withStyle(ChatFormatting.GRAY)
+                .append(Component.literal(" ").append(String.valueOf((int) hammeringPoint)+" \u00B0C").withStyle(temperature >= hammeringPoint ? ChatFormatting.DARK_RED : ChatFormatting.DARK_GRAY))
+                .append(Component.literal(" |").withStyle(ChatFormatting.GRAY))
+                .append(Component.literal(" ").append(String.valueOf((int) quenchingPoint)+" \u00B0C").withStyle(temperature >= quenchingPoint ? ChatFormatting.RED : ChatFormatting.DARK_GRAY))
+                .append(Component.literal(" |").withStyle(ChatFormatting.GRAY))
+                .append(Component.literal(" ").append(String.valueOf((int) foldingPoint)+" \u00B0C").withStyle(temperature >= foldingPoint ? ChatFormatting.GOLD : ChatFormatting.DARK_GRAY))
+                .append(Component.literal(" |").withStyle(ChatFormatting.GRAY))
+                .append(Component.literal(" ").append(String.valueOf((int) breakdownPoint)+" \u00B0C").withStyle(temperature >= breakdownPoint ? ChatFormatting.YELLOW : ChatFormatting.DARK_GRAY))
+                .append(Component.literal(" |").withStyle(ChatFormatting.GRAY))
+                .append(Component.literal(" ").append(String.valueOf((int) meltingPoint)+" \u00B0C").withStyle(temperature >= meltingPoint ? ChatFormatting.WHITE : ChatFormatting.DARK_GRAY))
         );
         
         return true;

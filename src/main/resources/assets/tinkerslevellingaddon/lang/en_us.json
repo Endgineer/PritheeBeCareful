@@ -88,6 +88,7 @@
   "tooltip.tinkerslevellingaddon.reinforce_item.progress": "Progress",
   "tooltip.tinkerslevellingaddon.reinforce_item.experience": "Experience",
   "tooltip.tinkerslevellingaddon.reinforce_item.malleability": "Malleability",
+  "tooltip.tinkerslevellingaddon.reinforce_item.points": "Points",
   
   "tooltip.tinkerslevellingaddon.hold_alt": "Hold %s for level info",
 
