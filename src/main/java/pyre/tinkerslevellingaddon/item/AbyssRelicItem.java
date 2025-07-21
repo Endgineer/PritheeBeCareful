@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.annotation.Nullable;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,7 +16,9 @@ import net.minecraft.world.level.Level;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 
 public class AbyssRelicItem extends Item {
-    private static final double[] BASE_EXPERIENCE_AT_LEVEL = {
+    public static final String SIZE = "size";
+    
+    private static final int[] BASE_EXPERIENCE_AT_LEVEL = {
            66,    74,    82,    91,   100,   111,   132,   136,   154,   164,
           182,   201,   219,   245,   270,   280,   290,   300,   311,   322,
           335,   348,   362,   376,   391,   408,   425,   443,   462,   482,
@@ -34,8 +37,18 @@ public class AbyssRelicItem extends Item {
         super(new Item.Properties().rarity(Rarity.EPIC).fireResistant().stacksTo(1));
     }
     
-    public static double getExperience(int relicSize, int skillLevel) {
-        return BASE_EXPERIENCE_AT_LEVEL[skillLevel-1]*Math.pow(2, relicSize);
+    public static boolean isValidAbyssRelicItem(ItemStack stack) {
+        if (!(stack.getItem() instanceof AbyssRelicItem)) return false;
+        if (!stack.hasTag()) return false;
+        
+        CompoundTag tag = stack.getTag();
+        if (!tag.contains(SIZE)) return false;
+        
+        return true;
+    }
+    
+    public static int getExperience(int relicSize, int skillLevel) {
+        return (int) (BASE_EXPERIENCE_AT_LEVEL[skillLevel-1]*Math.pow(2, relicSize));
     }
     
     public static int rollSize(double layer) {
@@ -75,5 +88,16 @@ public class AbyssRelicItem extends Item {
         components.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".abyss_relic.description").withStyle(ChatFormatting.DARK_GRAY));
         components.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".abyss_relic.usage").withStyle(ChatFormatting.DARK_GRAY));
         super.appendHoverText(itemstack, level, components, flag);
+    }
+    
+    @Override
+    public Component getName(ItemStack itemstack) {
+        CompoundTag tag = itemstack.getTag();
+
+        if(tag == null) {
+            return Component.translatable(("item."+TinkersLevellingAddon.MOD_ID+".abyss_relic"));
+        }
+        
+        return Component.translatable("item."+TinkersLevellingAddon.MOD_ID+".abyss_relic." + tag.getInt(SIZE));
     }
 }

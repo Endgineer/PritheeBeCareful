@@ -46,6 +46,12 @@ public class Messages {
                 .encoder(AnvilMulticlangPacket::toBytes)
                 .consumerMainThread(AnvilMulticlangPacket::handle)
                 .add();
+
+        net.messageBuilder(AnvilRelicUsePacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(AnvilRelicUsePacket::new)
+                .encoder(AnvilRelicUsePacket::toBytes)
+                .consumerMainThread(AnvilRelicUsePacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {
@@ -62,5 +68,9 @@ public class Messages {
 
     public static <MSG> void sendAnvilMulticlang(Level level, BlockPos blockPos) {
         INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(blockPos)), new AnvilMulticlangPacket(blockPos));
+    }
+
+    public static <MSG> void sendAnvilRelicUse(Level level, BlockPos blockPos) {
+        INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(blockPos)), new AnvilRelicUsePacket(blockPos));
     }
 }

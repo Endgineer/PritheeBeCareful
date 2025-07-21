@@ -9,6 +9,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +23,7 @@ import pyre.tinkerslevellingaddon.ReinforceModifier;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.block.ReinforcementAnvilBlock;
 import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
+import pyre.tinkerslevellingaddon.item.AbyssRelicItem;
 import pyre.tinkerslevellingaddon.item.ReinforceItem;
 import pyre.tinkerslevellingaddon.item.TitaniteShardItem;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec;
@@ -29,6 +31,7 @@ import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec.MaterialRei
 import pyre.tinkerslevellingaddon.loader.forging.models.ThermalModel;
 import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpec;
 import pyre.tinkerslevellingaddon.network.Messages;
+import pyre.tinkerslevellingaddon.util.ToolLevellingUtil;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariant;
@@ -118,7 +121,19 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
 
         String material = ForgingMaterialSpec.getRegisteredReinforceMaterial(handstack);
         
-        if (ReinforceItem.isValidReinforceItem(handstack)) {
+        if (AbyssRelicItem.isValidAbyssRelicItem(handstack)) {
+            if (slotstack_b.is(TinkerTags.Items.MODIFIABLE)) {
+                ToolStack toolstack = ToolStack.from(slotstack_b);
+                int relicSize = handstack.getTag().getInt(AbyssRelicItem.SIZE);
+                int skillLevel = ToolLevellingUtil.getSkillLevel(toolstack);
+                if (ToolLevellingUtil.addExperience(toolstack, AbyssRelicItem.getExperience(relicSize, skillLevel), (ServerPlayer) player)) {
+                    player.setItemInHand(hand, ItemStack.EMPTY);
+                    this.setItem(SLOT_B, toolstack.createStack());
+                    Messages.sendAnvilRelicUse(level, worldPosition);
+                    return true;
+                }
+            }
+        } else if (ReinforceItem.isValidReinforceItem(handstack)) {
             if (slotstack_b.is(TinkerTags.Items.MODIFIABLE)) {
                 CompoundTag tag = handstack.getTag();
                 if (tag.getInt(ReinforceItem.STATUS) != ReinforceItem.ReinforceStatus.FINISHED.ordinal()) return false;

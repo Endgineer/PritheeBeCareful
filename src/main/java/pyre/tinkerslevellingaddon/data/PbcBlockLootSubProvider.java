@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import pyre.tinkerslevellingaddon.block.DeepslateAncientRubbleBlock;
+import pyre.tinkerslevellingaddon.block.DeepslateTitaniteOreBlock;
 import pyre.tinkerslevellingaddon.core.PbcBlocks;
 
 public class PbcBlockLootSubProvider extends BlockLootSubProvider {
@@ -24,6 +26,6 @@ public class PbcBlockLootSubProvider extends BlockLootSubProvider {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return PbcBlocks.BLOCKS.getEntries().stream().map(entry -> entry.get()).collect(Collectors.toList());
+        return PbcBlocks.BLOCKS.getEntries().stream().map(entry -> entry.get()).filter(block -> !(block instanceof DeepslateTitaniteOreBlock || block instanceof DeepslateAncientRubbleBlock)).collect(Collectors.toList());
     }
 }

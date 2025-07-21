@@ -23,7 +23,9 @@ public class PbcCreativeModeTabs {
                 output.accept(PbcBlocks.FORGE_THROAT.get());
                 output.accept(PbcBlocks.QUENCHING_BASIN.get());
                 output.accept(PbcItems.REINFORCE_ITEM.get());
+                output.accept(PbcBlocks.DEEPSLATE_TITANITE_ORE.get());
                 output.accept(PbcItems.TITANITE_SHARD.get());
+                output.accept(PbcBlocks.DEEPSLATE_ANCIENT_RUBBLE.get());
                 output.accept(PbcItems.ABYSS_RELIC.get());
             }).build()
     );

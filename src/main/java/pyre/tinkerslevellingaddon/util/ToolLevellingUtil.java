@@ -326,9 +326,14 @@ public class ToolLevellingUtil {
         return xpDeficit;
     }
     
-    public static void addExperience(ToolStack tool, int amount, ServerPlayer player) {
+    public static int getSkillLevel(ToolStack tool) {
+        ModDataNBT data = tool.getPersistentData();
+        return data.getInt(LEVEL_KEY);
+    }
+    
+    public static boolean addExperience(ToolStack tool, int amount, ServerPlayer player) {
         if (tool == null) {
-            return;
+            return false;
         }
         
         ModDataNBT data = tool.getPersistentData();
@@ -338,9 +343,13 @@ public class ToolLevellingUtil {
         boolean isBroadTool = ToolLevellingUtil.isBroadTool(tool);
         int experienceNeeded = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroadTool);
         
+        if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) {
+            return false;
+        }
+        
         while (currentExperience >= experienceNeeded) {
             if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) {
-                return;
+                return true;
             }
             data.putInt(LEVEL_KEY, ++currentLevel);
             currentExperience -= experienceNeeded;
@@ -363,7 +372,9 @@ public class ToolLevellingUtil {
                 Messages.sendToPlayer(new LevelUpPacket(currentLevel, toolName), player);
             }
         }
+        
         data.putInt(EXPERIENCE_KEY, currentExperience);
+        return true;
     }
     
     public static boolean isStaff(IToolContext tool) {

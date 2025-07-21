@@ -10,6 +10,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
+import pyre.tinkerslevellingaddon.block.DeepslateAncientRubbleBlock;
+import pyre.tinkerslevellingaddon.block.DeepslateTitaniteOreBlock;
 import pyre.tinkerslevellingaddon.block.ForgeChamberBlock;
 import pyre.tinkerslevellingaddon.block.ForgeHearthBlock;
 import pyre.tinkerslevellingaddon.block.ForgeThroatBlock;
@@ -26,6 +28,9 @@ public class PbcBlocks {
     public static final RegistryObject<Block> FORGE_THROAT = registerBlock("forge_throat", () -> new ForgeThroatBlock());
 
     public static final RegistryObject<Block> QUENCHING_BASIN = registerBlock("quenching_basin", () -> new QuenchingBasinBlock());
+
+    public static final RegistryObject<Block> DEEPSLATE_TITANITE_ORE = registerBlock("deepslate_titanite_ore", () -> new DeepslateTitaniteOreBlock());
+    public static final RegistryObject<Block> DEEPSLATE_ANCIENT_RUBBLE = registerBlock("deepslate_ancient_rubble", () -> new DeepslateAncientRubbleBlock());
     
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> object = BLOCKS.register(name, block);

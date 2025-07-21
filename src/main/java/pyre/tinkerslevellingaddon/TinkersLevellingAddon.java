@@ -27,10 +27,12 @@ import pyre.tinkerslevellingaddon.core.PbcBlocks;
 import pyre.tinkerslevellingaddon.core.PbcCreativeModeTabs;
 import pyre.tinkerslevellingaddon.core.PbcItems;
 import pyre.tinkerslevellingaddon.core.PbcMenus;
+import pyre.tinkerslevellingaddon.core.PbcSounds;
 import pyre.tinkerslevellingaddon.core.PbcSpecs;
 import pyre.tinkerslevellingaddon.data.PbcBlockTagsProvider;
 import pyre.tinkerslevellingaddon.data.PbcLootTableProvider;
 import pyre.tinkerslevellingaddon.data.PbcRecipeProvider;
+import pyre.tinkerslevellingaddon.data.PbcWorldGenProvider;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpecManager;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpecProvider;
 import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpecManager;
@@ -53,6 +55,7 @@ public class TinkersLevellingAddon {
         PbcBlockEntities.register(modEventBus);
         PbcCreativeModeTabs.register(modEventBus);
         PbcMenus.register(modEventBus);
+        PbcSounds.register(modEventBus);
         
         Config.init();
         Registration.init();
@@ -85,6 +88,7 @@ public class TinkersLevellingAddon {
         generator.addProvider(event.includeServer(), new PbcRecipeProvider(packOutput));
         generator.addProvider(event.includeServer(), new PbcBlockTagsProvider(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new PbcLootTableProvider(packOutput));
+        generator.addProvider(event.includeServer(), new PbcWorldGenProvider(packOutput, lookupProvider));
         
         PbcSpecs.generateForgingMaterialSpecs();
         generator.addProvider(event.includeServer(), new ForgingMaterialSpecProvider(packOutput));
