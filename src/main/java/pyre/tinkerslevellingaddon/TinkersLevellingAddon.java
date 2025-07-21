@@ -2,7 +2,6 @@ package pyre.tinkerslevellingaddon;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.api.behaviour.spouting.BlockSpoutingBehaviour;
-import com.simibubi.create.compat.tconstruct.SpoutCasting;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -39,6 +38,7 @@ import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpecManager;
 import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpecProvider;
 import pyre.tinkerslevellingaddon.network.Messages;
 import pyre.tinkerslevellingaddon.setup.Registration;
+import pyre.tinkerslevellingaddon.setup.SpoutFilling;
 
 @Mod(TinkersLevellingAddon.MOD_ID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -69,7 +69,7 @@ public class TinkersLevellingAddon {
 
     private void onCommonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            BlockSpoutingBehaviour.BY_BLOCK.register(PbcBlocks.QUENCHING_BASIN.get(), SpoutCasting.INSTANCE);
+            BlockSpoutingBehaviour.BY_BLOCK.register(PbcBlocks.QUENCHING_BASIN.get(), SpoutFilling.INSTANCE);
         });
     }
     

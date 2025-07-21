@@ -16,7 +16,7 @@ import net.minecraftforge.fluids.FluidStack;
 import pyre.tinkerslevellingaddon.block.QuenchingBasinBlock;
 import pyre.tinkerslevellingaddon.core.PbcBlocks;
 
-public enum Spouting implements BlockSpoutingBehaviour {
+public enum SpoutFilling implements BlockSpoutingBehaviour {
     INSTANCE;
     
     @Override
