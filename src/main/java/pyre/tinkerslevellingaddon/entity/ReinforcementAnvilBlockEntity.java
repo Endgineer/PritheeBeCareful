@@ -137,10 +137,20 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         } else if (ReinforceItem.isValidReinforceItem(handstack)) {
             if (slotstack_b.is(TinkerTags.Items.MODIFIABLE)) {
                 CompoundTag tag = handstack.getTag();
-                if (tag.getInt(ReinforceItem.STATUS) != ReinforceItem.ReinforceStatus.FINISHED.ordinal()) return false;
+                if (tag.getInt(ReinforceItem.STATUS) != ReinforceItem.ReinforceStatus.FINISHED.ordinal()) {
+                    player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.reinforce_item_on_gear_item.reinforce_item_unfinished"), true);
+                    return false;
+                }
                 
-                if (slotstack_b.isDamaged()) return false;
-                if (!ForgeRegistries.ITEMS.getKey(slotitem_b).getPath().equals(tag.getString(ReinforceItem.GEAR))) return false;
+                if (slotstack_b.isDamaged()) {
+                    player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.reinforce_item_on_gear_item.gear_item_damaged"), true);
+                    return false;
+                }
+                
+                if (!ForgeRegistries.ITEMS.getKey(slotitem_b).getPath().equals(tag.getString(ReinforceItem.GEAR))) {
+                    player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.reinforce_item_on_gear_item.gear_type_unmatched"), true);
+                    return false;
+                }
 
                 boolean materialMatches = false;
                 ToolStack toolstack = ToolStack.from(slotstack_b);
@@ -153,11 +163,17 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                     }
                 }
                 
-                if (!materialMatches) return false;
+                if (!materialMatches) {
+                    player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.reinforce_item_on_gear_item.gear_material_unmatched"), true);
+                    return false;
+                }
                 
                 int targetReinforceLevel = tag.getInt(ReinforceItem.REINFORCE);
                 ToolStack gearstack = ReinforceModifier.reinforce(slotstack_b, targetReinforceLevel);
-                if (gearstack == null) return false;
+                if (gearstack == null) {
+                    player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.reinforce_item_on_gear_item.failed_reinforce_prerequisites"), true);
+                    return false;
+                }
                 
                 player.setItemInHand(hand, ItemStack.EMPTY);
                 this.setItem(SLOT_B, gearstack.createStack());

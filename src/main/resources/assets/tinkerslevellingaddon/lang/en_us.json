@@ -36,6 +36,12 @@
   "multiblock.tinkerslevellingaddon.forge.hearth_missing": "Missing forge hearth (below).",
   "multiblock.tinkerslevellingaddon.forge.hearth_direction": "Hearth must face the same direction as the chamber.",
   
+  "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.reinforce_item_unfinished": "Reinforce item must be finished before being applicable.",
+  "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.gear_item_damaged": "Gear item must be fully repaired before reinforcing.",
+  "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.gear_type_unmatched": "Reinforce item's type must correspond to the gear item's type.",
+  "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.gear_material_unmatched": "Reinforce item's material must correspond to the repair material of the gear item.",
+  "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.failed_reinforce_prerequisites": "Gear item must be reinforced further before applying this level of reinforce item.",
+  
   "itemGroup.tinkerslevellingaddon.creative_mode_tab": "Tinkers Levelling Addon",
   
   "forging.tinkerslevellingaddon.gear.dagger": "Dagger",
