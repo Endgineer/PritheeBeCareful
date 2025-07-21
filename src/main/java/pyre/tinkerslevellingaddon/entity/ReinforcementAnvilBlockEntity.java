@@ -122,7 +122,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         String material = ForgingMaterialSpec.getRegisteredReinforceMaterial(handstack);
         
         if (AbyssRelicItem.isValidAbyssRelicItem(handstack)) {
-            if (slotstack_b.is(TinkerTags.Items.MODIFIABLE)) {
+            if (slotstack_b.is(TinkerTags.Items.MODIFIABLE) && player.getY() > 0) {
                 ToolStack toolstack = ToolStack.from(slotstack_b);
                 int relicSize = handstack.getTag().getInt(AbyssRelicItem.SIZE);
                 int skillLevel = ToolLevellingUtil.getSkillLevel(toolstack);
