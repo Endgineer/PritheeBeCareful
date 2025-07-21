@@ -31,6 +31,7 @@ import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec.MaterialRei
 import pyre.tinkerslevellingaddon.loader.forging.models.ThermalModel;
 import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpec;
 import pyre.tinkerslevellingaddon.network.Messages;
+import pyre.tinkerslevellingaddon.setup.TooltipEventHandler;
 import pyre.tinkerslevellingaddon.util.ToolLevellingUtil;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
@@ -411,12 +412,17 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         Item slotitem_b = slotstack_b.getItem();
         Item slotitem_c = slotstack_c.getItem();
 
-        if (slotitem_b instanceof ModifiableItem || ReinforceItem.isValidReinforceItem(slotstack_b)) {
+        Player player = Minecraft.getInstance().player;
+        
+        if (slotitem_b instanceof ModifiableItem) {
+            this.displayTooltipInfo(tooltip, slotstack_b, slotitem_b);
+            TooltipEventHandler.prepareTooltipInfo(player, slotstack_b, tooltip);
+            return true;
+        } else if (ReinforceItem.isValidReinforceItem(slotstack_b)) {
             this.displayTooltipInfo(tooltip, slotstack_b, slotitem_b);
             return true;
         }
         
-        Player player = Minecraft.getInstance().player;
         int targetSlot = this.playerRaycastSlotResult(player);
         
         if (targetSlot == SLOT_A && slotitem_a instanceof ToolPartItem) {

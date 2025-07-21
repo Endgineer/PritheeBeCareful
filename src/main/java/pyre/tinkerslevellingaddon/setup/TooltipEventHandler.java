@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.settings.KeyModifier;
@@ -42,22 +43,20 @@ public class TooltipEventHandler {
             ModUtil.makeTranslation("tooltip", "info.next_level", ReinforceModifier.REINFORCE_MODIFIER_COLOR)
                     .withStyle(s -> s.withUnderlined(true));
 
-    @SubscribeEvent
-    static void onTooltipEvent(ItemTooltipEvent event) {
+    public static void prepareTooltipInfo(Player player, ItemStack stack, List<Component> tooltip) {
         KeyModifier activeModifierKey = KeyModifier.getActiveModifier();
-        if (event.getEntity() == null || activeModifierKey == KeyModifier.CONTROL || activeModifierKey == KeyModifier.SHIFT) {
+        if (player == null || activeModifierKey == KeyModifier.CONTROL || activeModifierKey == KeyModifier.SHIFT) {
             return;
         }
 
-        ItemStack stack = event.getItemStack();
         if (ModifierUtil.getModifierLevel(stack, Registration.REINFORCE.get().getId()) <= 0) {
             return;
         }
 
-        for (int i = event.getToolTip().size() - 1; i >= 0; i--) {
-            if (event.getToolTip().get(i) == TooltipUtil.TOOLTIP_HOLD_SHIFT ||
-                    event.getToolTip().get(i) == TooltipUtil.TOOLTIP_HOLD_CTRL) {
-                event.getToolTip().add(i + 1, TOOLTIP_HOLD_ALT);
+        for (int i = tooltip.size() - 1; i >= 0; i--) {
+            if (tooltip.get(i) == TooltipUtil.TOOLTIP_HOLD_SHIFT ||
+                tooltip.get(i) == TooltipUtil.TOOLTIP_HOLD_CTRL) {
+                tooltip.add(i + 1, TOOLTIP_HOLD_ALT);
                 break;
             }
         }
@@ -65,17 +64,22 @@ public class TooltipEventHandler {
         List<Component> infoEntries = new ArrayList<>();
         ToolStack tool = ToolStack.from(stack);
         if (activeModifierKey == KeyModifier.ALT) {
-            infoEntries.add(event.getToolTip().get(0));
+            infoEntries.add(tooltip.get(0));
             infoEntries.addAll(prepareLevelInfo(tool));
-            event.getToolTip().clear();
-            event.getToolTip().addAll(infoEntries);
+            tooltip.clear();
+            tooltip.addAll(infoEntries);
         } else {
             infoEntries = prepareGeneralInfo(tool);
             //add tooltips under tool durability
             for (int i = 2; i < infoEntries.size() + 2; i++) {
-                event.getToolTip().add(i, infoEntries.get(i - 2));
+                tooltip.add(i, infoEntries.get(i - 2));
             }
         }
+    }
+    
+    @SubscribeEvent
+    static void onTooltipEvent(ItemTooltipEvent event) {
+        prepareTooltipInfo(event.getEntity(), event.getItemStack(), event.getToolTip());
     }
 
     private static List<Component> prepareGeneralInfo(ToolStack tool) {
