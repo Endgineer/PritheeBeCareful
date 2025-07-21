@@ -53,8 +53,10 @@ public class ReinforcingGearSpec {
         return partMap;
     }
     
+    @Nullable
     public static final ReinforcingGearSpec getReinforcingGearSpec(Item... items) {
         TreeMap<String, Integer> partMap = ReinforcingGearSpec.buildPartMap(items);
+        if (partMap == null) return null;
         return GEAR_SPECS.get(ReinforcingGearSpec.getGearSpecIdentifier(partMap));
     }
 

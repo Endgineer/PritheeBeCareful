@@ -259,6 +259,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                 }
             } else {
                 ReinforcingGearSpec gearSpec = ReinforcingGearSpec.getReinforcingGearSpec(slotitem_a, slotitem_b, slotitem_c);
+                if (gearSpec == null) return false;
                 
                 String consensusMaterial = null;
                 
@@ -284,32 +285,30 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                     }
                 }
                 
-                if (gearSpec != null) {
-                    int materialCost = gearSpec.getMaterialCost();
-                    
-                    CompoundTag tag = new CompoundTag();
-                    tag.putString(ReinforceItem.MATERIAL, consensusMaterial);
-                    tag.putInt(ReinforceItem.COUNT, materialCost);
-                    tag.putString(ReinforceItem.GEAR, gearSpec.getResultingGear());
-                    tag.putInt(ReinforceItem.REINFORCE, 1);
-                    tag.putDouble(ReinforceItem.TEMPERATURE, ThermalModel.AMBIENT_TEMPERATURE);
-                    tag.putInt(ReinforceItem.PROGRESS, ForgingMaterialSpec.getExperienceCostTotal(consensusMaterial, 1, materialCost));
-                    tag.putDouble(ReinforceItem.EXPERIENCE, ForgingMaterialSpec.getExperienceCostPerTrip(consensusMaterial, 1, materialCost));
-                    tag.putInt("CustomModelData", 0);
-                    tag.putInt(ReinforceItem.STATUS, ReinforceItem.ReinforceStatus.UNTOUCHED.ordinal());
-                    tag.putInt(ReinforceItem.CLOCK, 0);
-                    
-                    ItemStack result = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(TinkersLevellingAddon.MOD_ID+":reinforce_item")));
-                    result.setTag(tag);
-                    
-                    player.setItemInHand(InteractionHand.MAIN_HAND, handstack.copyWithCount(handstack.getCount()-1));
-                    this.setItem(SLOT_A, ItemStack.EMPTY);
-                    this.setItem(SLOT_C, ItemStack.EMPTY);
-                    this.setItem(SLOT_B, result);
-                    
-                    Messages.sendAnvilMulticlang(level, worldPosition);
-                    return true;
-                }
+                int materialCost = gearSpec.getMaterialCost();
+                
+                CompoundTag tag = new CompoundTag();
+                tag.putString(ReinforceItem.MATERIAL, consensusMaterial);
+                tag.putInt(ReinforceItem.COUNT, materialCost);
+                tag.putString(ReinforceItem.GEAR, gearSpec.getResultingGear());
+                tag.putInt(ReinforceItem.REINFORCE, 1);
+                tag.putDouble(ReinforceItem.TEMPERATURE, ThermalModel.AMBIENT_TEMPERATURE);
+                tag.putInt(ReinforceItem.PROGRESS, ForgingMaterialSpec.getExperienceCostTotal(consensusMaterial, 1, materialCost));
+                tag.putDouble(ReinforceItem.EXPERIENCE, ForgingMaterialSpec.getExperienceCostPerTrip(consensusMaterial, 1, materialCost));
+                tag.putInt("CustomModelData", 0);
+                tag.putInt(ReinforceItem.STATUS, ReinforceItem.ReinforceStatus.UNTOUCHED.ordinal());
+                tag.putInt(ReinforceItem.CLOCK, 0);
+                
+                ItemStack result = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(TinkersLevellingAddon.MOD_ID+":reinforce_item")));
+                result.setTag(tag);
+                
+                player.setItemInHand(InteractionHand.MAIN_HAND, handstack.copyWithCount(handstack.getCount()-1));
+                this.setItem(SLOT_A, ItemStack.EMPTY);
+                this.setItem(SLOT_C, ItemStack.EMPTY);
+                this.setItem(SLOT_B, result);
+                
+                Messages.sendAnvilMulticlang(level, worldPosition);
+                return true;
             }
         }
         
