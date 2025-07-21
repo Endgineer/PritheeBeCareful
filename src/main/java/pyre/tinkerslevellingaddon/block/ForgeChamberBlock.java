@@ -1,5 +1,7 @@
 package pyre.tinkerslevellingaddon.block;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -11,7 +13,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -25,9 +26,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
-import pyre.tinkerslevellingaddon.core.PbcBlocks;
 import pyre.tinkerslevellingaddon.entity.ForgeChamberBlockEntity;
 import slimeknights.mantle.block.InventoryBlock;
 import slimeknights.mantle.util.BlockEntityHelper;
@@ -74,15 +73,10 @@ public class ForgeChamberBlock extends InventoryBlock {
     protected boolean displayStatus(Player player, Level level, BlockPos pos, BlockState state) {
         if (level.isClientSide) return true;
         
-        BlockState above2 = level.getBlockState(pos.above(2));
-        BlockState above1 = level.getBlockState(pos.above());
-        BlockState below1 = level.getBlockState(pos.below());
-        BlockState below2 = level.getBlockState(pos.below(2));
-
-        Component statusMessage = getReasonIfMultiblockInvalid(below2, below1, state.getValue(FACING), above1, above2);
+        List<Component> errors = ForgeChamberBlockEntity.getMultiblockErrors(level, pos, state, true);
         
-        if (statusMessage != null) {
-            player.displayClientMessage(statusMessage, true);
+        for (Component error : errors) {
+            player.displayClientMessage(error, true);
         }
         
         return true;
@@ -92,26 +86,6 @@ public class ForgeChamberBlock extends InventoryBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> check) {
         return level.isClientSide ? null : BlockEntityHelper.castTicker(check, PbcBlockEntities.FORGE_CHAMBER_BLOCK_ENTITY.get(), ForgeChamberBlockEntity.SERVER_TICKER);
-    }
-    
-    //! MOVE TO BLOCKENTITY
-    @Nullable
-    private Component getReasonIfMultiblockInvalid(BlockState below2, BlockState below1, Direction direction, BlockState above1, BlockState above2) {
-        if (!above2.is(Blocks.AIR)) {
-            return Component.translatable("multiblock."+TinkersLevellingAddon.MOD_ID+".forge.requires_clearance");
-        }
-        
-        if (!above1.is(PbcBlocks.FORGE_THROAT.get())) {
-            return Component.translatable("multiblock."+TinkersLevellingAddon.MOD_ID+".forge.requires_throat");
-        }
-        
-        if (!below1.is(PbcBlocks.FORGE_HEARTH.get())) {
-            return Component.translatable("multiblock."+TinkersLevellingAddon.MOD_ID+".forge.requires_hearth");
-        } else if (above1.getValue(ForgeHearthBlock.FACING) != direction) {
-            return Component.translatable("multiblock."+TinkersLevellingAddon.MOD_ID+".forge.direction_hearth");
-        }
-        
-        return null;
     }
     
     @Override

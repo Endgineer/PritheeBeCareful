@@ -1,5 +1,6 @@
 package pyre.tinkerslevellingaddon.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -27,7 +28,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
@@ -98,45 +98,52 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
         return new ForgeContainerMenu(id, inventory, this);
     }
     
-    private boolean isConnected(Level level, BlockPos pos, BlockState state) {
-        BlockPos above2Pos = pos.above(2);
+    public static List<Component> getMultiblockErrors(Level level, BlockPos pos, BlockState state, boolean simulate) {
         BlockPos above1Pos = pos.above();
         BlockPos below1Pos = pos.below();
-        
-        BlockState above2State = level.getBlockState(above2Pos);
         BlockState above1State = level.getBlockState(above1Pos);
         BlockState below1State = level.getBlockState(below1Pos);
-        
-        boolean above1Safe = above1State.is(PbcBlocks.FORGE_THROAT.get());
-        boolean below1Safe = below1State.is(PbcBlocks.FORGE_HEARTH.get());
 
-        boolean above2Correct = above2State.is(Blocks.AIR);
-        boolean above1Correct = above1Safe;
-        boolean below1Correct = below1Safe && below1State.getValue(ForgeHearthBlock.FACING) == state.getValue(ForgeChamberBlock.FACING);
+        List<Component> errors = new ArrayList<>();
+
+        boolean isThroatAbove = above1State.is(PbcBlocks.FORGE_THROAT.get());
+        boolean isHearthBelow = below1State.is(PbcBlocks.FORGE_HEARTH.get());
         
-        if (above2Correct && above1Correct && below1Correct) {
+        if (!isThroatAbove) {
+            errors.add(Component.translatable("multiblock."+TinkersLevellingAddon.MOD_ID+".forge.throat_missing").withStyle(ChatFormatting.GRAY));
+        }
+
+        if (!isHearthBelow) {
+            errors.add(Component.translatable("multiblock."+TinkersLevellingAddon.MOD_ID+".forge.hearth_missing").withStyle(ChatFormatting.GRAY));
+        } else if (below1State.getValue(ForgeHearthBlock.FACING) != state.getValue(ForgeChamberBlock.FACING)) {
+            errors.add(Component.translatable("multiblock."+TinkersLevellingAddon.MOD_ID+".forge.hearth_direction").withStyle(ChatFormatting.GRAY));
+        }
+        
+        if (simulate) return errors;
+        
+        if (errors.isEmpty()) {
             if (!state.getValue(ForgeChamberBlock.CONNECTED)) {
                 level.setBlock(pos, state.setValue(ForgeChamberBlock.CONNECTED, true), Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
             }
             
-            return true;
+            return errors;
         }
         
         level.setBlock(pos, state.setValue(ForgeChamberBlock.ACTIVE, false).setValue(ForgeChamberBlock.CONNECTED, false), Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
         
-        if (above1Safe) {
+        if (isThroatAbove) {
             level.setBlock(above1Pos, above1State.setValue(ForgeThroatBlock.ACTIVE, false), Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
         }
         
-        if (below1Safe) {
+        if (isHearthBelow) {
             level.setBlock(below1Pos, below1State.setValue(ForgeHearthBlock.ACTIVE, false), Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
         }
         
-        return false;
+        return errors;
     }
 
     private void tick(Level level, BlockPos pos, BlockState state) {
-        if (isConnected(level, pos, state)) {
+        if (ForgeChamberBlockEntity.getMultiblockErrors(level, pos, state, false).isEmpty()) {
             this.tickFuelAndTemperature(level, pos, state);
             this.tickItemHeating();
             this.setChanged();
@@ -264,6 +271,11 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
             
             ItemStack itemstack = this.getItem(ITEM_SLOT);
             ReinforceItem.addMetalStats(tooltip, itemstack);
+        } else {
+            List<Component> errors = ForgeChamberBlockEntity.getMultiblockErrors(level, this.getBlockPos(), this.getBlockState(), true);
+            for (Component error : errors) {
+                tooltip.add(error);
+            }
         }
 
         return true;

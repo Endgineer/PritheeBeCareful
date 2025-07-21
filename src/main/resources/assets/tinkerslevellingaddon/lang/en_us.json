@@ -32,9 +32,9 @@
   
   "create.tinkerslevellingaddon.forge_chamber": "Forge",
   
-  "multiblock.tinkerslevellingaddon.forge.all_missing": "Missing forge throat (above) and forge hearth (below).",
-  "multiblock.tinkerslevellingaddon.forge.top_missing": "Missing forge throat (above).",
-  "multiblock.tinkerslevellingaddon.forge.bot_missing": "Missing forge hearth (below).",
+  "multiblock.tinkerslevellingaddon.forge.throat_missing": "Missing forge throat (above).",
+  "multiblock.tinkerslevellingaddon.forge.hearth_missing": "Missing forge hearth (below).",
+  "multiblock.tinkerslevellingaddon.forge.hearth_direction": "Hearth must face the same direction as the chamber.",
   
   "itemGroup.tinkerslevellingaddon.creative_mode_tab": "Tinkers Levelling Addon",
   
