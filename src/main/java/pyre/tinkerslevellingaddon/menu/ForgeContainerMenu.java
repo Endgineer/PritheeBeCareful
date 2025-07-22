@@ -6,6 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import pyre.tinkerslevellingaddon.core.PbcMenus;
 import pyre.tinkerslevellingaddon.entity.ForgeChamberBlockEntity;
@@ -40,6 +41,55 @@ public class ForgeContainerMenu extends TriggeringBaseContainerMenu<ForgeChamber
     
     public ForgeContainerMenu(int id, Inventory inventory, FriendlyByteBuf buffer) {
         this(id, inventory, getTileEntityFromBuf(buffer, ForgeChamberBlockEntity.class));
+    }
+    
+    @Override
+    public ItemStack quickMoveStack(Player player, int index) {
+        ItemStack oldstack = ItemStack.EMPTY;
+        
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack newstack = slot.getItem();
+            oldstack = newstack.copy();
+            
+            if (index < 2) {
+                if (!this.moveItemStackTo(newstack, 2, 38, true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else {
+                if (this.itemSlot.mayPlace(newstack) && this.moveItemStackTo(newstack, 0, 1, false)) {
+                    return oldstack;
+                }
+                
+                if (this.fuelSlot.mayPlace(newstack) && this.moveItemStackTo(newstack, 1, 2, false)) {
+                    return oldstack;
+                }
+                
+                if (index > 1 && index < 29) {
+                    if (!this.moveItemStackTo(newstack, 29, 38, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index > 28 && index < 38) {
+                    if (!this.moveItemStackTo(newstack, 2, 29, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+            }
+            
+            if (newstack.isEmpty()) {
+                slot.set(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+
+            this.entity.setChanged();
+            
+            if (newstack.getCount() == oldstack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+        }
+        
+        return oldstack;
     }
     
     @Override
