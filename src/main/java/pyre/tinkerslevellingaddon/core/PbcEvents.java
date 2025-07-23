@@ -4,6 +4,7 @@ import net.endgineer.curseoftheabyss.common.Abyss;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -33,9 +34,12 @@ public class PbcEvents {
         LevelAccessor accessor = event.getLevel();
         if (accessor.isClientSide()) return;
         
+        ServerPlayer player = (ServerPlayer) event.getPlayer();
+        if (player.gameMode.isCreative()) return;
+        
         BlockState state = event.getState();
         
-        ItemStack mainstack = event.getPlayer().getMainHandItem();
+        ItemStack mainstack = player.getMainHandItem();
         if (!mainstack.isCorrectToolForDrops(state)) return;
         
         boolean isTitanite = state.is(PbcBlocks.DEEPSLATE_TITANITE_ORE.get());
