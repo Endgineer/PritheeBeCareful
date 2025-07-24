@@ -402,12 +402,22 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         double hitZ = blockHitResult.getLocation().z - blockHitResult.getBlockPos().getZ();
         
         Direction facing = this.getBlockState().getValue(ReinforcementAnvilBlock.getFacing());
-        if (facing == Direction.NORTH || facing == Direction.SOUTH) {
-            return hitX < 0.33 ? SLOT_A : (hitX < 0.67 ? SLOT_B : SLOT_C);
-        } else if (facing == Direction.WEST || facing == Direction.EAST) {
-            return hitZ < 0.33 ? SLOT_A : (hitZ < 0.67 ? SLOT_B : SLOT_C);
+        switch (facing) {
+            case NORTH -> {
+                return hitX < 0.33 ? SLOT_A : (hitX < 0.67 ? SLOT_B : SLOT_C);
+            }
+            case EAST -> {
+                return hitZ < 0.33 ? SLOT_A : (hitZ < 0.67 ? SLOT_B : SLOT_C);
+            }
+            case SOUTH -> {
+                return hitX < 0.33 ? SLOT_C : (hitX < 0.67 ? SLOT_B : SLOT_A);
+            }
+            case WEST -> {
+                return hitZ < 0.33 ? SLOT_C : (hitZ < 0.67 ? SLOT_B : SLOT_A);
+            }
+            default -> {}
         }
-
+        
         return -1;
     }
 
