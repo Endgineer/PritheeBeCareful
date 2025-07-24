@@ -69,6 +69,7 @@ public class ReinforceItem extends Item {
         double experience = tag.getDouble(ReinforceItem.EXPERIENCE);
 
         MaterialReinforceSpec reinforceSpec = ForgingMaterialSpec.getMaterialReinforceSpec(material, reinforce);
+        if (reinforceSpec == null) return false;
         
         int maxProgress = reinforceSpec.getExperienceCostTotal(count);
         double maxTemperature = reinforceSpec.getBreakdownPoint();
