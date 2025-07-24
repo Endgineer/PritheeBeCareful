@@ -25,7 +25,7 @@ public class DeepslateTitaniteOreBlock extends Block {
         super(BlockBehaviour.Properties.of()
             .requiresCorrectToolForDrops()
             .mapColor(MapColor.DEEPSLATE)
-            .strength(4.5F, 1200.0F)
+            .strength(4.5F, 3.0F)
             .sound(SoundType.DEEPSLATE));
     
         this.xpRange = UniformInt.of(3, 7);
