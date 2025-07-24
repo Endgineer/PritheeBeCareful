@@ -17,6 +17,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.registries.ForgeRegistries;
 import pyre.tinkerslevellingaddon.ReinforceModifier;
@@ -409,6 +411,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         return -1;
     }
 
+    @OnlyIn(Dist.CLIENT)
     private void displayTooltipInfo(List<Component> tooltip, ItemStack stack, Item item) {
         CreateLang.itemName(stack).forGoggles(tooltip);
         
@@ -418,6 +421,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         item.appendHoverText(stack, level, tooltip, flag);
     }
     
+    @OnlyIn(Dist.CLIENT)
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         ItemStack slotstack_a = this.getItem(SLOT_A);
