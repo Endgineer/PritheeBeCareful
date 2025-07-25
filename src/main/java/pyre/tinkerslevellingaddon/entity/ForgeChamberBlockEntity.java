@@ -176,10 +176,10 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
             if (below3State.is(AllBlocks.ENCASED_FAN.get()) && below3State.getValue(DirectionalKineticBlock.FACING) == Direction.UP) {
                 EncasedFanBlockEntity encasedFanBlockEntity = (EncasedFanBlockEntity) level.getBlockEntity(pos.below(3));
                 FanProcessingType fanProcessingType = encasedFanBlockEntity.getAirCurrent().getTypeAt(0);
-                if (fanProcessingType.equals(AllFanProcessingTypes.BLASTING)) {
-                    blastingSpeed = encasedFanBlockEntity.getSpeed();
-                } else if (!fanProcessingType.equals(AllFanProcessingTypes.SPLASHING)) {
+                if (fanProcessingType == null) {
                     blastingSpeed = 0.42*encasedFanBlockEntity.getSpeed();
+                } else if (fanProcessingType.equals(AllFanProcessingTypes.BLASTING)) {
+                    blastingSpeed = encasedFanBlockEntity.getSpeed();
                 }
             }
             
