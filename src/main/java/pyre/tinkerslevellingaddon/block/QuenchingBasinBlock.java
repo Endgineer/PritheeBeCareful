@@ -3,6 +3,7 @@ package pyre.tinkerslevellingaddon.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -35,8 +36,10 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.item.ReinforceItem;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec;
+import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec.MaterialReinforceSpec;
 
 public class QuenchingBasinBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -102,8 +105,15 @@ public class QuenchingBasinBlock extends Block {
                 int reinforce = tag.getInt(ReinforceItem.REINFORCE);
                 double temperature = tag.getDouble(ReinforceItem.TEMPERATURE);
                 
+                MaterialReinforceSpec reinforceSpec = ForgingMaterialSpec.getMaterialReinforceSpec(material, reinforce);
+                
                 int water = state.getValue(LEVEL);
-                if (water > 0 && progress == 0 && ForgingMaterialSpec.canQuench(material, reinforce, temperature)) {
+                if (water > 0 && progress == 0) {
+                    if (!reinforceSpec.canQuench(temperature)) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".quenching_basin.below_quenching_point", (int) reinforceSpec.getQuenchingPoint()), true);
+                        return InteractionResult.sidedSuccess(level.isClientSide);
+                    }
+                    
                     tag.putDouble(ReinforceItem.TEMPERATURE, 0);
                     tag.putInt("CustomModelData", 0);
                     tag.putInt(ReinforceItem.STATUS, ReinforceItem.ReinforceStatus.FINISHED.ordinal());

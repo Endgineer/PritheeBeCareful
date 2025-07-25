@@ -45,9 +45,10 @@
   "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.gear_not_reinforced": "The relic cannot be applied safely, as the item has no reinforce.",
   "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.not_enough_xp": "Your mind lacks the insight required to unravel the complexity of the relic's truth.",
   "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.cannot_level_up": "The item is already saturated with insight, unable to receive further experience.",
-  "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_reinforce_item.temperature_below_folding": "The ingot's temperature is too low for folding, needs %s \u00B0C.",
+  "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_reinforce_item.temperature_below_folding": "The item's temperature is too low for folding, needs %s \u00B0C.",
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_reinforce_item.insufficient_material_ingots": "The available ingots are too few for folding, needs %s ingots.",
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_gear_parts.material_mismatch": "Parts combined into a Reinforce Item cannot be of different material types.",
+  "message.tinkerslevellingaddon.quenching_basin.below_quenching_point": "The item's temperature is too low for quenching, needs %s \u00B0C.",
   
   "itemGroup.tinkerslevellingaddon.creative_mode_tab": "Tinkers Levelling Addon",
   
