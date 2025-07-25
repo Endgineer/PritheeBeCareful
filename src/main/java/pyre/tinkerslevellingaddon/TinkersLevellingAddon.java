@@ -39,6 +39,7 @@ import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpecProvider
 import pyre.tinkerslevellingaddon.network.Messages;
 import pyre.tinkerslevellingaddon.setup.Registration;
 import pyre.tinkerslevellingaddon.setup.SpoutFilling;
+import pyre.tinkerslevellingaddon.worldgen.PbcConfiguredFeatures;
 
 @Mod(TinkersLevellingAddon.MOD_ID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -56,6 +57,7 @@ public class TinkersLevellingAddon {
         PbcCreativeModeTabs.register(modEventBus);
         PbcMenus.register(modEventBus);
         PbcSounds.register(modEventBus);
+        PbcConfiguredFeatures.register(modEventBus);
         
         Config.init();
         Registration.init();

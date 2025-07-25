@@ -13,10 +13,17 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.core.PbcBlocks;
 
 public class PbcConfiguredFeatures {
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, TinkersLevellingAddon.MOD_ID);
+    
+    public static final RegistryObject<Feature<OreConfiguration>> EXPOSED_ORE = FEATURES.register("exposed_ore", () -> new ExposedOreFeature(OreConfiguration.CODEC));
+    
     public static final ResourceKey<ConfiguredFeature<?, ?>> DEEPSLATE_TITANITE_ORE_KEY = registerKey("deepslate_titanite_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DEEPSLATE_ANCIENT_RUBBLE_KEY = registerKey("deepslate_ancient_rubble");
 
@@ -27,7 +34,7 @@ public class PbcConfiguredFeatures {
         List<OreConfiguration.TargetBlockState> deepslateAncientRubbles = List.of(OreConfiguration.target(deepslateReplaceables, PbcBlocks.DEEPSLATE_ANCIENT_RUBBLE.get().defaultBlockState()));
         
         register(context, DEEPSLATE_TITANITE_ORE_KEY, Feature.ORE, new OreConfiguration(deepslateTitaniteOres, 9));
-        register(context, DEEPSLATE_ANCIENT_RUBBLE_KEY, Feature.ORE, new OreConfiguration(deepslateAncientRubbles, 9));
+        register(context, DEEPSLATE_ANCIENT_RUBBLE_KEY, EXPOSED_ORE.get(), new OreConfiguration(deepslateAncientRubbles, 1));
     }
     
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
@@ -36,5 +43,9 @@ public class PbcConfiguredFeatures {
 
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration) {
         context.register(key, new ConfiguredFeature<>(feature, configuration));
+    }
+    
+    public static void register(IEventBus eventBus) {
+        FEATURES.register(eventBus);
     }
 }
