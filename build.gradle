@@ -19,6 +19,7 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    maven { url = "https://cursemaven.com" } // World Stripper
     maven {
         name = 'tterrag maven'
         url = 'https://maven.tterrag.com/'
