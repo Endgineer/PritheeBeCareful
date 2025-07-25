@@ -27,7 +27,7 @@ public class PbcConfiguredFeatures {
         List<OreConfiguration.TargetBlockState> deepslateAncientRubbles = List.of(OreConfiguration.target(deepslateReplaceables, PbcBlocks.DEEPSLATE_ANCIENT_RUBBLE.get().defaultBlockState()));
         
         register(context, DEEPSLATE_TITANITE_ORE_KEY, Feature.ORE, new OreConfiguration(deepslateTitaniteOres, 9));
-        register(context, DEEPSLATE_ANCIENT_RUBBLE_KEY, Feature.ORE, new OreConfiguration(deepslateAncientRubbles, 3));
+        register(context, DEEPSLATE_ANCIENT_RUBBLE_KEY, Feature.ORE, new OreConfiguration(deepslateAncientRubbles, 9));
     }
     
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
