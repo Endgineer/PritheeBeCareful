@@ -8,8 +8,10 @@ import pyre.tinkerslevellingaddon.ReinforceModifier;
 import pyre.tinkerslevellingaddon.config.Config;
 import pyre.tinkerslevellingaddon.network.LevelUpPacket;
 import pyre.tinkerslevellingaddon.network.Messages;
+import pyre.tinkerslevellingaddon.setup.Registration;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.SlotType;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -329,6 +331,12 @@ public class ToolLevellingUtil {
     public static int getSkillLevel(ToolStack tool) {
         ModDataNBT data = tool.getPersistentData();
         return data.getInt(LEVEL_KEY);
+    }
+    
+    public static boolean isReinforcedAtLeastTo(ToolStack tool, int minimumReinforce) {
+        if (tool == null | ModifierUtil.getModifierLevel(tool.createStack(), Registration.REINFORCE.getId()) <= 0) return false;
+        int reinforce = tool.getPersistentData().getInt(ReinforceModifier.REINFORCE_KEY);
+        return reinforce >= minimumReinforce && reinforce > reinforce;
     }
     
     public static boolean addExperience(ToolStack tool, int amount, ServerPlayer player) {

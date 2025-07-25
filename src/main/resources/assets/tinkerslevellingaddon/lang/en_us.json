@@ -41,6 +41,10 @@
   "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.gear_type_unmatched": "Reinforce item's type must correspond to the gear item's type.",
   "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.gear_material_unmatched": "Reinforce item's material must correspond to the repair material of the gear item.",
   "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.failed_reinforce_prerequisites": "Gear item must be reinforced further before applying this level of reinforce item.",
+  "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.anvil_within_abyss": "A mysterious force within the abyss forbids you from applying the relic.",
+  "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.gear_not_reinforced": "The relic cannot be applied safely, as the item has no reinforce.",
+  "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.not_enough_xp": "Your mind lacks the insight required to unravel the complexity of the relic's truth.",
+  "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.cannot_level_up": "The item is already saturated with insight, unable to receive further experience.",
   
   "itemGroup.tinkerslevellingaddon.creative_mode_tab": "Tinkers Levelling Addon",
   
@@ -86,6 +90,17 @@
   
   "tooltip.tinkerslevellingaddon.titanite_shard.description": "Fragment of the world's great deep.",
   "tooltip.tinkerslevellingaddon.titanite_shard.usage": "Capable of reinforcing metal.",
+  
+  "tooltip.tinkerslevellingaddon.abyss_relic.resonance": "Resonance: %s",
+  "tooltip.tinkerslevellingaddon.abyss_relic.complexity": "Complexity: %s",
+  "tooltip.tinkerslevellingaddon.abyss_relic.instability": "Instability: %s",
+  "tooltip.tinkerslevellingaddon.abyss_relic.attack_percentage": "ATK %s",
+  "tooltip.tinkerslevellingaddon.abyss_relic.health_percentage": "HP %s",
+  "tooltip.tinkerslevellingaddon.abyss_relic.defense_percentage": "DEF %s",
+  "tooltip.tinkerslevellingaddon.abyss_relic.critical_rate": "CR %s",
+  "tooltip.tinkerslevellingaddon.abyss_relic.critical_damage": "CD %s",
+  "tooltip.tinkerslevellingaddon.abyss_relic.energy_regeneration": "ER %s",
+  "tooltip.tinkerslevellingaddon.abyss_relic.damage_bonus": "%s DMG %s",
   
   "tooltip.tinkerslevellingaddon.abyss_relic.description": "Relic of the world's great deep.",
   "tooltip.tinkerslevellingaddon.abyss_relic.usage": "Capable of elevating metal's insight.",

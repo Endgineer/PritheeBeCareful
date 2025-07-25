@@ -1,6 +1,7 @@
 package pyre.tinkerslevellingaddon.loader.forging;
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.annotation.Nullable;
@@ -22,6 +23,14 @@ import slimeknights.tconstruct.library.tools.part.IMaterialItem;
 
 public class ForgingMaterialSpec {
     private static HashMap<String, ForgingMaterialSpec> MATERIAL_SPECS = new HashMap<>();
+    
+    public static Set<String> getAllRegisteredMaterials() {
+        return MATERIAL_SPECS.keySet();
+    }
+    
+    public static boolean isRegisteredMaterial(String material) {
+        return MATERIAL_SPECS.containsKey(material);
+    }
     
     public static void registerForgingMaterialSpec(String material, JsonElement jsonelement) throws Exception {
         JsonObject jsonobject = jsonelement.getAsJsonObject();

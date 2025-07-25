@@ -2,7 +2,6 @@ package pyre.tinkerslevellingaddon.core;
 
 import net.endgineer.curseoftheabyss.common.Abyss;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -76,13 +75,8 @@ public class PbcEvents {
             event.setCanceled(true);
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
             
-            ItemStack relicstack = new ItemStack(PbcItems.ABYSS_RELIC.get());
-            CompoundTag tag = new CompoundTag();
-            tag.putInt(AbyssRelicItem.SIZE, AbyssRelicItem.rollSize(ModList.get().isLoaded("curseoftheabyss") ? Abyss.layer(pos.getY()) : 7));
-            relicstack.setTag(tag);
-            
             DeepslateAncientRubbleBlock block = (DeepslateAncientRubbleBlock) state.getBlock();
-            Block.popResource(level, pos, relicstack.copy());
+            Block.popResource(level, pos, AbyssRelicItem.rollAbyssRelic(pos.getY()));
             block.popExperience(level, pos, block.getExpDrop(state, level, level.random, pos, 0, 0));
         }
     }

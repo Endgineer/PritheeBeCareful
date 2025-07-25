@@ -2,7 +2,9 @@ package pyre.tinkerslevellingaddon.loader.reinforcing;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -17,6 +19,14 @@ import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 
 public class ReinforcingGearSpec {
     private static HashMap<String, ReinforcingGearSpec> GEAR_SPECS = new HashMap<>();
+    
+    public static Set<String> getAllRegisteredGear() {
+        return GEAR_SPECS.values().stream().map(value -> value.resultingGear).collect(Collectors.toSet());
+    }
+    
+    public static boolean isRegisteredGear(String gear) {
+        return GEAR_SPECS.containsKey(gear);
+    }
     
     public static void registerReinforcingGearSpec(String gear, JsonElement jsonelement) throws Exception {
         JsonObject jsonobject = jsonelement.getAsJsonObject();
