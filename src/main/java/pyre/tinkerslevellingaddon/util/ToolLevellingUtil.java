@@ -336,7 +336,7 @@ public class ToolLevellingUtil {
     public static boolean isReinforcedAtLeastTo(ToolStack tool, int minimumReinforce) {
         if (tool == null | ModifierUtil.getModifierLevel(tool.createStack(), Registration.REINFORCE.getId()) <= 0) return false;
         int reinforce = tool.getPersistentData().getInt(ReinforceModifier.REINFORCE_KEY);
-        return reinforce >= minimumReinforce && reinforce > reinforce;
+        return reinforce >= minimumReinforce && reinforce > 0;
     }
     
     public static boolean addExperience(ToolStack tool, int amount, ServerPlayer player) {
