@@ -322,6 +322,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                     if (consensusMaterial == null) {
                         consensusMaterial = slotstack_a_material;
                     } else if (!slotstack_a_material.equals(consensusMaterial)) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.titanite_shard_on_gear_parts.material_mismatch"), true);
                         return false;
                     }
                 }
@@ -331,6 +332,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                     if (consensusMaterial == null) {
                         consensusMaterial = slotstack_c_material;
                     } else if (!slotstack_c_material.equals(consensusMaterial)) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.titanite_shard_on_gear_parts.material_mismatch"), true);
                         return false;
                     }
                 }
