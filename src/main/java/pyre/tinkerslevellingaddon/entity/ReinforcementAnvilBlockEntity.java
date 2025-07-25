@@ -271,41 +271,47 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                 } else if (slottag_b.getDouble(ReinforceItem.EXPERIENCE) == 0 && slottag_b.getInt(ReinforceItem.PROGRESS) > 0) {
                     String ingotMaterial = slottag_b.getString(ReinforceItem.MATERIAL);
                     MaterialReinforceSpec materialReinforceSpec = ForgingMaterialSpec.getMaterialReinforceSpec(ingotMaterial, slottag_b.getInt(ReinforceItem.REINFORCE));
-                    if (materialReinforceSpec.canFold(slottag_b.getDouble(ReinforceItem.TEMPERATURE))) {
-                        int required = slottag_b.getInt(ReinforceItem.COUNT);
-                        int available = 0;
-                        
-                        Inventory inventory = player.getInventory();
-                        
-                        List<Integer> materialIngotStackIndices = new ArrayList<>();
-                        for (int i = 0; i < Inventory.INVENTORY_SIZE && available < required; i++) {
-                            ItemStack stack = inventory.getItem(i);
-                            if (ForgingMaterialSpec.match(ingotMaterial, stack)) {
-                                materialIngotStackIndices.add(i);
-                                available += stack.getCount();
-                            }
-                        }
-                        
-                        if(available >= required) {
-                            player.getItemInHand(hand).setCount(player.getItemInHand(hand).getCount()-1);
-                            
-                            for(Integer index : materialIngotStackIndices) {
-                                ItemStack stack = inventory.getItem(index);
-                                
-                                int amount = Math.min(stack.getCount(), required);
-                                inventory.getItem(index).setCount(stack.getCount()-amount);
-                                required -= amount;
-                            }
-                            
-                            ItemStack result = slotstack_b.copy();
-                            slottag_b.putDouble(ReinforceItem.EXPERIENCE, materialReinforceSpec.getExperienceCostPerTrip(slottag_b.getInt(ReinforceItem.COUNT)));
-                            result.setTag(slottag_b);
-                            this.setItem(SLOT_B, result);
-                            
-                            Messages.sendAnvilMulticlang(level, worldPosition);
-                            return true;
+                    if (!materialReinforceSpec.canFold(slottag_b.getDouble(ReinforceItem.TEMPERATURE))) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.titanite_shard_on_reinforce_item.temperature_below_folding", (int) materialReinforceSpec.getFoldingPoint()), true);
+                        return false;
+                    }
+                    
+                    int required = slottag_b.getInt(ReinforceItem.COUNT);
+                    int available = 0;
+                    
+                    Inventory inventory = player.getInventory();
+                    
+                    List<Integer> materialIngotStackIndices = new ArrayList<>();
+                    for (int i = 0; i < Inventory.INVENTORY_SIZE && available < required; i++) {
+                        ItemStack stack = inventory.getItem(i);
+                        if (ForgingMaterialSpec.match(ingotMaterial, stack)) {
+                            materialIngotStackIndices.add(i);
+                            available += stack.getCount();
                         }
                     }
+
+                    if (available < required) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.titanite_shard_on_reinforce_item.insufficient_material_ingots", required), true);
+                        return false;
+                    }
+                    
+                    player.getItemInHand(hand).setCount(player.getItemInHand(hand).getCount()-1);
+                    
+                    for(Integer index : materialIngotStackIndices) {
+                        ItemStack stack = inventory.getItem(index);
+                        
+                        int amount = Math.min(stack.getCount(), required);
+                        inventory.getItem(index).setCount(stack.getCount()-amount);
+                        required -= amount;
+                    }
+                    
+                    ItemStack result = slotstack_b.copy();
+                    slottag_b.putDouble(ReinforceItem.EXPERIENCE, materialReinforceSpec.getExperienceCostPerTrip(slottag_b.getInt(ReinforceItem.COUNT)));
+                    result.setTag(slottag_b);
+                    this.setItem(SLOT_B, result);
+                    
+                    Messages.sendAnvilMulticlang(level, worldPosition);
+                    return true;
                 }
             } else {
                 ReinforcingGearSpec gearSpec = ReinforcingGearSpec.getReinforcingGearSpec(slotitem_a, slotitem_b, slotitem_c);
