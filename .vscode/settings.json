@@ -2,10 +2,9 @@
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-17",
-            "path": "./jdk-17.0.8"
+            "path": "./jdk-17.0.12"
         },
     ],
-    "java.jdt.ls.java.home": "./jdk-17.0.8",
     "java.import.gradle.user.home": "./.gradlehome",
     "java.compile.nullAnalysis.mode": "disabled",
     "java.configuration.updateBuildConfiguration": "interactive",
