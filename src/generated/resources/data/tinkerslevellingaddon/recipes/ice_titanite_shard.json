@@ -1,0 +1,14 @@
+{
+  "type": "iceandfire:dragonforge",
+  "blood": {
+    "item": "iceandfire:ice_dragon_blood"
+  },
+  "cook_time": 1000,
+  "dragon_type": "ice",
+  "input": {
+    "item": "tinkerslevellingaddon:titanite_shard"
+  },
+  "result": {
+    "item": "tinkerslevellingaddon:ice_titanite_shard"
+  }
+}
