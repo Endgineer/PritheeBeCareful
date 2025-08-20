@@ -2,11 +2,11 @@
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-17",
-            "path": "C:/Programs/MultiMC/jdk-17.0.8"
+            "path": "./jdk-17.0.8"
         },
     ],
-    "java.jdt.ls.java.home": "C:/Programs/MultiMC/jdk-17.0.8",
-    "java.import.gradle.user.home": "C:/Packages/.gradlehome",
+    "java.jdt.ls.java.home": "./jdk-17.0.8",
+    "java.import.gradle.user.home": "./.gradlehome",
     "java.compile.nullAnalysis.mode": "disabled",
     "java.configuration.updateBuildConfiguration": "interactive",
     "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable"
