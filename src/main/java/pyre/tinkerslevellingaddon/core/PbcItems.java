@@ -15,6 +15,9 @@ public class PbcItems {
 
     public static final RegistryObject<ReinforceItem> REINFORCE_ITEM = ITEMS.register("reinforce_item", () -> new ReinforceItem());
     public static final RegistryObject<TitaniteShardItem> TITANITE_SHARD = ITEMS.register("titanite_shard", () -> new TitaniteShardItem());
+    public static final RegistryObject<TitaniteShardItem> FIRE_TITANITE_SHARD = ITEMS.register("fire_titanite_shard", () -> new TitaniteShardItem());
+    public static final RegistryObject<TitaniteShardItem> ICE_TITANITE_SHARD = ITEMS.register("ice_titanite_shard", () -> new TitaniteShardItem());
+    public static final RegistryObject<TitaniteShardItem> LIGHTNING_TITANITE_SHARD = ITEMS.register("lightning_titanite_shard", () -> new TitaniteShardItem());
     public static final RegistryObject<AbyssRelicItem> ABYSS_RELIC = ITEMS.register("abyss_relic", () -> new AbyssRelicItem());
     
     public static void register(IEventBus eventBus) {
