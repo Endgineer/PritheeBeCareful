@@ -26,7 +26,7 @@ public class ReinforceItem extends Item {
     public static final String TEMPERATURE = TinkersLevellingAddon.MOD_ID+".temperature";
     public static final String PROGRESS = TinkersLevellingAddon.MOD_ID+".progress";
     public static final String EXPERIENCE = TinkersLevellingAddon.MOD_ID+".experience";
-    public static final String STATUS = TinkersLevellingAddon.MOD_ID+".committed";
+    public static final String STATUS = TinkersLevellingAddon.MOD_ID+".status";
     public static final String CLOCK = TinkersLevellingAddon.MOD_ID+".clock";
     
     public ReinforceItem() {
