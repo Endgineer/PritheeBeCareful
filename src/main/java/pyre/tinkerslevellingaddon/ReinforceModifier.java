@@ -172,6 +172,9 @@ public class ReinforceModifier extends Modifier implements PlantHarvestModifierH
         tool.getPersistentData().remove(STAT_HISTORY_KEY);
         tool.getPersistentData().remove(REINFORCE_KEY);
         tool.getPersistentData().remove(MATERIAL_KEY);
+        tool.getPersistentData().remove(INFUSION_FLAME_KEY);
+        tool.getPersistentData().remove(INFUSION_FROST_KEY);
+        tool.getPersistentData().remove(INFUSION_STORM_KEY);
         return null;
     }
 
