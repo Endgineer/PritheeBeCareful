@@ -112,12 +112,12 @@ public class TooltipEventHandler {
         int sparks = tool.getPersistentData().getInt(ReinforceModifier.INFUSION_STORM_KEY);
         
         infoEntries.add(
-            Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".infusions").withStyle(ChatFormatting.GRAY)
-                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * embers / 31.0))+"%").withStyle(embers > 0 ? Style.EMPTY.withColor(0xFF5E00) : Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
+            Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".infusions").withStyle(ChatFormatting.WHITE)
+                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * embers / 31.0))+"%").withStyle(embers > 0 ? Style.EMPTY.withColor(0xFF5E00) : Style.EMPTY.withColor(ChatFormatting.GRAY)))
                 .append(Component.literal(" /").withStyle(ChatFormatting.GRAY))
-                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * frosts / 31.0))+"%").withStyle(frosts > 0 ? Style.EMPTY.withColor(0x00B8FF) : Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
+                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * frosts / 31.0))+"%").withStyle(frosts > 0 ? Style.EMPTY.withColor(0x00B8FF) : Style.EMPTY.withColor(ChatFormatting.GRAY)))
                 .append(Component.literal(" /").withStyle(ChatFormatting.GRAY))
-                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * sparks / 31.0))+"%").withStyle(sparks > 0 ? Style.EMPTY.withColor(0xEC00FF) : Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
+                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * sparks / 31.0))+"%").withStyle(sparks > 0 ? Style.EMPTY.withColor(0xEC00FF) : Style.EMPTY.withColor(ChatFormatting.GRAY)))
         );
         
         return infoEntries;
