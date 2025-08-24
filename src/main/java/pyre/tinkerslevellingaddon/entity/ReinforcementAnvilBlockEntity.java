@@ -27,6 +27,9 @@ import pyre.tinkerslevellingaddon.block.ReinforcementAnvilBlock;
 import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
 import pyre.tinkerslevellingaddon.helper.openmods.EnchantmentUtils;
 import pyre.tinkerslevellingaddon.item.AbyssRelicItem;
+import pyre.tinkerslevellingaddon.item.FireTitaniteShardItem;
+import pyre.tinkerslevellingaddon.item.IceTitaniteShardItem;
+import pyre.tinkerslevellingaddon.item.LightningTitaniteShardItem;
 import pyre.tinkerslevellingaddon.item.ReinforceItem;
 import pyre.tinkerslevellingaddon.item.TitaniteShardItem;
 import pyre.tinkerslevellingaddon.item.AbyssRelicItem.RelicApplyResult;
@@ -202,7 +205,10 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                 }
                 
                 int targetReinforceLevel = tag.getInt(ReinforceItem.REINFORCE);
-                ToolStack gearstack = ReinforceModifier.reinforce(slotstack_b, targetReinforceLevel);
+                int gainedFlameInfusion = tag.getInt(ReinforceItem.INFUSION_FLAME);
+                int gainedFrostInfusion = tag.getInt(ReinforceItem.INFUSION_FROST);
+                int gainedStormInfusion = tag.getInt(ReinforceItem.INFUSION_STORM);
+                ToolStack gearstack = ReinforceModifier.reinforce(slotstack_b, targetReinforceLevel, gainedFlameInfusion, gainedFrostInfusion, gainedStormInfusion);
                 if (gearstack == null) {
                     player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.reinforce_item_on_gear_item.failed_reinforce_prerequisites"), true);
                     return false;
@@ -295,6 +301,14 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                         return false;
                     }
                     
+                    if (handitem instanceof FireTitaniteShardItem) {
+                        slottag_b.putInt(ReinforceItem.INFUSION_FLAME, slottag_b.getInt(ReinforceItem.INFUSION_FLAME)+1);
+                    } else if (handitem instanceof IceTitaniteShardItem) {
+                        slottag_b.putInt(ReinforceItem.INFUSION_FROST, slottag_b.getInt(ReinforceItem.INFUSION_FROST)+1);
+                    } else if (handitem instanceof LightningTitaniteShardItem) {
+                        slottag_b.putInt(ReinforceItem.INFUSION_STORM, slottag_b.getInt(ReinforceItem.INFUSION_STORM)+1);
+                    }
+                    
                     player.getItemInHand(hand).setCount(player.getItemInHand(hand).getCount()-1);
                     
                     for(Integer index : materialIngotStackIndices) {
@@ -356,6 +370,24 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                 tag.putInt("CustomModelData", 0);
                 tag.putInt(ReinforceItem.STATUS, ReinforceItem.ReinforceStatus.UNTOUCHED.ordinal());
                 tag.putInt(ReinforceItem.CLOCK, 0);
+                
+                if (handitem instanceof FireTitaniteShardItem) {
+                    tag.putInt(ReinforceItem.INFUSION_FLAME, 1);
+                    tag.putInt(ReinforceItem.INFUSION_FROST, 0);
+                    tag.putInt(ReinforceItem.INFUSION_STORM, 0);
+                } else if (handitem instanceof IceTitaniteShardItem) {
+                    tag.putInt(ReinforceItem.INFUSION_FLAME, 0);
+                    tag.putInt(ReinforceItem.INFUSION_FROST, 1);
+                    tag.putInt(ReinforceItem.INFUSION_STORM, 0);
+                } else if (handitem instanceof LightningTitaniteShardItem) {
+                    tag.putInt(ReinforceItem.INFUSION_FLAME, 0);
+                    tag.putInt(ReinforceItem.INFUSION_FROST, 0);
+                    tag.putInt(ReinforceItem.INFUSION_STORM, 1);
+                } else {
+                    tag.putInt(ReinforceItem.INFUSION_FLAME, 0);
+                    tag.putInt(ReinforceItem.INFUSION_FROST, 0);
+                    tag.putInt(ReinforceItem.INFUSION_STORM, 0);
+                }
                 
                 ItemStack result = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(TinkersLevellingAddon.MOD_ID+":reinforce_item")));
                 result.setTag(tag);

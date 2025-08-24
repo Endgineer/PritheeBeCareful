@@ -115,6 +115,9 @@ public class ReinforceModifier extends Modifier implements PlantHarvestModifierH
     public static final ResourceLocation STAT_HISTORY_KEY = ModUtil.getResource("stat_history");
     public static final ResourceLocation REINFORCE_KEY = ModUtil.getResource("reinforce");
     public static final ResourceLocation MATERIAL_KEY = ModUtil.getResource("material");
+    public static final ResourceLocation INFUSION_FLAME_KEY = ModUtil.getResource("infusion_flame");
+    public static final ResourceLocation INFUSION_FROST_KEY = ModUtil.getResource("infusion_frost");
+    public static final ResourceLocation INFUSION_STORM_KEY = ModUtil.getResource("infusion_storm");
 
     @Override
     public Component getDisplayName(int level) {
@@ -138,7 +141,7 @@ public class ReinforceModifier extends Modifier implements PlantHarvestModifierH
     }
 
     @Nullable
-    public static ToolStack reinforce(ItemStack stack, int targetReinforceLevel) {
+    public static ToolStack reinforce(ItemStack stack, int targetReinforceLevel, int addedFlameInfusion, int addedFrostInfusion, int addedStormInfusion) {
         if (ModifierUtil.getModifierLevel(stack, Registration.REINFORCE.getId()) <= 0) return null;
 
         ToolStack tool = ToolStack.copyFrom(stack);
@@ -148,8 +151,16 @@ public class ReinforceModifier extends Modifier implements PlantHarvestModifierH
         if (currentReinforce == 5 || targetReinforceLevel != currentReinforce+1) {
             return null;
         }
+
+        int currentFlameInfusion = persistentData.getInt(INFUSION_FLAME_KEY);
+        int currentFrostInfusion = persistentData.getInt(INFUSION_FROST_KEY);
+        int currentStormInfusion = persistentData.getInt(INFUSION_STORM_KEY);
         
         persistentData.putInt(REINFORCE_KEY, currentReinforce+1);
+        persistentData.putInt(INFUSION_FLAME_KEY, currentFlameInfusion+addedFlameInfusion);
+        persistentData.putInt(INFUSION_FROST_KEY, currentFrostInfusion+addedFrostInfusion);
+        persistentData.putInt(INFUSION_STORM_KEY, currentStormInfusion+addedStormInfusion);
+        
         return tool;
     }
     

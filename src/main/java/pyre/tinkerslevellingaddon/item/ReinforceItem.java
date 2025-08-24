@@ -26,6 +26,9 @@ public class ReinforceItem extends Item {
     public static final String TEMPERATURE = TinkersLevellingAddon.MOD_ID+".temperature";
     public static final String PROGRESS = TinkersLevellingAddon.MOD_ID+".progress";
     public static final String EXPERIENCE = TinkersLevellingAddon.MOD_ID+".experience";
+    public static final String INFUSION_FLAME = TinkersLevellingAddon.MOD_ID+".infusion_flame";
+    public static final String INFUSION_FROST = TinkersLevellingAddon.MOD_ID+".infusion_frost";
+    public static final String INFUSION_STORM = TinkersLevellingAddon.MOD_ID+".infusion_storm";
     public static final String STATUS = TinkersLevellingAddon.MOD_ID+".status";
     public static final String CLOCK = TinkersLevellingAddon.MOD_ID+".clock";
     
@@ -51,6 +54,9 @@ public class ReinforceItem extends Item {
         if (!tag.contains(TEMPERATURE)) return false;
         if (!tag.contains(PROGRESS)) return false;
         if (!tag.contains(EXPERIENCE)) return false;
+        if (!tag.contains(INFUSION_FLAME)) return false;
+        if (!tag.contains(INFUSION_FROST)) return false;
+        if (!tag.contains(INFUSION_STORM)) return false;
         if (!tag.contains(STATUS)) return false;
         if (!tag.contains(CLOCK)) return false;
 
