@@ -167,6 +167,9 @@ dependencies {
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
     implementation fg.deobf("net.endgineer:curseoftheabyss-${minecraft_version}:2.3.0")
+
+    implementation fg.deobf("curse.maven:citadel-331936:6702068")
+    implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5633453")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
