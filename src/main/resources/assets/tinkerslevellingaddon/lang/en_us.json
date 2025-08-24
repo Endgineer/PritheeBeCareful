@@ -167,6 +167,7 @@
   "tooltip.tinkerslevellingaddon.xp.unused": "Unused",
   "tooltip.tinkerslevellingaddon.xp.maxed": "MAXED",
   "tooltip.tinkerslevellingaddon.xp.limited": "Max for %s",
+  "tooltip.tinkerslevellingaddon.infusions": "Infusions:",
   "tooltip.tinkerslevellingaddon.reinforce": "Reinforce: %s",
   "tooltip.tinkerslevellingaddon.level": "Level: %s",
   "tooltip.tinkerslevellingaddon.level.name": "%s [%s]",
