@@ -97,6 +97,9 @@
   
   "tooltip.tinkerslevellingaddon.titanite_shard.description": "Fragment of the world's great deep.",
   "tooltip.tinkerslevellingaddon.titanite_shard.usage": "Capable of reinforcing metal.",
+  "tooltip.tinkerslevellingaddon.titanite_shard.fire_infused": "EMBERED",
+  "tooltip.tinkerslevellingaddon.titanite_shard.ice_infused": "FROSTED",
+  "tooltip.tinkerslevellingaddon.titanite_shard.lightning_infused": "CHARGED",
   
   "tooltip.tinkerslevellingaddon.abyss_relic.resonance": "Resonance: %s",
   "tooltip.tinkerslevellingaddon.abyss_relic.complexity": "Complexity: %s",
@@ -116,6 +119,7 @@
   "tooltip.tinkerslevellingaddon.reinforce_item.progress": "Progress",
   "tooltip.tinkerslevellingaddon.reinforce_item.experience": "Experience",
   "tooltip.tinkerslevellingaddon.reinforce_item.malleability": "Malleability",
+  "tooltip.tinkerslevellingaddon.reinforce_item.infusions": "Infusions",
   "tooltip.tinkerslevellingaddon.reinforce_item.points": "Points",
   
   "tooltip.tinkerslevellingaddon.hold_alt": "Hold %s for level info",

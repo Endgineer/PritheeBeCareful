@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.network.chat.Style;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.nbt.CompoundTag;
@@ -74,6 +75,10 @@ public class ReinforceItem extends Item {
         int progress = tag.getInt(ReinforceItem.PROGRESS);
         double experience = tag.getDouble(ReinforceItem.EXPERIENCE);
 
+        int embers = tag.getInt(ReinforceItem.INFUSION_FLAME);
+        int frosts = tag.getInt(ReinforceItem.INFUSION_FROST);
+        int sparks = tag.getInt(ReinforceItem.INFUSION_STORM);
+
         MaterialReinforceSpec reinforceSpec = ForgingMaterialSpec.getMaterialReinforceSpec(material, reinforce);
         if (reinforceSpec == null) return false;
         
@@ -122,6 +127,15 @@ public class ReinforceItem extends Item {
                 .append(Component.literal(" ")
                 .append(malleabilityPercentage)
                 .withStyle(ChatFormatting.WHITE))
+        );
+        
+        tooltip.add(
+            Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".reinforce_item.infusions").append(":").withStyle(ChatFormatting.GRAY)
+                .append(Component.literal(" ").append(String.valueOf(embers)).withStyle(embers > 0 ? Style.EMPTY.withColor(0xFF5E00) : Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
+                .append(Component.literal(" |").withStyle(ChatFormatting.GRAY))
+                .append(Component.literal(" ").append(String.valueOf(frosts)).withStyle(frosts > 0 ? Style.EMPTY.withColor(0x00B8FF) : Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
+                .append(Component.literal(" |").withStyle(ChatFormatting.GRAY))
+                .append(Component.literal(" ").append(String.valueOf(sparks)).withStyle(sparks > 0 ? Style.EMPTY.withColor(0xEC00FF) : Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
         );
         
         tooltip.add(
