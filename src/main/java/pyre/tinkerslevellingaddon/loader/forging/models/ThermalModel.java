@@ -10,8 +10,8 @@ import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec;
 
 public class ThermalModel {
     public static final double AMBIENT_TEMPERATURE = 20;
-    private static final double FANNED_TEMPERATURE_LIMIT = 4000;
-    private static final double UNFANNED_TEMPERATURE_LIMIT = 700;
+    public static final double FANNED_TEMPERATURE_LIMIT = 4000;
+    public static final double UNFANNED_TEMPERATURE_LIMIT = 700;
     private static final double FORGE_THERMAL_SLOPE = Math.exp(-Config.thermalRelaxation.get());
     private static final double HEAT_TRANSFER_CONST = Config.heatTransfer.get();
     

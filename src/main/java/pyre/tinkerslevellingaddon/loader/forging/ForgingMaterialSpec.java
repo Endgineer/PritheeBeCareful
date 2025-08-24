@@ -17,6 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import pyre.tinkerslevellingaddon.exception.InvalidForgingMaterialSpecException;
 import pyre.tinkerslevellingaddon.loader.forging.models.MalleabilityModel;
+import pyre.tinkerslevellingaddon.loader.forging.models.ThermalModel;
 import slimeknights.tconstruct.library.materials.definition.IMaterial;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.tools.part.IMaterialItem;
@@ -190,14 +191,15 @@ public class ForgingMaterialSpec {
             this.minXpConductance = minXpConductance;
             this.maxXpConductance = maxXpConductance+1;
             this.volumetricHeatCapacity = density * specificHeat;
-
-            boolean byHammeringPointValid = hammeringPointTemperature < foldingPointTemperature;
-            boolean byFoldingPointValid = byHammeringPointValid && (foldingPointTemperature < breakdownPointTemperature);
-            boolean byBreakdownPointValid = byFoldingPointValid && (breakdownPointTemperature < meltingPointTemperature);
-            boolean allTemperaturePointsValid = byBreakdownPointValid && (quenchingPointTemperature >= hammeringPointTemperature && quenchingPointTemperature <= breakdownPointTemperature);
+            
+            boolean byHammeringPointValid = hammeringPointTemperature > ThermalModel.AMBIENT_TEMPERATURE && (hammeringPointTemperature < foldingPointTemperature);
+            boolean byFoldingPointValid = byHammeringPointValid && (foldingPointTemperature < quenchingPointTemperature);
+            boolean byQuenchingPointValid = byFoldingPointValid && (quenchingPointTemperature < breakdownPointTemperature);
+            boolean byBreakdownPointValid = byQuenchingPointValid && (breakdownPointTemperature < meltingPointTemperature);
+            boolean allTemperaturePointsValid = byBreakdownPointValid && (meltingPointTemperature <= ThermalModel.FANNED_TEMPERATURE_LIMIT);
             
             if (!allTemperaturePointsValid) {
-                throw new InvalidForgingMaterialSpecException("Temperatures must follow AMBIENT =< HAMMERING < FOLDING < BREAKDOWN < MELTING <= LIMIT and HAMMERING <= QUENCHING <= BREAKDOWN");
+                throw new InvalidForgingMaterialSpecException("Temperatures must follow AMBIENT < HAMMERING < FOLDING < QUENCHING < BREAKDOWN < MELTING <= LIMIT");
             }
             
             this.malleabilityModel = new MalleabilityModel(hammeringPointTemperature, foldingPointTemperature, breakdownPointTemperature, meltingPointTemperature, quenchingPointTemperature);
