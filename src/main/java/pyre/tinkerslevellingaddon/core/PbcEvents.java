@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.LevelAccessor;
@@ -19,9 +20,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
-import pyre.tinkerslevellingaddon.block.DeepslateAncientRubbleBlock;
 import pyre.tinkerslevellingaddon.block.DeepslateTitaniteOreBlock;
-import pyre.tinkerslevellingaddon.item.AbyssRelicItem;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.tools.data.ModifierIds;
@@ -74,10 +73,7 @@ public class PbcEvents {
         } else if (isRelic) {
             event.setCanceled(true);
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-            
-            DeepslateAncientRubbleBlock block = (DeepslateAncientRubbleBlock) state.getBlock();
-            Block.popResource(level, pos, AbyssRelicItem.rollAbyssRelic(pos.getY()));
-            block.popExperience(level, pos, block.getExpDrop(state, level, level.random, pos, 0, 0));
+            Block.popResource(level, pos, new ItemStack(Items.DEEPSLATE));
         }
     }
 }
