@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "tinkerslevellingaddon:block/deepslate_ancient_rubble" }
+    "dusted=0": { "model": "tinkerslevellingaddon:block/deepslate_ancient_rubble" },
+    "dusted=1": { "model": "tinkerslevellingaddon:block/deepslate_ancient_rubble_1" },
+    "dusted=2": { "model": "tinkerslevellingaddon:block/deepslate_ancient_rubble_2" },
+    "dusted=3": { "model": "tinkerslevellingaddon:block/deepslate_ancient_rubble_3" }
   }
 }

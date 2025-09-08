@@ -30,6 +30,7 @@ public class PbcCreativeModeTabs {
                 output.accept(PbcItems.LIGHTNING_TITANITE_SHARD.get());
                 output.accept(PbcBlocks.DEEPSLATE_ANCIENT_RUBBLE.get());
                 output.accept(PbcItems.ABYSS_RELIC.get());
+                output.accept(PbcItems.AMPHITHERE_BRUSH.get());
             }).build()
     );
 

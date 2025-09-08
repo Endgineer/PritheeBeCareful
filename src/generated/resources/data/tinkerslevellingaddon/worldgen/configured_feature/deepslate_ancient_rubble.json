@@ -6,7 +6,10 @@
     "targets": [
       {
         "state": {
-          "Name": "tinkerslevellingaddon:deepslate_ancient_rubble"
+          "Name": "tinkerslevellingaddon:deepslate_ancient_rubble",
+          "Properties": {
+            "dusted": "0"
+          }
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
