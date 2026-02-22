@@ -386,11 +386,11 @@ public class ToolLevellingUtil {
             while (amount < 0) {
                 int experienceNeeded = ToolLevellingUtil.getXpAt(currentLevel - 1, isBroadTool);
                 int amountSubtracted = Math.max(experienceNeeded-currentExperience, amount);
-                currentExperience -= amountSubtracted;
+                currentExperience += amountSubtracted;
                 int newLevel = Levels.getLevel(currentExperience);
                 boolean leveldown = newLevel != currentLevel;
                 currentLevel = newLevel;
-                amount += amountSubtracted;
+                amount -= amountSubtracted;
                 
                 data.putInt(ReinforceModifier.LEVEL_KEY, currentLevel);
                 
