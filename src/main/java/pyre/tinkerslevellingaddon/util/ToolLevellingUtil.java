@@ -311,21 +311,11 @@ public class ToolLevellingUtil {
     }
     
     public static boolean canLevelUp(int level, int reinforce) {
-        return reinforce > 0 && level < Config.maxLevelAtReinforce.get().get(reinforce-1) && level < Config.maxLevel.get();
+        return reinforce > 0 && level < Levels.getMaxLevelAt(reinforce) && level < Levels.MAX_LEVEL;
     }
     
     public static int getXpNeededForLevel(int level, boolean isBroadTool) {
-        int prevLevel = level-1;
-        if (prevLevel == 0) return 0;
-        
-        int startingXpPrevLevel = (int) Math.round(Config.valueM.get()*Math.pow(2, Config.valueN.get()*(prevLevel-1)) + Config.valueA.get()*Math.pow(prevLevel,2) + Config.valueB.get()*prevLevel + Config.valueC.get());
-        int xpDeficit = (int) Math.round(Config.valueM.get()*Math.pow(2, Config.valueN.get()*(level-1)) + Config.valueA.get()*Math.pow(level,2) + Config.valueB.get()*level + Config.valueC.get()) - startingXpPrevLevel;
-        
-        if (isBroadTool) {
-            xpDeficit *= Config.broadToolRequiredXpMultiplier.get();
-        }
-        
-        return xpDeficit;
+        return (int) ((isBroadTool ? Config.broadToolRequiredXpMultiplier.get() : 1) * Levels.getXpNeeded(level));
     }
     
     public static int getSkillLevel(ToolStack tool) {

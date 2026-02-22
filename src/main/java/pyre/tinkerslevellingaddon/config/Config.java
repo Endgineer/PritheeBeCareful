@@ -63,8 +63,6 @@ public class Config {
     private static final List<String> DEFAULT_ARMOR_STATS_RANDOM_POOL = List.of(DURABILITY, ARMOR, ARMOR_TOUGHNESS, KNOCKBACK_RESISTANCE);
     private static final List<String> DEFAULT_STAFF_STATS_ORDER = List.of(DURABILITY, DRAW_SPEED, VELOCITY, ACCURACY, PROJECTILE_DAMAGE, ARMOR);
     private static final List<String> DEFAULT_STAFF_STATS_RANDOM_POOL = List.of(DURABILITY, DRAW_SPEED, VELOCITY, ACCURACY, PROJECTILE_DAMAGE, ARMOR);
-
-    private static final List<Integer> DEFAULT_MAX_LEVEL_AT_REINFORCE = List.of(6, 22, 47, 80, 120);
     
     public static final ForgeConfigSpec SERVER_CONFIG;
     public static final ForgeConfigSpec CLIENT_CONFIG;
@@ -95,14 +93,7 @@ public class Config {
     public static ForgeConfigSpec.DoubleValue heatTransfer;
     
     //general.leveling
-    public static ForgeConfigSpec.IntValue maxLevel;
-    public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> maxLevelAtReinforce;
     public static ForgeConfigSpec.DoubleValue broadToolRequiredXpMultiplier;
-    public static ForgeConfigSpec.DoubleValue valueM;
-    public static ForgeConfigSpec.DoubleValue valueN;
-    public static ForgeConfigSpec.DoubleValue valueA;
-    public static ForgeConfigSpec.DoubleValue valueB;
-    public static ForgeConfigSpec.DoubleValue valueC;
     
     //general.slots
     private static ForgeConfigSpec.ConfigValue<List<? extends String>> toolsSlotTypeRandomPool;
@@ -282,37 +273,9 @@ public class Config {
     private static void levelingConfig(ForgeConfigSpec.Builder builder) {
         builder.comment("Leveling settings").push("leveling");
 
-        maxLevel = builder.comment("Maximum tool level that could be achieved.")
-                .translation("config.tinkerslevellingaddon.general.max_level")
-                .defineInRange("maxLevel", 120, 1, 120);
-
-        maxLevelAtReinforce = builder.comment("Maximum level at each reinforce level.")
-                .translation("config.tinkerslevellingaddon.general.max_level_at_reinforce")
-                .defineList("maxLevelAtReinforce", DEFAULT_MAX_LEVEL_AT_REINFORCE, l -> ((Integer) l).intValue() <= 120);
-
         broadToolRequiredXpMultiplier = builder.comment("Additional multiplier for broad tools for experience required to level up.")
                 .translation("config.tinkerslevellingaddon.general.broad_tool_required_xp_multiplier")
                 .defineInRange("broadToolRequiredXpMultiplier", 3D, 1D, 10D);
-
-        valueM = builder.comment("Coefficient to the exponential term of the starting experience at level equation.")
-                .translation("config.tinkerslevellingaddon.general.value_m")
-                .defineInRange("valueM", 795.533676764, -Double.MAX_VALUE, Double.MAX_VALUE);
-
-        valueN = builder.comment("Rate of the exponential term of the starting experience at level equation.")
-                .translation("config.tinkerslevellingaddon.general.value_n")
-                .defineInRange("valueN", 0.142857142857, -Double.MAX_VALUE, Double.MAX_VALUE);
-
-        valueA = builder.comment("Coefficient to the quadratic term of the starting experience at level equation.")
-                .translation("config.tinkerslevellingaddon.general.value_a")
-                .defineInRange("valueA", 0.125, -Double.MAX_VALUE, Double.MAX_VALUE);
-
-        valueB = builder.comment("Coefficient to the linear term of the starting experience at level equation.")
-                .translation("config.tinkerslevellingaddon.general.value_b")
-                .defineInRange("valueB", -0.234, -Double.MAX_VALUE, Double.MAX_VALUE);
-
-        valueC = builder.comment("Offset of the starting experience at level equation.")
-                .translation("config.tinkerslevellingaddon.general.value_c")
-                .defineInRange("valueC", -795.533676764, -Double.MAX_VALUE, Double.MAX_VALUE);
 
         builder.pop();
     }

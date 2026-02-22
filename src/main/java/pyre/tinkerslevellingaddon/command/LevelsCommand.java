@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 import static pyre.tinkerslevellingaddon.ReinforceModifier.*;
 import static pyre.tinkerslevellingaddon.command.ModCommands.PERMISSION_GAME_COMMANDS;
 import static pyre.tinkerslevellingaddon.command.ModCommands.TOOL_VALIDATION_ERROR;
+import pyre.tinkerslevellingaddon.util.Levels;
 
 public class LevelsCommand {
     
@@ -53,8 +54,8 @@ public class LevelsCommand {
     
     private static int run(CommandContext<CommandSourceStack> context, ModCommands.Operation op, int count)
             throws CommandSyntaxException {
-        if (count > Config.maxLevel.get() && op == ModCommands.Operation.SET) {
-            throw new SimpleCommandExceptionType(ModUtil.makeTranslation("command", "levels.failure.set.invalid_count", Config.maxLevel.get())).create();
+        if (count > Levels.MAX_LEVEL && op == ModCommands.Operation.SET) {
+            throw new SimpleCommandExceptionType(ModUtil.makeTranslation("command", "levels.failure.set.invalid_count", Levels.MAX_LEVEL)).create();
         }
         
         List<LivingEntity> successes = HeldModifiableItemIterator.apply(context, (living, stack) -> {

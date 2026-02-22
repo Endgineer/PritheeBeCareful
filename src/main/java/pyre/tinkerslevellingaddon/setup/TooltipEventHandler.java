@@ -14,7 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import pyre.tinkerslevellingaddon.ReinforceModifier;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
-import pyre.tinkerslevellingaddon.config.Config;
+import pyre.tinkerslevellingaddon.util.Levels;
 import pyre.tinkerslevellingaddon.util.ModUtil;
 import pyre.tinkerslevellingaddon.util.ToolLevellingUtil;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
@@ -92,13 +92,11 @@ public class TooltipEventHandler {
         MutableComponent reinforceValue = ModUtil.makeText("+"+String.valueOf(reinforce), ReinforceModifier.REINFORCE_MODIFIER_COLOR);
         infoEntries.add(ModUtil.makeTranslation("tooltip","reinforce", reinforce > 0 ? reinforceValue : ModUtil.makeText("-", TextColor.fromLegacyFormat(ChatFormatting.DARK_GRAY))));
         
-        MutableComponent fullLevelName = ModUtil.makeTranslation("tooltip", "level.name", ChatFormatting.GRAY,
-                getLevelName(level), ModUtil.makeText(level, ChatFormatting.GRAY));
-        infoEntries.add(ModUtil.makeTranslation("tooltip", "level", fullLevelName));
+        infoEntries.add(ModUtil.makeTranslation("tooltip", "level", ModUtil.makeText(level, ChatFormatting.GRAY)));
         
         if (level == 0) {
             infoEntries.add(ModUtil.makeTranslation("tooltip","xp", ModUtil.makeTranslation("tooltip", "xp.unused", ChatFormatting.DARK_GRAY)));
-        } else if (level == Config.maxLevel.get()) {
+        } else if (level == Levels.MAX_LEVEL) {
             infoEntries.add(ModUtil.makeTranslation("tooltip","xp", ModUtil.makeTranslation("tooltip", "xp.maxed", ChatFormatting.DARK_GRAY)));
         } else {
             MutableComponent xp = ModUtil.makeText(tool.getPersistentData().getInt(ReinforceModifier.EXPERIENCE_KEY), limited ? ChatFormatting.DARK_GRAY : ChatFormatting.GOLD);
@@ -208,17 +206,5 @@ public class TooltipEventHandler {
         }
 
         return infoEntries;
-    }
-
-    private static MutableComponent getLevelName(int level) {
-        int tier = level / 10;
-        
-        TextColor tierColor = getTierColor(tier);
-        return ModUtil.makeTranslation("tooltip", "level." + tier, tierColor);
-    }
-
-    private static TextColor getTierColor(int tier) {
-        int tierColors[] = { 6441256, 6182737, 9602941, 4474470, 4808516, 4810605, 12130566, 815416, 3224912, 3385291, 14645571, 10195645, 10129883 };
-        return TextColor.fromRgb(tierColors[tier]);
     }
 }
