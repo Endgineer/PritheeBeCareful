@@ -363,14 +363,14 @@ public class ToolLevellingUtil {
                     if (statName != null) {
                         pushHistory(ReinforceModifier.STAT_HISTORY_KEY, statName, data);
                     }
-                }
-                
-                //temporarily set xp to 0, so it displays nicely in chat message
-                data.putInt(ReinforceModifier.EXPERIENCE_KEY, 0);
-                tool.rebuildStats();
-                if (player != null) {
-                    Component toolName = tool.createStack().getDisplayName();
-                    Messages.sendToPlayer(new LevelUpPacket(currentLevel, toolName), player);
+                    
+                    //temporarily set xp to 0, so it displays nicely in chat message
+                    data.putInt(ReinforceModifier.EXPERIENCE_KEY, 0);
+                    tool.rebuildStats();
+                    if (player != null) {
+                        Component toolName = tool.createStack().getDisplayName();
+                        Messages.sendToPlayer(new LevelUpPacket(currentLevel, toolName), player);
+                    }
                 }
                 
                 if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) {
@@ -397,14 +397,14 @@ public class ToolLevellingUtil {
                 if (leveldown) {
                     popHistory(ReinforceModifier.SLOT_HISTORY_KEY, data);
                     popHistory(ReinforceModifier.STAT_HISTORY_KEY, data);
-                }
-                
-                //temporarily set xp to 0, so it displays nicely in chat message
-                data.putInt(ReinforceModifier.EXPERIENCE_KEY, 0);
-                tool.rebuildStats();
-                if (player != null) {
-                    Component toolName = tool.createStack().getDisplayName();
-                    Messages.sendToPlayer(new LevelUpPacket(currentLevel, toolName), player);
+                    
+                    //temporarily set xp to 0, so it displays nicely in chat message
+                    data.putInt(ReinforceModifier.EXPERIENCE_KEY, 0);
+                    tool.rebuildStats();
+                    if (player != null) {
+                        Component toolName = tool.createStack().getDisplayName();
+                        Messages.sendToPlayer(new LevelUpPacket(currentLevel, toolName), player);
+                    }
                 }
                 
                 if (currentLevel == 1) {
