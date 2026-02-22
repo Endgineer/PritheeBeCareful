@@ -89,9 +89,9 @@ public class ReinforceItem extends Item {
         String temperaturePercentage = String.valueOf((int) (100 * temperature / maxTemperature))+"%";
         String malleabilityPercentage = String.valueOf((int) (100 * reinforceSpec.getMalleability(temperature)))+"%";
         
-        double hammeringPoint = reinforceSpec.getHammeringPoint();
-        double foldingPoint = reinforceSpec.getFoldingPoint();
+        double workingPoint = reinforceSpec.getWorkingPoint();
         double quenchingPoint = reinforceSpec.getQuenchingPoint();
+        double foldingPoint = reinforceSpec.getFoldingPoint();
         double breakdownPoint = reinforceSpec.getBreakdownPoint();
         double meltingPoint = reinforceSpec.getMeltingPoint();
         
@@ -140,11 +140,11 @@ public class ReinforceItem extends Item {
         
         tooltip.add(
             Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".reinforce_item.points").append(":").withStyle(ChatFormatting.GRAY)
-                .append(Component.literal(" ").append(String.valueOf((int) hammeringPoint)+" \u00B0C").withStyle(temperature >= hammeringPoint ? ChatFormatting.DARK_RED : ChatFormatting.DARK_GRAY))
+                .append(Component.literal(" ").append(String.valueOf((int) workingPoint)+" \u00B0C").withStyle(temperature >= workingPoint ? ChatFormatting.DARK_RED : ChatFormatting.DARK_GRAY))
                 .append(Component.literal(" |").withStyle(ChatFormatting.GRAY))
-                .append(Component.literal(" ").append(String.valueOf((int) foldingPoint)+" \u00B0C").withStyle(temperature >= foldingPoint ? ChatFormatting.RED : ChatFormatting.DARK_GRAY))
+                .append(Component.literal(" ").append(String.valueOf((int) quenchingPoint)+" \u00B0C").withStyle(temperature >= quenchingPoint ? ChatFormatting.RED : ChatFormatting.DARK_GRAY))
                 .append(Component.literal(" |").withStyle(ChatFormatting.GRAY))
-                .append(Component.literal(" ").append(String.valueOf((int) quenchingPoint)+" \u00B0C").withStyle(temperature >= quenchingPoint ? ChatFormatting.GOLD : ChatFormatting.DARK_GRAY))
+                .append(Component.literal(" ").append(String.valueOf((int) foldingPoint)+" \u00B0C").withStyle(temperature >= foldingPoint ? ChatFormatting.GOLD : ChatFormatting.DARK_GRAY))
                 .append(Component.literal(" |").withStyle(ChatFormatting.GRAY))
                 .append(Component.literal(" ").append(String.valueOf((int) breakdownPoint)+" \u00B0C").withStyle(temperature >= breakdownPoint ? ChatFormatting.YELLOW : ChatFormatting.DARK_GRAY))
                 .append(Component.literal(" |").withStyle(ChatFormatting.GRAY))

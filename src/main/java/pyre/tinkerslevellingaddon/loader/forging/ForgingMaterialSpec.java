@@ -155,9 +155,9 @@ public class ForgingMaterialSpec {
                 xpConductance.get("max").getAsDouble(),
                 volumetricHeatCapacity.get("density").getAsDouble(),
                 volumetricHeatCapacity.get("specific_heat").getAsDouble(),
-                temperatures.get("hammering").getAsDouble(),
-                temperatures.get("folding").getAsDouble(),
+                temperatures.get("working").getAsDouble(),
                 temperatures.get("quenching").getAsDouble(),
+                temperatures.get("folding").getAsDouble(),
                 temperatures.get("breakdown").getAsDouble(),
                 temperatures.get("melting").getAsDouble()
             );
@@ -180,9 +180,9 @@ public class ForgingMaterialSpec {
             double maxXpConductance,
             double density,
             double specificHeat,
-            double hammeringPointTemperature,
-            double foldingPointTemperature,
+            double workingPointTemperature,
             double quenchingPointTemperature,
+            double foldingPointTemperature,
             double breakdownPointTemperature,
             double meltingPointTemperature
         ) {
@@ -192,17 +192,17 @@ public class ForgingMaterialSpec {
             this.maxXpConductance = maxXpConductance+1;
             this.volumetricHeatCapacity = density * specificHeat;
             
-            boolean byHammeringPointValid = hammeringPointTemperature > ThermalModel.AMBIENT_TEMPERATURE && (hammeringPointTemperature < foldingPointTemperature);
-            boolean byFoldingPointValid = byHammeringPointValid && (foldingPointTemperature < quenchingPointTemperature);
-            boolean byQuenchingPointValid = byFoldingPointValid && (quenchingPointTemperature < breakdownPointTemperature);
-            boolean byBreakdownPointValid = byQuenchingPointValid && (breakdownPointTemperature < meltingPointTemperature);
+            boolean byWorkingPointValid = workingPointTemperature > ThermalModel.AMBIENT_TEMPERATURE && (workingPointTemperature < quenchingPointTemperature);
+            boolean byQuenchingPointValid = byWorkingPointValid && (quenchingPointTemperature < foldingPointTemperature);
+            boolean byFoldingPointValid = byQuenchingPointValid && (foldingPointTemperature < breakdownPointTemperature);
+            boolean byBreakdownPointValid = byFoldingPointValid && (breakdownPointTemperature < meltingPointTemperature);
             boolean allTemperaturePointsValid = byBreakdownPointValid && (meltingPointTemperature <= ThermalModel.FANNED_TEMPERATURE_LIMIT);
             
             if (!allTemperaturePointsValid) {
-                throw new InvalidForgingMaterialSpecException("Temperatures must follow AMBIENT < HAMMERING < FOLDING < QUENCHING < BREAKDOWN < MELTING <= LIMIT");
+                throw new InvalidForgingMaterialSpecException("Temperatures must follow AMBIENT < WORKING < QUENCHING < FOLDING < BREAKDOWN < MELTING <= LIMIT");
             }
             
-            this.malleabilityModel = new MalleabilityModel(hammeringPointTemperature, foldingPointTemperature, breakdownPointTemperature, meltingPointTemperature, quenchingPointTemperature);
+            this.malleabilityModel = new MalleabilityModel(workingPointTemperature, quenchingPointTemperature, foldingPointTemperature, breakdownPointTemperature, meltingPointTemperature);
         }
         
         public double getXpConductance(double temperature) {
@@ -230,16 +230,16 @@ public class ForgingMaterialSpec {
             return this.volumetricHeatCapacity;
         }
 
-        public double getHammeringPoint() {
-            return this.malleabilityModel.getHammeringTemperature();
-        }
-
-        public double getFoldingPoint() {
-            return this.malleabilityModel.getFoldingTemperature();
+        public double getWorkingPoint() {
+            return this.malleabilityModel.getWorkingTemperature();
         }
 
         public double getQuenchingPoint() {
             return this.malleabilityModel.getQuenchingTemperature();
+        }
+
+        public double getFoldingPoint() {
+            return this.malleabilityModel.getFoldingTemperature();
         }
 
         public double getBreakdownPoint() {

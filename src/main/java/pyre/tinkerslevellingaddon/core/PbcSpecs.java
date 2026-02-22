@@ -63,11 +63,11 @@ public class PbcSpecs {
             new ReinforceRecord(10, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(8400, 420), new TemperaturesRecord(1077, 1607, 2140, 2141, 2692))
         )));
         ForgingMaterialSpecProvider.register("iron", new ForgingMaterialRecord("forge:ingots/iron", List.of(
-            new ReinforceRecord(45, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 449), new TemperaturesRecord(750, 1100, 912, 1350, 1538)),
-            new ReinforceRecord(30, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 449), new TemperaturesRecord(750, 1100, 912, 1350, 1538)),
-            new ReinforceRecord(22, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 449), new TemperaturesRecord(750, 1100, 912, 1350, 1538)),
-            new ReinforceRecord(14, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 449), new TemperaturesRecord(750, 1100, 912, 1350, 1538)),
-            new ReinforceRecord(10, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 449), new TemperaturesRecord(750, 1100, 912, 1350, 1538))
+            new ReinforceRecord(45, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 449), new TemperaturesRecord(750, 912, 1100, 1350, 1538)),
+            new ReinforceRecord(30, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 449), new TemperaturesRecord(750, 912, 1100, 1350, 1538)),
+            new ReinforceRecord(22, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 449), new TemperaturesRecord(750, 912, 1100, 1350, 1538)),
+            new ReinforceRecord(14, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 449), new TemperaturesRecord(750, 912, 1100, 1350, 1538)),
+            new ReinforceRecord(10, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 449), new TemperaturesRecord(750, 912, 1100, 1350, 1538))
         )));
         ForgingMaterialSpecProvider.register("manyullyn", new ForgingMaterialRecord("forge:ingots/manyullyn", List.of(
             new ReinforceRecord(45, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(8900, 430), new TemperaturesRecord(923, 1385, 1846, 1917, 2307)),
@@ -105,11 +105,11 @@ public class PbcSpecs {
             new ReinforceRecord(10, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7870, 440), new TemperaturesRecord(690, 1040, 1380, 1390, 1730))
         )));
         ForgingMaterialSpecProvider.register("steel", new ForgingMaterialRecord("forge:ingots/steel", List.of(
-            new ReinforceRecord(45, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7850, 500), new TemperaturesRecord(750, 1100, 900, 1350, 1538)),
-            new ReinforceRecord(30, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7850, 500), new TemperaturesRecord(750, 1100, 900, 1350, 1538)),
-            new ReinforceRecord(22, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7850, 500), new TemperaturesRecord(750, 1100, 900, 1350, 1538)),
-            new ReinforceRecord(14, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7850, 500), new TemperaturesRecord(750, 1100, 900, 1350, 1538)),
-            new ReinforceRecord(10, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7850, 500), new TemperaturesRecord(750, 1100, 900, 1350, 1538))
+            new ReinforceRecord(45, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7850, 500), new TemperaturesRecord(750, 900, 1100, 1350, 1538)),
+            new ReinforceRecord(30, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7850, 500), new TemperaturesRecord(750, 900, 1100, 1350, 1538)),
+            new ReinforceRecord(22, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7850, 500), new TemperaturesRecord(750, 900, 1100, 1350, 1538)),
+            new ReinforceRecord(14, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7850, 500), new TemperaturesRecord(750, 900, 1100, 1350, 1538)),
+            new ReinforceRecord(10, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7850, 500), new TemperaturesRecord(750, 900, 1100, 1350, 1538))
         )));
         ForgingMaterialSpecProvider.register("zinc", new ForgingMaterialRecord("forge:ingots/zinc", List.of(
             new ReinforceRecord(45, new XPConductanceRecord(3, 7), new VolumetricHeatCapacityRecord(7130, 390), new TemperaturesRecord(200, 300, 350, 400, 420)),

@@ -28,7 +28,7 @@ public class ForgingMaterialSpecProvider implements DataProvider {
     
     public record VolumetricHeatCapacityRecord(int density, int specific_heat) {}
     
-    public record TemperaturesRecord(int hammering, int folding, int quenching, int breakdown, int melting) {}
+    public record TemperaturesRecord(int working, int quenching, int folding, int breakdown, int melting) {}
     
     public ForgingMaterialSpecProvider(PackOutput output) {
         this.output = output;
