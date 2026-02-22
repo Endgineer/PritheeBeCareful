@@ -26,17 +26,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static pyre.tinkerslevellingaddon.ReinforceModifier.*;
-import static pyre.tinkerslevellingaddon.command.ModCommands.PERMISSION_GAME_COMMANDS;
-import static pyre.tinkerslevellingaddon.command.ModCommands.TOOL_VALIDATION_ERROR;
-import pyre.tinkerslevellingaddon.util.Levels;
-
-//! DOES NOT WORK!!! NEEDS REVIEW!!!
-
 public class LevelsCommand {
     
     public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
-        subCommand.requires(sender -> sender.hasPermission(PERMISSION_GAME_COMMANDS))
+        subCommand.requires(sender -> sender.hasPermission(ModCommands.PERMISSION_GAME_COMMANDS))
                 .then(Commands.argument("targets", EntityArgument.entities())
                         // levels <target> add [<count>]
                         .then(Commands.literal("add")
@@ -56,10 +49,6 @@ public class LevelsCommand {
     
     private static int run(CommandContext<CommandSourceStack> context, ModCommands.Operation op, int count)
             throws CommandSyntaxException {
-        if (count > Levels.MAX_LEVEL && op == ModCommands.Operation.SET) {
-            throw new SimpleCommandExceptionType(ModUtil.makeTranslation("command", "levels.failure.set.invalid_count", Levels.MAX_LEVEL)).create();
-        }
-        
         List<LivingEntity> successes = HeldModifiableItemIterator.apply(context, (living, stack) -> {
             if (ModifierUtil.getModifierLevel(stack, Registration.REINFORCE.get().getId()) <= 0) {
                 return false;
@@ -67,12 +56,11 @@ public class LevelsCommand {
             
             ToolStack tool = ToolStack.copyFrom(stack);
             if (op == ModCommands.Operation.ADD) {
-                int levelsAdded = addLevel(tool, count, living);
-                if (levelsAdded == 0) {
+                if (!addLevels(tool, count, living)) {
                     throw new SimpleCommandExceptionType(ModUtil.makeTranslation("command", "levels.failure.add.already_max_level", stack.getDisplayName())).create();
                 }
             } else {
-                if (!setLevel(tool, count)) {
+                if (!setLevel(tool, count, living)) {
                     throw new SimpleCommandExceptionType(ModUtil.makeTranslation("command", "levels.failure.set.current_level", stack.getDisplayName(), count)).create();
                 }
                 
@@ -80,7 +68,7 @@ public class LevelsCommand {
             
             Component error = tool.tryValidate();
             if (error != null) {
-                throw TOOL_VALIDATION_ERROR.create(error);
+                throw ModCommands.TOOL_VALIDATION_ERROR.create(error);
             }
             
             living.setItemInHand(InteractionHand.MAIN_HAND, tool.createStack(stack.getCount()));
@@ -110,56 +98,13 @@ public class LevelsCommand {
         return size;
     }
     
-    private static int addLevel(ToolStack tool, int count, LivingEntity living) {
-        // boolean isBroad = ToolLevellingUtil.isBroadTool(tool);
-        // ServerPlayer player = living instanceof ServerPlayer p ? p : null;
-        
-        // int levelsAdded = 0;
-        // for (levelsAdded = 0; levelsAdded < count; levelsAdded++) {
-        //     ModDataNBT data = tool.getPersistentData();
-        //     int currentLevel = data.getInt(LEVEL_KEY);
-        //     int currentReinforce = data.getInt(REINFORCE_KEY);
-        //     if (ToolLevellingUtil.canLevelUp(currentLevel, currentReinforce)) {
-        //         int xpAtCurrentLevel = data.getInt(EXPERIENCE_KEY);
-        //         int xpAtNextLevel = ToolLevellingUtil.getXpAt(currentLevel + 1, isBroad);
-        //         ToolLevellingUtil.addExperience(tool, xpAtNextLevel-xpAtCurrentLevel, player);
-        //         currentLevel++;
-        //     } else {
-        //         break;
-        //     }
-        // }
-        
-        // return levelsAdded;
-        return 0;
+    private static boolean addLevels(ToolStack tool, int count, LivingEntity living) {
+        ServerPlayer player = living instanceof ServerPlayer p ? p : null;
+        return ToolLevellingUtil.addLevels(tool, count, player);
     }
     
-    private static boolean setLevel(ToolStack tool, int count) {
-        // ModDataNBT data = tool.getPersistentData();
-        // int currentLevel = data.getInt(LEVEL_KEY);
-        // int levelDiff = count - currentLevel;
-        
-        // if (levelDiff == 0) return false;
-        
-        // if (levelDiff > 0) {
-        //     addLevel(tool, levelDiff, null);
-        // } else {
-        //     data.putInt(LEVEL_KEY, count);
-        //     trimHistory(SLOT_HISTORY_KEY, data, count);
-        //     trimHistory(STAT_HISTORY_KEY, data, count);
-        // }
-        
-        // tool.rebuildStats();
-        // return true;
-        return false;
-    }
-    
-    private static void trimHistory(ResourceLocation historyKey, ModDataNBT data, int size) {
-        String newHistory = Arrays.stream(data.getString(historyKey).split(";"))
-                .limit(size)
-                .collect(Collectors.joining(";"));
-        if (!newHistory.isBlank()) {
-            newHistory = newHistory + ";";
-        }
-        data.putString(historyKey, newHistory);
+    private static boolean setLevel(ToolStack tool, int count, LivingEntity living) {
+        ServerPlayer player = living instanceof ServerPlayer p ? p : null;
+        return ToolLevellingUtil.setLevel(tool, count, player);
     }
 }

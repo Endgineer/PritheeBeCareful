@@ -20,8 +20,7 @@ import slimeknights.tconstruct.library.tools.stat.FloatToolStat;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.*;
-
-import static pyre.tinkerslevellingaddon.ReinforceModifier.*;
+import java.util.stream.Collectors;
 
 public class ToolLevellingUtil {
     //slot types
@@ -320,7 +319,7 @@ public class ToolLevellingUtil {
     
     public static int getSkillLevel(ToolStack tool) {
         ModDataNBT data = tool.getPersistentData();
-        return data.getInt(LEVEL_KEY);
+        return data.getInt(ReinforceModifier.LEVEL_KEY);
     }
     
     public static boolean isReinforcedAtLeastTo(ToolStack tool, int minimumReinforce) {
@@ -335,49 +334,108 @@ public class ToolLevellingUtil {
         }
         
         ModDataNBT data = tool.getPersistentData();
-        int currentLevel = data.getInt(LEVEL_KEY);
-        int currentExperience = data.getInt(EXPERIENCE_KEY);
+        int currentLevel = data.getInt(ReinforceModifier.LEVEL_KEY);
+        int currentExperience = data.getInt(ReinforceModifier.EXPERIENCE_KEY);
         int reinforce = tool.getPersistentData().getInt(ReinforceModifier.REINFORCE_KEY);
-        
-        if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) {
-            return false;
-        }
-        
         boolean isBroadTool = ToolLevellingUtil.isBroadTool(tool);
         
-        while (amount > 0) {
-            int experienceNeeded = ToolLevellingUtil.getXpAt(currentLevel + 1, isBroadTool);
-            int amountAdded = Math.min(amount, experienceNeeded-currentExperience);
-            currentExperience += amountAdded;
-            currentLevel = Levels.getLevel(currentExperience);
-            amount -= amountAdded;
-            
-            data.putInt(LEVEL_KEY, currentLevel);
-            
-            String slotName = ToolLevellingUtil.getSlot(tool, currentLevel);
-            if (slotName != null && !slotName.equals(NONE)) {
-                appendHistory(SLOT_HISTORY_KEY, slotName, data);
+        if (amount > 0) {
+            if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) return false;
+
+            while (amount > 0) {
+                int experienceNeeded = ToolLevellingUtil.getXpAt(currentLevel + 1, isBroadTool);
+                int amountAdded = Math.min(amount, experienceNeeded-currentExperience);
+                currentExperience += amountAdded;
+                int newLevel = Levels.getLevel(currentExperience);
+                boolean levelup = newLevel != currentLevel;
+                currentLevel = newLevel;
+                amount -= amountAdded;
+                
+                data.putInt(ReinforceModifier.LEVEL_KEY, currentLevel);
+                
+                if (levelup) {
+                    String slotName = ToolLevellingUtil.getSlot(tool, currentLevel);
+                    if (slotName != null && !slotName.equals(NONE)) {
+                        pushHistory(ReinforceModifier.SLOT_HISTORY_KEY, slotName, data);
+                    }
+                    
+                    String statName = ToolLevellingUtil.getStat(tool, currentLevel);
+                    if (statName != null) {
+                        pushHistory(ReinforceModifier.STAT_HISTORY_KEY, statName, data);
+                    }
+                }
+                
+                //temporarily set xp to 0, so it displays nicely in chat message
+                data.putInt(ReinforceModifier.EXPERIENCE_KEY, 0);
+                tool.rebuildStats();
+                if (player != null) {
+                    Component toolName = tool.createStack().getDisplayName();
+                    Messages.sendToPlayer(new LevelUpPacket(currentLevel, toolName), player);
+                }
+                
+                if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) {
+                    break;
+                }
             }
-            String statName = ToolLevellingUtil.getStat(tool, currentLevel);
-            if (statName != null) {
-                appendHistory(STAT_HISTORY_KEY, statName, data);
+            
+            data.putInt(ReinforceModifier.EXPERIENCE_KEY, currentExperience);
+            return true;
+        } else if (amount < 0) {
+            if (currentLevel == 1) return false;
+
+            while (amount < 0) {
+                int experienceNeeded = ToolLevellingUtil.getXpAt(currentLevel - 1, isBroadTool);
+                int amountSubtracted = Math.max(experienceNeeded-currentExperience, amount);
+                currentExperience -= amountSubtracted;
+                int newLevel = Levels.getLevel(currentExperience);
+                boolean leveldown = newLevel != currentLevel;
+                currentLevel = newLevel;
+                amount += amountSubtracted;
+                
+                data.putInt(ReinforceModifier.LEVEL_KEY, currentLevel);
+                
+                if (leveldown) {
+                    popHistory(ReinforceModifier.SLOT_HISTORY_KEY, data);
+                    popHistory(ReinforceModifier.STAT_HISTORY_KEY, data);
+                }
+                
+                //temporarily set xp to 0, so it displays nicely in chat message
+                data.putInt(ReinforceModifier.EXPERIENCE_KEY, 0);
+                tool.rebuildStats();
+                if (player != null) {
+                    Component toolName = tool.createStack().getDisplayName();
+                    Messages.sendToPlayer(new LevelUpPacket(currentLevel, toolName), player);
+                }
+                
+                if (currentLevel == 1) {
+                    break;
+                }
             }
             
-            //temporarily set xp to 0, so it displays nicely in chat message
-            data.putInt(EXPERIENCE_KEY, 0);
-            tool.rebuildStats();
-            if (player != null) {
-                Component toolName = tool.createStack().getDisplayName();
-                Messages.sendToPlayer(new LevelUpPacket(currentLevel, toolName), player);
-            }
-            
-            if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) {
-                break;
-            }
+            data.putInt(ReinforceModifier.EXPERIENCE_KEY, currentExperience);
+            return true;
         }
         
-        data.putInt(EXPERIENCE_KEY, currentExperience);
-        return true;
+        return false;
+    }
+    
+    public static boolean setExperience(ToolStack tool, int amount, ServerPlayer player) {
+        return ToolLevellingUtil.addExperience(tool, amount-tool.getPersistentData().getInt(ReinforceModifier.EXPERIENCE_KEY), player);
+    }
+    
+    public static boolean addLevels(ToolStack tool, int amount, ServerPlayer player) {
+        ModDataNBT data = tool.getPersistentData();
+        int currentLevel = data.getInt(ReinforceModifier.LEVEL_KEY);
+        int currentExperience = data.getInt(ReinforceModifier.EXPERIENCE_KEY);
+
+        int targetLevel = Math.min(Math.max(Levels.MIN_LEVEL, currentLevel+amount), Levels.MAX_LEVEL);
+        int targetExperience = Levels.getXpAt(targetLevel);
+        
+        return ToolLevellingUtil.addExperience(tool, targetExperience-currentExperience, player);
+    }
+    
+    public static boolean setLevel(ToolStack tool, int amount, ServerPlayer player) {
+        return ToolLevellingUtil.addLevels(tool, amount-tool.getPersistentData().getInt(ReinforceModifier.LEVEL_KEY), player);
     }
     
     public static boolean isStaff(IToolContext tool) {
@@ -484,10 +542,20 @@ public class ToolLevellingUtil {
         return staffStatsRandomPool.get(RANDOM.nextInt(staffStatsRandomPool.size()));
     }
     
-    private static void appendHistory(ResourceLocation historyKey, String value, ModDataNBT data) {
+    private static void pushHistory(ResourceLocation historyKey, String value, ModDataNBT data) {
         String modifierHistory = data.getString(historyKey);
         modifierHistory = modifierHistory + value + ";";
         data.putString(historyKey, modifierHistory);
+    }
+    
+    private static void popHistory(ResourceLocation historyKey, ModDataNBT data) {
+        String[] historyEvents = data.getString(historyKey).split(";");
+        String newHistory = Arrays.stream(historyEvents).limit(historyEvents.length-1).collect(Collectors.joining(";"));
+        if (!newHistory.isBlank()) {
+            newHistory = newHistory + ";";
+        }
+        
+        data.putString(historyKey, newHistory);
     }
     
     private ToolLevellingUtil() {

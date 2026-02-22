@@ -16,22 +16,16 @@ import pyre.tinkerslevellingaddon.setup.Registration;
 import pyre.tinkerslevellingaddon.util.ModUtil;
 import pyre.tinkerslevellingaddon.util.ToolLevellingUtil;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
+import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.shared.command.HeldModifiableItemIterator;
 
 import java.util.List;
 
-import static pyre.tinkerslevellingaddon.ReinforceModifier.EXPERIENCE_KEY;
-import static pyre.tinkerslevellingaddon.ReinforceModifier.LEVEL_KEY;
-import static pyre.tinkerslevellingaddon.ReinforceModifier.REINFORCE_KEY;
-import static pyre.tinkerslevellingaddon.command.ModCommands.PERMISSION_GAME_COMMANDS;
-
-//! DOES NOT WORK!!! NEEDS REVIEW!!!
-
 public class ExperienceCommand {
     
     public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
-        subCommand.requires(sender -> sender.hasPermission(PERMISSION_GAME_COMMANDS))
+        subCommand.requires(sender -> sender.hasPermission(ModCommands.PERMISSION_GAME_COMMANDS))
                 .then(Commands.argument("targets", EntityArgument.entities())
                         //xp <target> add [<count>]
                         .then(Commands.literal("add")
@@ -100,32 +94,12 @@ public class ExperienceCommand {
     }
     
     private static boolean addXp(ToolStack tool, int count, LivingEntity living) {
-        // ServerPlayer player = living instanceof ServerPlayer p ? p : null;
-    
-        // int currentLevel = tool.getPersistentData().getInt(LEVEL_KEY);
-        // int currentReinforce = tool.getPersistentData().getInt(REINFORCE_KEY);
-        // if (ToolLevellingUtil.canLevelUp(currentLevel, currentReinforce)) {
-        //     ToolLevellingUtil.addExperience(tool, count, player);
-        //     return true;
-        // }
-        
-        return false;
+        ServerPlayer player = living instanceof ServerPlayer p ? p : null;
+        return ToolLevellingUtil.addExperience(tool, count, player);
     }
     
     private static boolean setXp(ToolStack tool, int count, LivingEntity living) {
-        // int currentLevel = tool.getPersistentData().getInt(LEVEL_KEY);
-        // int currentReinforce = tool.getPersistentData().getInt(REINFORCE_KEY);
-        
-        // boolean isBroad = ToolLevellingUtil.isBroadTool(tool);
-        // ServerPlayer player = living instanceof ServerPlayer p ? p : null;
-        
-        // if (ToolLevellingUtil.canLevelUp(currentLevel, currentReinforce)) {
-        //     int neededXp = ToolLevellingUtil.getXpNeededForLevel(currentLevel, isBroad);
-        //     int currentXp = tool.getPersistentData().getInt(EXPERIENCE_KEY);
-        //     int xp = Math.max(1, Math.min(count, neededXp - currentXp));
-        //     ToolLevellingUtil.addExperience(tool, xp, player);
-        //     return true;
-        // }
-        return false;
+        ServerPlayer player = living instanceof ServerPlayer p ? p : null;
+        return ToolLevellingUtil.setExperience(tool, count, player);
     }
 }
