@@ -27,14 +27,11 @@ public class ExperienceCommand {
     public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
         subCommand.requires(sender -> sender.hasPermission(ModCommands.PERMISSION_GAME_COMMANDS))
                 .then(Commands.argument("targets", EntityArgument.entities())
-                        //xp <target> add [<count>]
                         .then(Commands.literal("add")
-                                .executes(context -> run(context, ModCommands.Operation.ADD, 1))
-                                .then(Commands.argument("count", IntegerArgumentType.integer(1))
+                                .then(Commands.argument("count", IntegerArgumentType.integer())
                                         .executes(context -> run(context, ModCommands.Operation.ADD))))
-                        //xp <target> set <count>
                         .then(Commands.literal("set")
-                                .then(Commands.argument("count", IntegerArgumentType.integer(0))
+                                .then(Commands.argument("count", IntegerArgumentType.integer())
                                         .executes(context -> run(context, ModCommands.Operation.SET)))));
     }
     
