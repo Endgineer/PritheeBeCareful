@@ -31,6 +31,8 @@ import static pyre.tinkerslevellingaddon.command.ModCommands.PERMISSION_GAME_COM
 import static pyre.tinkerslevellingaddon.command.ModCommands.TOOL_VALIDATION_ERROR;
 import pyre.tinkerslevellingaddon.util.Levels;
 
+//! DOES NOT WORK!!! NEEDS REVIEW!!!
+
 public class LevelsCommand {
     
     public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
@@ -109,43 +111,46 @@ public class LevelsCommand {
     }
     
     private static int addLevel(ToolStack tool, int count, LivingEntity living) {
-        int levelsAdded;
+        // boolean isBroad = ToolLevellingUtil.isBroadTool(tool);
+        // ServerPlayer player = living instanceof ServerPlayer p ? p : null;
         
-        int currentLevel = tool.getPersistentData().getInt(LEVEL_KEY);
-        int currentReinforce = tool.getPersistentData().getInt(REINFORCE_KEY);
+        // int levelsAdded = 0;
+        // for (levelsAdded = 0; levelsAdded < count; levelsAdded++) {
+        //     ModDataNBT data = tool.getPersistentData();
+        //     int currentLevel = data.getInt(LEVEL_KEY);
+        //     int currentReinforce = data.getInt(REINFORCE_KEY);
+        //     if (ToolLevellingUtil.canLevelUp(currentLevel, currentReinforce)) {
+        //         int xpAtCurrentLevel = data.getInt(EXPERIENCE_KEY);
+        //         int xpAtNextLevel = ToolLevellingUtil.getXpAt(currentLevel + 1, isBroad);
+        //         ToolLevellingUtil.addExperience(tool, xpAtNextLevel-xpAtCurrentLevel, player);
+        //         currentLevel++;
+        //     } else {
+        //         break;
+        //     }
+        // }
         
-        boolean isBroad = ToolLevellingUtil.isBroadTool(tool);
-        ServerPlayer player = living instanceof ServerPlayer p ? p : null;
-    
-        for (levelsAdded = 0; levelsAdded < count; levelsAdded++) {
-            if (ToolLevellingUtil.canLevelUp(currentLevel, currentReinforce)) {
-                int xp = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroad);
-                ToolLevellingUtil.addExperience(tool, xp, player);
-                currentLevel++;
-            } else {
-                break;
-            }
-        }
-        return levelsAdded;
+        // return levelsAdded;
+        return 0;
     }
     
     private static boolean setLevel(ToolStack tool, int count) {
-        ModDataNBT data = tool.getPersistentData();
-        int currentLevel = data.getInt(LEVEL_KEY);
-        int levelDiff = count - currentLevel;
+        // ModDataNBT data = tool.getPersistentData();
+        // int currentLevel = data.getInt(LEVEL_KEY);
+        // int levelDiff = count - currentLevel;
         
-        if (levelDiff == 0) {
-            return false;
-        }
-        if (levelDiff > 0) {
-            addLevel(tool, levelDiff, null);
-        } else {
-            data.putInt(LEVEL_KEY, count);
-            trimHistory(SLOT_HISTORY_KEY, data, count);
-            trimHistory(STAT_HISTORY_KEY, data, count);
-        }
-        tool.rebuildStats();
-        return true;
+        // if (levelDiff == 0) return false;
+        
+        // if (levelDiff > 0) {
+        //     addLevel(tool, levelDiff, null);
+        // } else {
+        //     data.putInt(LEVEL_KEY, count);
+        //     trimHistory(SLOT_HISTORY_KEY, data, count);
+        //     trimHistory(STAT_HISTORY_KEY, data, count);
+        // }
+        
+        // tool.rebuildStats();
+        // return true;
+        return false;
     }
     
     private static void trimHistory(ResourceLocation historyKey, ModDataNBT data, int size) {

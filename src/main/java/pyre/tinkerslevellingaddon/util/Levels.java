@@ -17,10 +17,7 @@ public class Levels {
         return 5*reinforce;
     }
     
-    public static int getXpNeeded(int level) {
-        int prevLevel = level-1;
-        if (prevLevel == 0) return 0;
-        
-        return XP_AT_LEVEL[level-1] - XP_AT_LEVEL[prevLevel-1];
+    public static int getXpAt(int level) {
+        return XP_AT_LEVEL[level-1];
     }
 }

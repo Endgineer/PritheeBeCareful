@@ -314,8 +314,8 @@ public class ToolLevellingUtil {
         return reinforce > 0 && level < Levels.getMaxLevelAt(reinforce) && level < Levels.MAX_LEVEL;
     }
     
-    public static int getXpNeededForLevel(int level, boolean isBroadTool) {
-        return (int) ((isBroadTool ? Config.broadToolRequiredXpMultiplier.get() : 1) * Levels.getXpNeeded(level));
+    public static int getXpAt(int level, boolean isBroadTool) {
+        return (int) ((isBroadTool ? Config.broadToolRequiredXpMultiplier.get() : 1) * Levels.getXpAt(level));
     }
     
     public static int getSkillLevel(ToolStack tool) {
@@ -336,22 +336,23 @@ public class ToolLevellingUtil {
         
         ModDataNBT data = tool.getPersistentData();
         int currentLevel = data.getInt(LEVEL_KEY);
+        int currentExperience = data.getInt(EXPERIENCE_KEY);
         int reinforce = tool.getPersistentData().getInt(ReinforceModifier.REINFORCE_KEY);
-        int currentExperience = data.getInt(EXPERIENCE_KEY) + amount;
-        boolean isBroadTool = ToolLevellingUtil.isBroadTool(tool);
-        int experienceNeeded = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroadTool);
         
         if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) {
             return false;
         }
         
-        while (currentExperience >= experienceNeeded) {
-            if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) {
-                return true;
-            }
-            data.putInt(LEVEL_KEY, ++currentLevel);
-            currentExperience -= experienceNeeded;
-            experienceNeeded = ToolLevellingUtil.getXpNeededForLevel(currentLevel + 1, isBroadTool);
+        boolean isBroadTool = ToolLevellingUtil.isBroadTool(tool);
+        
+        while (amount > 0) {
+            int experienceNeeded = ToolLevellingUtil.getXpAt(currentLevel + 1, isBroadTool);
+            int amountAdded = Math.min(amount, experienceNeeded-currentExperience);
+            currentExperience += amountAdded;
+            currentLevel = Levels.getLevel(currentExperience);
+            amount -= amountAdded;
+            
+            data.putInt(LEVEL_KEY, currentLevel);
             
             String slotName = ToolLevellingUtil.getSlot(tool, currentLevel);
             if (slotName != null && !slotName.equals(NONE)) {
@@ -368,6 +369,10 @@ public class ToolLevellingUtil {
             if (player != null) {
                 Component toolName = tool.createStack().getDisplayName();
                 Messages.sendToPlayer(new LevelUpPacket(currentLevel, toolName), player);
+            }
+            
+            if (!ToolLevellingUtil.canLevelUp(currentLevel, reinforce)) {
+                break;
             }
         }
         

@@ -97,11 +97,12 @@ public class TooltipEventHandler {
         if (level == 0) {
             infoEntries.add(ModUtil.makeTranslation("tooltip","xp", ModUtil.makeTranslation("tooltip", "xp.unused", ChatFormatting.DARK_GRAY)));
         } else if (level == Levels.MAX_LEVEL) {
-            infoEntries.add(ModUtil.makeTranslation("tooltip","xp", ModUtil.makeTranslation("tooltip", "xp.maxed", ChatFormatting.DARK_GRAY)));
-        } else {
             MutableComponent xp = ModUtil.makeText(tool.getPersistentData().getInt(ReinforceModifier.EXPERIENCE_KEY), limited ? ChatFormatting.DARK_GRAY : ChatFormatting.GOLD);
-            MutableComponent xpNeeded = ModUtil.makeText(ToolLevellingUtil.getXpNeededForLevel(level + 1, ToolLevellingUtil.isBroadTool(tool)), limited ? ChatFormatting.DARK_GRAY : ChatFormatting.GOLD);
-            MutableComponent xpValue = ModUtil.makeTranslation("tooltip", "xp.value", ChatFormatting.GRAY, xp, xpNeeded);
+            infoEntries.add(ModUtil.makeTranslation("tooltip","xp", xp));
+        } else {
+            MutableComponent currentXp = ModUtil.makeText(tool.getPersistentData().getInt(ReinforceModifier.EXPERIENCE_KEY), limited ? ChatFormatting.DARK_GRAY : ChatFormatting.GOLD);
+            MutableComponent targetXp = ModUtil.makeText(ToolLevellingUtil.getXpAt(level + 1, ToolLevellingUtil.isBroadTool(tool)), limited ? ChatFormatting.DARK_GRAY : ChatFormatting.GOLD);
+            MutableComponent xpValue = ModUtil.makeTranslation("tooltip", "xp.value", ChatFormatting.GRAY, currentXp, targetXp);
             infoEntries.add(ModUtil.makeTranslation("tooltip","xp", xpValue));
         }
 
