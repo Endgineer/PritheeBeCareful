@@ -5,10 +5,10 @@
       "base_xp_cost": 45,
       "temperatures": {
         "breakdown": 400,
-        "folding": 300,
-        "hammering": 200,
+        "folding": 350,
         "melting": 420,
-        "quenching": 350
+        "quenching": 300,
+        "working": 200
       },
       "volumetric_heat_capacity": {
         "density": 7130,
@@ -23,10 +23,10 @@
       "base_xp_cost": 30,
       "temperatures": {
         "breakdown": 400,
-        "folding": 300,
-        "hammering": 200,
+        "folding": 350,
         "melting": 420,
-        "quenching": 350
+        "quenching": 300,
+        "working": 200
       },
       "volumetric_heat_capacity": {
         "density": 7130,
@@ -41,10 +41,10 @@
       "base_xp_cost": 22,
       "temperatures": {
         "breakdown": 400,
-        "folding": 300,
-        "hammering": 200,
+        "folding": 350,
         "melting": 420,
-        "quenching": 350
+        "quenching": 300,
+        "working": 200
       },
       "volumetric_heat_capacity": {
         "density": 7130,
@@ -59,10 +59,10 @@
       "base_xp_cost": 14,
       "temperatures": {
         "breakdown": 400,
-        "folding": 300,
-        "hammering": 200,
+        "folding": 350,
         "melting": 420,
-        "quenching": 350
+        "quenching": 300,
+        "working": 200
       },
       "volumetric_heat_capacity": {
         "density": 7130,
@@ -77,10 +77,10 @@
       "base_xp_cost": 10,
       "temperatures": {
         "breakdown": 400,
-        "folding": 300,
-        "hammering": 200,
+        "folding": 350,
         "melting": 420,
-        "quenching": 350
+        "quenching": 300,
+        "working": 200
       },
       "volumetric_heat_capacity": {
         "density": 7130,

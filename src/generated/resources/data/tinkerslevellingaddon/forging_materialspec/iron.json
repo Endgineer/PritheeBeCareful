@@ -6,9 +6,9 @@
       "temperatures": {
         "breakdown": 1350,
         "folding": 1100,
-        "hammering": 750,
         "melting": 1538,
-        "quenching": 912
+        "quenching": 912,
+        "working": 750
       },
       "volumetric_heat_capacity": {
         "density": 7870,
@@ -24,9 +24,9 @@
       "temperatures": {
         "breakdown": 1350,
         "folding": 1100,
-        "hammering": 750,
         "melting": 1538,
-        "quenching": 912
+        "quenching": 912,
+        "working": 750
       },
       "volumetric_heat_capacity": {
         "density": 7870,
@@ -42,9 +42,9 @@
       "temperatures": {
         "breakdown": 1350,
         "folding": 1100,
-        "hammering": 750,
         "melting": 1538,
-        "quenching": 912
+        "quenching": 912,
+        "working": 750
       },
       "volumetric_heat_capacity": {
         "density": 7870,
@@ -60,9 +60,9 @@
       "temperatures": {
         "breakdown": 1350,
         "folding": 1100,
-        "hammering": 750,
         "melting": 1538,
-        "quenching": 912
+        "quenching": 912,
+        "working": 750
       },
       "volumetric_heat_capacity": {
         "density": 7870,
@@ -78,9 +78,9 @@
       "temperatures": {
         "breakdown": 1350,
         "folding": 1100,
-        "hammering": 750,
         "melting": 1538,
-        "quenching": 912
+        "quenching": 912,
+        "working": 750
       },
       "volumetric_heat_capacity": {
         "density": 7870,

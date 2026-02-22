@@ -5,10 +5,10 @@
       "base_xp_cost": 45,
       "temperatures": {
         "breakdown": 1809,
-        "folding": 1326,
-        "hammering": 884,
+        "folding": 1768,
         "melting": 2210,
-        "quenching": 1768
+        "quenching": 1326,
+        "working": 884
       },
       "volumetric_heat_capacity": {
         "density": 12200,
@@ -23,10 +23,10 @@
       "base_xp_cost": 30,
       "temperatures": {
         "breakdown": 1809,
-        "folding": 1326,
-        "hammering": 884,
+        "folding": 1768,
         "melting": 2210,
-        "quenching": 1768
+        "quenching": 1326,
+        "working": 884
       },
       "volumetric_heat_capacity": {
         "density": 12200,
@@ -41,10 +41,10 @@
       "base_xp_cost": 22,
       "temperatures": {
         "breakdown": 1809,
-        "folding": 1326,
-        "hammering": 884,
+        "folding": 1768,
         "melting": 2210,
-        "quenching": 1768
+        "quenching": 1326,
+        "working": 884
       },
       "volumetric_heat_capacity": {
         "density": 12200,
@@ -59,10 +59,10 @@
       "base_xp_cost": 14,
       "temperatures": {
         "breakdown": 1809,
-        "folding": 1326,
-        "hammering": 884,
+        "folding": 1768,
         "melting": 2210,
-        "quenching": 1768
+        "quenching": 1326,
+        "working": 884
       },
       "volumetric_heat_capacity": {
         "density": 12200,
@@ -77,10 +77,10 @@
       "base_xp_cost": 10,
       "temperatures": {
         "breakdown": 1809,
-        "folding": 1326,
-        "hammering": 884,
+        "folding": 1768,
         "melting": 2210,
-        "quenching": 1768
+        "quenching": 1326,
+        "working": 884
       },
       "volumetric_heat_capacity": {
         "density": 12200,
