@@ -3,7 +3,6 @@ package pyre.tinkerslevellingaddon.setup;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -105,19 +104,6 @@ public class TooltipEventHandler {
             MutableComponent xpValue = ModUtil.makeTranslation("tooltip", "xp.value", ChatFormatting.GRAY, currentXp, targetXp);
             infoEntries.add(ModUtil.makeTranslation("tooltip","xp", xpValue));
         }
-
-        int embers = tool.getPersistentData().getInt(ReinforceModifier.INFUSION_FLAME_KEY);
-        int frosts = tool.getPersistentData().getInt(ReinforceModifier.INFUSION_FROST_KEY);
-        int sparks = tool.getPersistentData().getInt(ReinforceModifier.INFUSION_STORM_KEY);
-        
-        infoEntries.add(
-            Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".infusions").withStyle(ChatFormatting.WHITE)
-                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * embers / 31.0))+"%").withStyle(embers > 0 ? Style.EMPTY.withColor(0xFF5E00) : Style.EMPTY.withColor(ChatFormatting.GRAY)))
-                .append(Component.literal(" /").withStyle(ChatFormatting.GRAY))
-                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * frosts / 31.0))+"%").withStyle(frosts > 0 ? Style.EMPTY.withColor(0x00B8FF) : Style.EMPTY.withColor(ChatFormatting.GRAY)))
-                .append(Component.literal(" /").withStyle(ChatFormatting.GRAY))
-                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * sparks / 31.0))+"%").withStyle(sparks > 0 ? Style.EMPTY.withColor(0xEC00FF) : Style.EMPTY.withColor(ChatFormatting.GRAY)))
-        );
         
         return infoEntries;
     }

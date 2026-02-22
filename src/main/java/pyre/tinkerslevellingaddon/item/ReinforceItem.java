@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.network.chat.Style;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.nbt.CompoundTag;
@@ -27,9 +26,6 @@ public class ReinforceItem extends Item {
     public static final String TEMPERATURE = TinkersLevellingAddon.MOD_ID+".temperature";
     public static final String PROGRESS = TinkersLevellingAddon.MOD_ID+".progress";
     public static final String EXPERIENCE = TinkersLevellingAddon.MOD_ID+".experience";
-    public static final String INFUSION_FLAME = TinkersLevellingAddon.MOD_ID+".infusion_flame";
-    public static final String INFUSION_FROST = TinkersLevellingAddon.MOD_ID+".infusion_frost";
-    public static final String INFUSION_STORM = TinkersLevellingAddon.MOD_ID+".infusion_storm";
     public static final String STATUS = TinkersLevellingAddon.MOD_ID+".status";
     public static final String CLOCK = TinkersLevellingAddon.MOD_ID+".clock";
     
@@ -55,9 +51,6 @@ public class ReinforceItem extends Item {
         if (!tag.contains(TEMPERATURE)) return false;
         if (!tag.contains(PROGRESS)) return false;
         if (!tag.contains(EXPERIENCE)) return false;
-        if (!tag.contains(INFUSION_FLAME)) return false;
-        if (!tag.contains(INFUSION_FROST)) return false;
-        if (!tag.contains(INFUSION_STORM)) return false;
         if (!tag.contains(STATUS)) return false;
         if (!tag.contains(CLOCK)) return false;
 
@@ -74,10 +67,6 @@ public class ReinforceItem extends Item {
         double temperature = tag.getDouble(ReinforceItem.TEMPERATURE);
         int progress = tag.getInt(ReinforceItem.PROGRESS);
         double experience = tag.getDouble(ReinforceItem.EXPERIENCE);
-
-        int embers = tag.getInt(ReinforceItem.INFUSION_FLAME);
-        int frosts = tag.getInt(ReinforceItem.INFUSION_FROST);
-        int sparks = tag.getInt(ReinforceItem.INFUSION_STORM);
 
         MaterialReinforceSpec reinforceSpec = ForgingMaterialSpec.getMaterialReinforceSpec(material, reinforce);
         if (reinforceSpec == null) return false;
@@ -127,15 +116,6 @@ public class ReinforceItem extends Item {
                 .append(Component.literal(" ")
                 .append(malleabilityPercentage)
                 .withStyle(ChatFormatting.WHITE))
-        );
-        
-        tooltip.add(
-            Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".reinforce_item.infusions").append(":").withStyle(ChatFormatting.GRAY)
-                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * embers / 31.0))+"%").withStyle(embers > 0 ? Style.EMPTY.withColor(0xFF5E00) : Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
-                .append(Component.literal(" /").withStyle(ChatFormatting.GRAY))
-                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * frosts / 31.0))+"%").withStyle(frosts > 0 ? Style.EMPTY.withColor(0x00B8FF) : Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
-                .append(Component.literal(" /").withStyle(ChatFormatting.GRAY))
-                .append(Component.literal(" ").append(String.valueOf((int) (100.0 * sparks / 31.0))+"%").withStyle(sparks > 0 ? Style.EMPTY.withColor(0xEC00FF) : Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
         );
         
         tooltip.add(

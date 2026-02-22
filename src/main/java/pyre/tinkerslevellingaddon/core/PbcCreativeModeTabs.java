@@ -25,9 +25,6 @@ public class PbcCreativeModeTabs {
                 output.accept(PbcItems.REINFORCE_ITEM.get());
                 output.accept(PbcBlocks.DEEPSLATE_TITANITE_ORE.get());
                 output.accept(PbcItems.TITANITE_SHARD.get());
-                output.accept(PbcItems.FIRE_TITANITE_SHARD.get());
-                output.accept(PbcItems.ICE_TITANITE_SHARD.get());
-                output.accept(PbcItems.LIGHTNING_TITANITE_SHARD.get());
                 output.accept(PbcBlocks.DEEPSLATE_ANCIENT_RUBBLE.get());
                 output.accept(PbcItems.ABYSS_RELIC.get());
                 output.accept(PbcItems.AMPHITHERE_BRUSH.get());

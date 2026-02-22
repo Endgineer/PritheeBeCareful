@@ -11,9 +11,6 @@
   "item.tinkerslevellingaddon.reinforce_item.1": "%1$s %2$s %3$s Reinforce Item (Unf)",
   "item.tinkerslevellingaddon.reinforce_item.2": "%1$s %2$s %3$s Reinforce Item (Fin)",
   "item.tinkerslevellingaddon.titanite_shard": "Titanite Shard",
-  "item.tinkerslevellingaddon.fire_titanite_shard": "Fire Titanite Shard",
-  "item.tinkerslevellingaddon.ice_titanite_shard": "Ice Titanite Shard",
-  "item.tinkerslevellingaddon.lightning_titanite_shard": "Lightning Titanite Shard",
   "item.tinkerslevellingaddon.abyss_relic": "Invalid Abyss Relic",
   "item.tinkerslevellingaddon.abyss_relic.0": "Small Abyss Relic",
   "item.tinkerslevellingaddon.abyss_relic.1": "Medium Abyss Relic",
@@ -98,9 +95,6 @@
   
   "tooltip.tinkerslevellingaddon.titanite_shard.description": "Fragment of the world's great deep.",
   "tooltip.tinkerslevellingaddon.titanite_shard.usage": "Capable of reinforcing metal.",
-  "tooltip.tinkerslevellingaddon.titanite_shard.fire_infused": "EMBERED",
-  "tooltip.tinkerslevellingaddon.titanite_shard.ice_infused": "FROSTED",
-  "tooltip.tinkerslevellingaddon.titanite_shard.lightning_infused": "CHARGED",
   
   "tooltip.tinkerslevellingaddon.abyss_relic.resonance": "Resonance: %s",
   "tooltip.tinkerslevellingaddon.abyss_relic.complexity": "Complexity: %s",
@@ -120,7 +114,6 @@
   "tooltip.tinkerslevellingaddon.reinforce_item.progress": "Progress",
   "tooltip.tinkerslevellingaddon.reinforce_item.experience": "Experience",
   "tooltip.tinkerslevellingaddon.reinforce_item.malleability": "Malleability",
-  "tooltip.tinkerslevellingaddon.reinforce_item.infusions": "Infusions",
   "tooltip.tinkerslevellingaddon.reinforce_item.points": "Points",
   
   "tooltip.tinkerslevellingaddon.hold_alt": "Hold %s for level info",
@@ -166,7 +159,6 @@
   "tooltip.tinkerslevellingaddon.xp": "Item XP: %s",
   "tooltip.tinkerslevellingaddon.xp.value": "%s / %s",
   "tooltip.tinkerslevellingaddon.xp.unused": "Unused",
-  "tooltip.tinkerslevellingaddon.infusions": "Infusions:",
   "tooltip.tinkerslevellingaddon.reinforce": "Reinforce: %s",
   "tooltip.tinkerslevellingaddon.level": "Item Level: %s",
   
