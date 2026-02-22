@@ -15,43 +15,19 @@ import static pyre.tinkerslevellingaddon.util.ToolLevellingUtil.*;
 
 public class Config {
 
-    private static final List<String> DEFAULT_TOOLS_SLOTS_ORDER = List.of(
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, ABILITY,
-        NONE, NONE, NONE, NONE, NONE, UPGRADE
-    );
+    private static final List<String> DEFAULT_TOOLS_SLOTS_ORDER = List.of(UPGRADE, UPGRADE, UPGRADE, ABILITY, UPGRADE);
     
     private static final List<String> DEFAULT_TOOLS_SLOTS_RANDOM_POOL = List.of(UPGRADE, UPGRADE, UPGRADE, UPGRADE, ABILITY);
     
-    private static final List<String> DEFAULT_RANGED_SLOTS_ORDER = List.of(
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, ABILITY,
-        NONE, NONE, NONE, NONE, NONE, UPGRADE
-    );
+    private static final List<String> DEFAULT_RANGED_SLOTS_ORDER = List.of(UPGRADE, UPGRADE, UPGRADE, ABILITY, UPGRADE);
 
     private static final List<String> DEFAULT_RANGED_SLOTS_RANDOM_POOL = List.of(UPGRADE, UPGRADE, UPGRADE, UPGRADE, ABILITY);
     
-    private static final List<String> DEFAULT_ARMOR_SLOTS_ORDER = List.of(
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, DEFENSE,
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, ABILITY,
-        NONE, NONE, NONE, NONE, NONE, DEFENSE
-    );
+    private static final List<String> DEFAULT_ARMOR_SLOTS_ORDER = List.of(UPGRADE, DEFENSE, UPGRADE, ABILITY, DEFENSE);
 
     private static final List<String> DEFAULT_ARMOR_SLOTS_RANDOM_POOL = List.of(UPGRADE, UPGRADE, DEFENSE, DEFENSE, ABILITY);
     
-    private static final List<String> DEFAULT_STAFF_SLOTS_ORDER = List.of(
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, UPGRADE,
-        NONE, NONE, NONE, NONE, NONE, DEFENSE,
-        NONE, NONE, NONE, NONE, NONE, ABILITY
-    );
+    private static final List<String> DEFAULT_STAFF_SLOTS_ORDER = List.of(UPGRADE, UPGRADE, UPGRADE, DEFENSE, ABILITY);
 
     private static final List<String> DEFAULT_STAFF_SLOTS_RANDOM_POOL = List.of(UPGRADE, UPGRADE, UPGRADE, DEFENSE, ABILITY);
 
