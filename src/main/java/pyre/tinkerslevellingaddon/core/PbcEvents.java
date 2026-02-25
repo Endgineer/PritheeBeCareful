@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.LevelAccessor;
@@ -41,7 +40,6 @@ public class PbcEvents {
         if (!mainstack.isCorrectToolForDrops(state)) return;
         
         boolean isTitanite = state.is(PbcBlocks.DEEPSLATE_TITANITE_ORE.get());
-        boolean isRelic = state.is(PbcBlocks.DEEPSLATE_ANCIENT_RUBBLE.get());
         
         BlockPos pos = event.getPos();
         ServerLevel level = (ServerLevel) accessor;
@@ -70,10 +68,6 @@ public class PbcEvents {
             DeepslateTitaniteOreBlock block = (DeepslateTitaniteOreBlock) state.getBlock();
             Block.popResource(level, pos, new ItemStack(PbcItems.TITANITE_SHARD.get(), Math.max(1, dropCount)));
             block.popExperience(level, pos, block.getExpDrop(state, level, level.random, pos, fortuneLevel, 0));
-        } else if (isRelic) {
-            event.setCanceled(true);
-            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-            Block.popResource(level, pos, new ItemStack(Items.DEEPSLATE));
         }
     }
 }

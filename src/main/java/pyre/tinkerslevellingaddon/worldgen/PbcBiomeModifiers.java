@@ -14,14 +14,12 @@ import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 
 public class PbcBiomeModifiers {
     public static final ResourceKey<BiomeModifier> DEEPSLATE_TITANITE_ORE_KEY = registerKey("deepslate_titanite_ore_biomemodifier");
-    public static final ResourceKey<BiomeModifier> DEEPSLATE_ANCIENT_RUBBLE_KEY = registerKey("deepslate_ancient_rubble_biomemodifier");
     
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
         
         context.register(DEEPSLATE_TITANITE_ORE_KEY, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD), HolderSet.direct(placedFeatures.getOrThrow(PbcPlacedFeatures.DEEPSLATE_TITANITE_ORE_KEY)), GenerationStep.Decoration.UNDERGROUND_ORES));
-        context.register(DEEPSLATE_ANCIENT_RUBBLE_KEY, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_OVERWORLD), HolderSet.direct(placedFeatures.getOrThrow(PbcPlacedFeatures.DEEPSLATE_ANCIENT_RUBBLE_KEY)), GenerationStep.Decoration.UNDERGROUND_ORES));
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {

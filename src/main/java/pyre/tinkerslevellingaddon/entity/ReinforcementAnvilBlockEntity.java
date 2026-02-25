@@ -9,7 +9,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -25,18 +24,14 @@ import pyre.tinkerslevellingaddon.ReinforceModifier;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.block.ReinforcementAnvilBlock;
 import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
-import pyre.tinkerslevellingaddon.helper.openmods.EnchantmentUtils;
-import pyre.tinkerslevellingaddon.item.AbyssRelicItem;
 import pyre.tinkerslevellingaddon.item.ReinforceItem;
 import pyre.tinkerslevellingaddon.item.TitaniteShardItem;
-import pyre.tinkerslevellingaddon.item.AbyssRelicItem.RelicApplyResult;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec.MaterialReinforceSpec;
 import pyre.tinkerslevellingaddon.loader.forging.models.ThermalModel;
 import pyre.tinkerslevellingaddon.loader.reinforcing.ReinforcingGearSpec;
 import pyre.tinkerslevellingaddon.network.Messages;
 import pyre.tinkerslevellingaddon.setup.TooltipEventHandler;
-import pyre.tinkerslevellingaddon.util.ToolLevellingUtil;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariant;
@@ -45,8 +40,6 @@ import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.shared.block.entity.TableBlockEntity;
-
-import static pyre.tinkerslevellingaddon.util.ToolLevellingUtil.isReinforcedAtLeastTo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,46 +121,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
 
         String material = ForgingMaterialSpec.getRegisteredReinforceMaterial(handstack);
         
-        if (AbyssRelicItem.isValidAbyssRelicItem(handstack)) {
-            if (slotstack_b.is(TinkerTags.Items.MODIFIABLE)) {
-                if (this.getBlockPos().getY() <= 0) {
-                    player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.abyss_relic_on_gear_item.anvil_within_abyss"), true);
-                    return false;
-                }
-                
-                ToolStack toolstack = ToolStack.from(slotstack_b);
-                if (!isReinforcedAtLeastTo(toolstack, 1)) {
-                    player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.abyss_relic_on_gear_item.gear_not_reinforced"), true);
-                    return false;
-                }
-                
-                RelicApplyResult result = AbyssRelicItem.getApplyResult(handstack, ToolLevellingUtil.getSkillLevel(toolstack), ForgeRegistries.ITEMS.getKey(slotitem_b).getPath());
-                if (EnchantmentUtils.getPlayerXP(player) < result.cost()) {
-                    player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.abyss_relic_on_gear_item.not_enough_xp"), true);
-                    return false;
-                }
-                
-                double resonanceBonus = 1.0;
-                for (MaterialVariant materialVariant : toolstack.getMaterials()) {
-                    MaterialId materialId = materialVariant.getId();
-                    if (materialId.getPath().equals(result.resonance()) && MaterialRepairToolHook.canRepairWith(toolstack, materialId)) {
-                        resonanceBonus = 1.6;
-                        break;
-                    }
-                }
-
-                if (!ToolLevellingUtil.addExperience(toolstack, (int) (result.experience()*resonanceBonus), (ServerPlayer) player)) {
-                    player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.abyss_relic_on_gear_item.cannot_level_up"), true);
-                    return false;
-                }
-                
-                EnchantmentUtils.addPlayerXP(player, -result.cost());
-                player.setItemInHand(hand, ItemStack.EMPTY);
-                this.setItem(SLOT_B, toolstack.createStack());
-                Messages.sendAnvilRelicUse(level, worldPosition);
-                return true;
-            }
-        } else if (ReinforceItem.isValidReinforceItem(handstack)) {
+        if (ReinforceItem.isValidReinforceItem(handstack)) {
             if (slotstack_b.is(TinkerTags.Items.MODIFIABLE)) {
                 CompoundTag tag = handstack.getTag();
                 if (tag.getInt(ReinforceItem.STATUS) != ReinforceItem.ReinforceStatus.FINISHED.ordinal()) {

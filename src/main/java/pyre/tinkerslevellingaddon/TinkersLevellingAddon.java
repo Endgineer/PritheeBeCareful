@@ -26,7 +26,6 @@ import pyre.tinkerslevellingaddon.core.PbcBlocks;
 import pyre.tinkerslevellingaddon.core.PbcCreativeModeTabs;
 import pyre.tinkerslevellingaddon.core.PbcItems;
 import pyre.tinkerslevellingaddon.core.PbcMenus;
-import pyre.tinkerslevellingaddon.core.PbcSounds;
 import pyre.tinkerslevellingaddon.core.PbcSpecs;
 import pyre.tinkerslevellingaddon.data.PbcBlockTagsProvider;
 import pyre.tinkerslevellingaddon.data.PbcLootTableProvider;
@@ -57,7 +56,6 @@ public class TinkersLevellingAddon {
         PbcBlockEntities.register(modEventBus);
         PbcCreativeModeTabs.register(modEventBus);
         PbcMenus.register(modEventBus);
-        PbcSounds.register(modEventBus);
         PbcConfiguredFeatures.register(modEventBus);
         
         Config.init();

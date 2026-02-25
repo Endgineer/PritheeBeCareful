@@ -34,8 +34,5 @@ public class PbcBlockTagsProvider extends BlockTagsProvider {
         
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(PbcBlocks.DEEPSLATE_TITANITE_ORE.get());
         tag(BlockTags.NEEDS_IRON_TOOL).add(PbcBlocks.DEEPSLATE_TITANITE_ORE.get());
-        
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(PbcBlocks.DEEPSLATE_ANCIENT_RUBBLE.get());
-        tag(BlockTags.NEEDS_IRON_TOOL).add(PbcBlocks.DEEPSLATE_ANCIENT_RUBBLE.get());
     }
 }

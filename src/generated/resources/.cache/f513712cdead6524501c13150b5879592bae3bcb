@@ -1,3 +1,3 @@
-// 1.20.1	2025-07-20T16:40:53.2731912	Tags for minecraft:block mod id tinkerslevellingaddon
-b0b622182598f4ea6948da2f56bf17b4425c571e data/minecraft/tags/blocks/mineable/pickaxe.json
-b0b622182598f4ea6948da2f56bf17b4425c571e data/minecraft/tags/blocks/needs_iron_tool.json
+// 1.20.1	2026-02-25T16:31:45.1633372	Tags for minecraft:block mod id tinkerslevellingaddon
+e36cdf35fc038eb0c44af34e381a1616dbdda675 data/minecraft/tags/blocks/mineable/pickaxe.json
+e36cdf35fc038eb0c44af34e381a1616dbdda675 data/minecraft/tags/blocks/needs_iron_tool.json

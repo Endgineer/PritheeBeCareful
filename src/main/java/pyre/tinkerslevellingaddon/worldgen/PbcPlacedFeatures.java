@@ -17,13 +17,11 @@ import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 
 public class PbcPlacedFeatures {
     public static final ResourceKey<PlacedFeature> DEEPSLATE_TITANITE_ORE_KEY = registerKey("deepslate_titanite_ore_placed");
-    public static final ResourceKey<PlacedFeature> DEEPSLATE_ANCIENT_RUBBLE_KEY = registerKey("deepslate_ancient_rubble_placed");
-
+    
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         
         register(context, DEEPSLATE_TITANITE_ORE_KEY, configuredFeatures.getOrThrow(PbcConfiguredFeatures.DEEPSLATE_TITANITE_ORE_KEY), PbcOrePlacement.commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.BOTTOM, VerticalAnchor.absolute(0))));
-        register(context, DEEPSLATE_ANCIENT_RUBBLE_KEY, configuredFeatures.getOrThrow(PbcConfiguredFeatures.DEEPSLATE_ANCIENT_RUBBLE_KEY), PbcOrePlacement.commonOrePlacement(64, HeightRangePlacement.uniform(VerticalAnchor.BOTTOM, VerticalAnchor.absolute(0))));
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {

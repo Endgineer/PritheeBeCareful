@@ -25,16 +25,13 @@ public class PbcConfiguredFeatures {
     public static final RegistryObject<Feature<OreConfiguration>> EXPOSED_ORE = FEATURES.register("exposed_ore", () -> new ExposedOreFeature(OreConfiguration.CODEC));
     
     public static final ResourceKey<ConfiguredFeature<?, ?>> DEEPSLATE_TITANITE_ORE_KEY = registerKey("deepslate_titanite_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> DEEPSLATE_ANCIENT_RUBBLE_KEY = registerKey("deepslate_ancient_rubble");
-
+    
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         
         List<OreConfiguration.TargetBlockState> deepslateTitaniteOres = List.of(OreConfiguration.target(deepslateReplaceables, PbcBlocks.DEEPSLATE_TITANITE_ORE.get().defaultBlockState()));
-        List<OreConfiguration.TargetBlockState> deepslateAncientRubbles = List.of(OreConfiguration.target(deepslateReplaceables, PbcBlocks.DEEPSLATE_ANCIENT_RUBBLE.get().defaultBlockState()));
         
         register(context, DEEPSLATE_TITANITE_ORE_KEY, Feature.ORE, new OreConfiguration(deepslateTitaniteOres, 9));
-        register(context, DEEPSLATE_ANCIENT_RUBBLE_KEY, EXPOSED_ORE.get(), new OreConfiguration(deepslateAncientRubbles, 1));
     }
     
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

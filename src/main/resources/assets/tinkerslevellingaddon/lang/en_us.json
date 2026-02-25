@@ -5,18 +5,11 @@
 
   "key.tinkerslevellingaddon.alt": "Alt",
 
-  "item.tinkerslevellingaddon.amphithere_brush": "Amphithere Brush",
   "item.tinkerslevellingaddon.reinforce_item": "Invalid Reinforce Item",
   "item.tinkerslevellingaddon.reinforce_item.0": "%1$s %2$s %3$s Reinforce Item (New)",
   "item.tinkerslevellingaddon.reinforce_item.1": "%1$s %2$s %3$s Reinforce Item (Unf)",
   "item.tinkerslevellingaddon.reinforce_item.2": "%1$s %2$s %3$s Reinforce Item (Fin)",
   "item.tinkerslevellingaddon.titanite_shard": "Titanite Shard",
-  "item.tinkerslevellingaddon.abyss_relic": "Invalid Abyss Relic",
-  "item.tinkerslevellingaddon.abyss_relic.0": "Small Abyss Relic",
-  "item.tinkerslevellingaddon.abyss_relic.1": "Medium Abyss Relic",
-  "item.tinkerslevellingaddon.abyss_relic.2": "Large Abyss Relic",
-  "item.tinkerslevellingaddon.abyss_relic.3": "Huge Abyss Relic",
-  "item.tinkerslevellingaddon.abyss_relic.4": "Giant Abyss Relic",
   
   "block.tinkerslevellingaddon.reinforcement_anvil": "Reinforcement Anvil",
   "block.tinkerslevellingaddon.forge_chamber": "Forge Chamber",
@@ -24,7 +17,6 @@
   "block.tinkerslevellingaddon.forge_throat": "Forge Throat",
   "block.tinkerslevellingaddon.quenching_basin": "Quenching Basin",
   "block.tinkerslevellingaddon.deepslate_titanite_ore": "Deepslate Titanite Ore",
-  "block.tinkerslevellingaddon.deepslate_ancient_rubble": "Deepslate Ancient Rubble",
   
   "gui.tinkerslevellingaddon.reinforcement_anvil": "Reinforcement Anvil",
   "gui.tinkerslevellingaddon.forge_chamber": "Forge",
@@ -42,10 +34,6 @@
   "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.gear_type_unmatched": "Reinforce item's type must correspond to the gear item's type.",
   "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.gear_material_unmatched": "Reinforce item's material must correspond to the repair material of the gear item.",
   "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.failed_reinforce_prerequisites": "Gear item must be reinforced further before applying this level of reinforce item.",
-  "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.anvil_within_abyss": "A mysterious force within the abyss forbids you from applying the relic.",
-  "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.gear_not_reinforced": "The relic cannot be applied safely, as the item has no reinforce.",
-  "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.not_enough_xp": "Your mind lacks the insight required to unravel the complexity of the relic's truth.",
-  "message.tinkerslevellingaddon.reinforcement_anvil.abyss_relic_on_gear_item.cannot_level_up": "The item is already saturated with insight, unable to receive further experience.",
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_reinforce_item.temperature_below_folding": "The item's temperature is too low for folding, needs %s \u00B0C.",
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_reinforce_item.insufficient_material_ingots": "The available ingots are too few for folding, needs %s ingots.",
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_gear_parts.material_mismatch": "Parts combined into a Reinforce Item cannot be of different material types.",
@@ -95,20 +83,6 @@
   
   "tooltip.tinkerslevellingaddon.titanite_shard.description": "Fragment of the world's great deep.",
   "tooltip.tinkerslevellingaddon.titanite_shard.usage": "Capable of reinforcing metal.",
-  
-  "tooltip.tinkerslevellingaddon.abyss_relic.resonance": "Resonance: %s",
-  "tooltip.tinkerslevellingaddon.abyss_relic.complexity": "Complexity: %s",
-  "tooltip.tinkerslevellingaddon.abyss_relic.instability": "Instability: %s",
-  "tooltip.tinkerslevellingaddon.abyss_relic.attack_percentage": "ATK %s",
-  "tooltip.tinkerslevellingaddon.abyss_relic.health_percentage": "HP %s",
-  "tooltip.tinkerslevellingaddon.abyss_relic.defense_percentage": "DEF %s",
-  "tooltip.tinkerslevellingaddon.abyss_relic.critical_rate": "CR %s",
-  "tooltip.tinkerslevellingaddon.abyss_relic.critical_damage": "CD %s",
-  "tooltip.tinkerslevellingaddon.abyss_relic.energy_regeneration": "ER %s",
-  "tooltip.tinkerslevellingaddon.abyss_relic.damage_bonus": "%s DMG %s",
-  
-  "tooltip.tinkerslevellingaddon.abyss_relic.description": "Relic of the world's great deep.",
-  "tooltip.tinkerslevellingaddon.abyss_relic.usage": "Capable of elevating metal's insight.",
   
   "tooltip.tinkerslevellingaddon.reinforce_item.temperature": "Temperature",
   "tooltip.tinkerslevellingaddon.reinforce_item.progress": "Progress",

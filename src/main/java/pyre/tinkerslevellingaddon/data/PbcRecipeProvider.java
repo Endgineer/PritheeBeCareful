@@ -6,7 +6,6 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.core.PbcBlocks;
@@ -19,7 +18,6 @@ import slimeknights.tconstruct.library.recipe.modifiers.adding.ModifierRecipeBui
 
 import java.util.function.Consumer;
 
-import com.github.alexthe666.iceandfire.item.IafItemRegistry;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 
@@ -98,20 +96,6 @@ public class PbcRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("sss")
                 .unlockedBy("has_item", has(PbcItems.TITANITE_SHARD.get()))
                 .save(consumer, prefix(quenchingBasinId, blocksFolder));
-
-        String itemsFolder = "items/";
-        
-        ResourceLocation amphithereBrushId = ModUtil.getResource("amphithere_brush");
-        
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, PbcItems.AMPHITHERE_BRUSH.get())
-                .define('h', IafItemRegistry.AMPHITHERE_FEATHER.get())
-                .define('b', Items.NETHERITE_INGOT)
-                .define('r', IafItemRegistry.DRAGON_BONE.get())
-                .pattern("h")
-                .pattern("b")
-                .pattern("r")
-                .unlockedBy("has_item", has(IafItemRegistry.AMPHITHERE_FEATHER.get()))
-                .save(consumer, prefix(amphithereBrushId, itemsFolder));
     }
     
     @Override
