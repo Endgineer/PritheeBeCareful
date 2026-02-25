@@ -22,7 +22,7 @@ public class ForgingMaterialSpecProvider implements DataProvider {
     
     public record ForgingMaterialRecord(String ingot_tag, List<ReinforceRecord> reinforces) {}
     
-    public record ReinforceRecord(int base_xp_cost, XPConductanceRecord xp_conductance, VolumetricHeatCapacityRecord volumetric_heat_capacity, TemperaturesRecord temperatures) {}
+    public record ReinforceRecord(int base_xp_cost, int breakdown_rate, XPConductanceRecord xp_conductance, VolumetricHeatCapacityRecord volumetric_heat_capacity, TemperaturesRecord temperatures) {}
     
     public record XPConductanceRecord(int min, int max) {}
     

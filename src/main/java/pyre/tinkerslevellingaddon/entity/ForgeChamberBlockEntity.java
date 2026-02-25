@@ -232,6 +232,9 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
         String material = tag.getString(ReinforceItem.MATERIAL);
         int reinforce = tag.getInt(ReinforceItem.REINFORCE);
         double temperature = tag.getDouble(ReinforceItem.TEMPERATURE);
+        int ingotCount = tag.getInt(ReinforceItem.COUNT);
+        int progress = tag.getInt(ReinforceItem.PROGRESS);
+        
         double meltingTemperature = ForgingMaterialSpec.getMeltingPoint(material, reinforce);
         
         if (clock == 0) {
@@ -240,6 +243,9 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
                 tag.putInt(ReinforceItem.STATUS, ReinforceItem.ReinforceStatus.FORGING.ordinal());
                 tag.putDouble(ReinforceItem.TEMPERATURE, newTemperature);
                 tag.putInt("CustomModelData", ForgingMaterialSpec.getCustomModelData(material, reinforce, newTemperature));
+
+                int newProgress = ForgingMaterialSpec.getProgressAfterBreakdown(material, reinforce, temperature, ingotCount, progress);
+                tag.putInt(ReinforceItem.PROGRESS, newProgress);
             }
         }
         

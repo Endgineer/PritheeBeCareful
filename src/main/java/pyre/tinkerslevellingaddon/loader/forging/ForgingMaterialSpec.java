@@ -129,6 +129,14 @@ public class ForgingMaterialSpec {
         return materialReinforceSpec.getMalleability(temperature);
     }
     
+    @Nullable
+    public static Integer getProgressAfterBreakdown(String material, int reinforce, double temperature, int ingotCount, int progress) {
+        MaterialReinforceSpec materialReinforceSpec = getMaterialReinforceSpec(material, reinforce);
+        if (materialReinforceSpec == null) return null;
+        
+        return materialReinforceSpec.getProgressAfterBreakdown(temperature, progress, ingotCount);
+    }
+    
     public static boolean match(String material, ItemStack stack) {
         ForgingMaterialSpec materialSpec = ForgingMaterialSpec.MATERIAL_SPECS.get(material);
         if (materialSpec == null) return false;
@@ -151,6 +159,7 @@ public class ForgingMaterialSpec {
             this.materialReinforceSpecs[i] = new MaterialReinforceSpec(
                 i,
                 materialReinforceSpec.get("base_xp_cost").getAsInt(),
+                materialReinforceSpec.get("breakdown_rate").getAsInt(),
                 xpConductance.get("min").getAsDouble(),
                 xpConductance.get("max").getAsDouble(),
                 volumetricHeatCapacity.get("density").getAsDouble(),
@@ -176,6 +185,7 @@ public class ForgingMaterialSpec {
         public MaterialReinforceSpec(
             int index,
             int baseXpCost,
+            int breakdownRate,
             double minXpConductance,
             double maxXpConductance,
             double density,
@@ -202,12 +212,16 @@ public class ForgingMaterialSpec {
                 throw new InvalidForgingMaterialSpecException("Temperatures must follow AMBIENT < WORKING < QUENCHING < FOLDING < BREAKDOWN < MELTING <= LIMIT");
             }
             
-            this.malleabilityModel = new MalleabilityModel(workingPointTemperature, quenchingPointTemperature, foldingPointTemperature, breakdownPointTemperature, meltingPointTemperature);
+            this.malleabilityModel = new MalleabilityModel(workingPointTemperature, quenchingPointTemperature, foldingPointTemperature, breakdownPointTemperature, meltingPointTemperature, breakdownRate);
         }
         
         public double getXpConductance(double temperature) {
             double conductanceNormalizedByPlayerEffort = ThreadLocalRandom.current().nextDouble(this.minXpConductance, this.maxXpConductance);
             return conductanceNormalizedByPlayerEffort * this.malleabilityModel.getMalleabilityAt(temperature);
+        }
+        
+        public int getProgressAfterBreakdown(double temperature, int progress, int ingotCount) {
+            return Math.min(progress+this.malleabilityModel.getProgressBreakdownAt(temperature), this.getExperienceCostTotal(ingotCount));
         }
 
         public double getMalleability(double temperature) {

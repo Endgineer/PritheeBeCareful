@@ -306,7 +306,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                     }
                     
                     ItemStack result = slotstack_b.copy();
-                    slottag_b.putDouble(ReinforceItem.EXPERIENCE, materialReinforceSpec.getExperienceCostPerTrip(slottag_b.getInt(ReinforceItem.COUNT)));
+                    slottag_b.putDouble(ReinforceItem.EXPERIENCE, Math.min(materialReinforceSpec.getExperienceCostPerTrip(slottag_b.getInt(ReinforceItem.COUNT)), slottag_b.getInt(ReinforceItem.PROGRESS)));
                     result.setTag(slottag_b);
                     this.setItem(SLOT_B, result);
                     

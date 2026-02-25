@@ -1,5 +1,7 @@
 package pyre.tinkerslevellingaddon.loader.forging.models;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class MalleabilityModel {
     private static final double MALLEABILITY_TOLERANCE = 0.01;
     
@@ -13,13 +15,16 @@ public class MalleabilityModel {
     private final double malleability_rise_steepness;
     private final double malleability_softening_temperature;
     private final double malleability_fall_steepness;
+
+    private final double breakdown_rate;
     
-    public MalleabilityModel(double temperature_working_point, double temperature_quenching_point, double temperature_folding_point, double temperature_breakdown_point, double temperature_melting_point) {
+    public MalleabilityModel(double temperature_working_point, double temperature_quenching_point, double temperature_folding_point, double temperature_breakdown_point, double temperature_melting_point, int breakdown_rate) {
         this.temperature_working_point = temperature_working_point;
         this.temperature_quenching_point = temperature_quenching_point;
         this.temperature_folding_point = temperature_folding_point;
         this.temperature_breakdown_point = temperature_breakdown_point;
         this.temperature_melting_point = temperature_melting_point;
+        this.breakdown_rate = Math.log(breakdown_rate);
         
         double A = Math.log(1.0 / MALLEABILITY_TOLERANCE - 1.0);
         
@@ -40,6 +45,19 @@ public class MalleabilityModel {
 
     private double getMalleabilityFall(double temperature) {
         return 1.0 / (1.0 + Math.exp(this.malleability_fall_steepness * (temperature - this.malleability_softening_temperature)));
+    }
+
+    public int getProgressBreakdownAt(double temperature) {
+        if (temperature < this.temperature_breakdown_point) return 0;
+
+        double progressBreakdown = Math.exp(this.breakdown_rate*(temperature-this.temperature_breakdown_point)/(this.temperature_melting_point-this.temperature_breakdown_point));
+        double fractionalBreakdown = progressBreakdown-Math.floor(progressBreakdown);
+        
+        if (fractionalBreakdown == 0 || ThreadLocalRandom.current().nextDouble() > fractionalBreakdown) {
+            return (int) progressBreakdown;
+        }
+        
+        return ((int) progressBreakdown)+1;
     }
 
     public double getWorkingTemperature() {
