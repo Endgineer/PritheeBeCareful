@@ -50,11 +50,3 @@ Tinkers' Construct addon that adds tool leveling system.
     versionRange="[1.20.1-2.3.0,)"
     ordering="AFTER"
     side="BOTH"
-
-
-[[dependencies.tinkerslevellingaddon]]
-    modId="iceandfire"
-    mandatory=false
-    versionRange="[1.20.1-2.1.13,)"
-    ordering="AFTER"
-    side="BOTH"
