@@ -420,11 +420,20 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         
         if (resultTemperature > Integer.MIN_VALUE) {
             ItemStack result = slotstack.copy();
+            
             CompoundTag tag = result.getTag();
             int clock = tag.getInt(ReinforceItem.CLOCK);
-            if (clock == 0 && resultTemperature != tag.getDouble(ReinforceItem.TEMPERATURE)) {
+            String material = tag.getString(ReinforceItem.MATERIAL);
+            int reinforce = tag.getInt(ReinforceItem.REINFORCE);
+            double temperature = tag.getDouble(ReinforceItem.TEMPERATURE);
+            int ingotCount = tag.getInt(ReinforceItem.COUNT);
+            int progress = tag.getInt(ReinforceItem.PROGRESS);
+            
+            if (clock == 0 && resultTemperature != temperature) {
                 tag.putDouble(ReinforceItem.TEMPERATURE, resultTemperature);
-                tag.putInt("CustomModelData", ForgingMaterialSpec.getCustomModelData(tag.getString(ReinforceItem.MATERIAL), tag.getInt(ReinforceItem.REINFORCE), resultTemperature));
+                tag.putInt("CustomModelData", ForgingMaterialSpec.getCustomModelData(material, reinforce, resultTemperature));
+                int newProgress = ForgingMaterialSpec.getProgressAfterBreakdown(material, reinforce, temperature, ingotCount, progress);
+                tag.putInt(ReinforceItem.PROGRESS, newProgress);
             }
             
             tag.putInt(ReinforceItem.CLOCK, (clock+1) % 20);
