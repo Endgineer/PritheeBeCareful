@@ -269,7 +269,7 @@ public class ForgingMaterialSpec {
         }
 
         public boolean canQuench(double temperature) {
-            return temperature >= this.malleabilityModel.getQuenchingTemperature();
+            return temperature >= this.malleabilityModel.getQuenchingTemperature() && temperature < this.malleabilityModel.getFoldingTemperature();
         }
     }
 }

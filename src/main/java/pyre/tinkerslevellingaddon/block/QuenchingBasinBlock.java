@@ -110,7 +110,7 @@ public class QuenchingBasinBlock extends Block {
                 int water = state.getValue(LEVEL);
                 if (water > 0 && progress == 0) {
                     if (!reinforceSpec.canQuench(temperature)) {
-                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".quenching_basin.below_quenching_point", (int) reinforceSpec.getQuenchingPoint()), true);
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".quenching_basin.outside_quenching_range", (int) reinforceSpec.getQuenchingPoint(), (int) reinforceSpec.getFoldingPoint()), true);
                         return InteractionResult.sidedSuccess(level.isClientSide);
                     }
                     

@@ -49,7 +49,7 @@
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_reinforce_item.temperature_below_folding": "The item's temperature is too low for folding, needs %s \u00B0C.",
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_reinforce_item.insufficient_material_ingots": "The available ingots are too few for folding, needs %s ingots.",
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_gear_parts.material_mismatch": "Parts combined into a Reinforce Item cannot be of different material types.",
-  "message.tinkerslevellingaddon.quenching_basin.below_quenching_point": "The item's temperature is too low for quenching, needs %s \u00B0C.",
+  "message.tinkerslevellingaddon.quenching_basin.outside_quenching_range": "The item's temperature must be at least %s\u00B0C and below %s\u00B0C.",
   
   "itemGroup.tinkerslevellingaddon.creative_mode_tab": "Tinkers Levelling Addon",
   
