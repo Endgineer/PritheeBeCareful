@@ -310,11 +310,11 @@ public class ToolLevellingUtil {
     }
     
     public static boolean canLevelUp(int level, int reinforce) {
-        return reinforce > 0 && level < Levels.getMaxLevelAt(reinforce) && level < Levels.MAX_LEVEL;
+        return reinforce > 0 && level < EquipmentLevels.getMaxLevelAt(reinforce) && level < EquipmentLevels.MAX_LEVEL;
     }
     
     public static int getXpAt(int level, boolean isBroadTool) {
-        return (int) ((isBroadTool ? Config.broadToolRequiredXpMultiplier.get() : 1) * Levels.getXpAt(level));
+        return (int) ((isBroadTool ? Config.broadToolRequiredXpMultiplier.get() : 1) * EquipmentLevels.getXpAt(level));
     }
     
     public static int getSkillLevel(ToolStack tool) {
@@ -346,7 +346,7 @@ public class ToolLevellingUtil {
                 int experienceNeeded = ToolLevellingUtil.getXpAt(currentLevel + 1, isBroadTool);
                 int amountAdded = Math.min(amount, experienceNeeded-currentExperience);
                 currentExperience += amountAdded;
-                int newLevel = Levels.getLevel(currentExperience);
+                int newLevel = EquipmentLevels.getLevel(currentExperience);
                 boolean levelup = newLevel != currentLevel;
                 currentLevel = newLevel;
                 amount -= amountAdded;
@@ -387,7 +387,7 @@ public class ToolLevellingUtil {
                 int experienceNeeded = ToolLevellingUtil.getXpAt(currentLevel - 1, isBroadTool);
                 int amountSubtracted = Math.max(experienceNeeded-currentExperience, amount);
                 currentExperience += amountSubtracted;
-                int newLevel = Levels.getLevel(currentExperience);
+                int newLevel = EquipmentLevels.getLevel(currentExperience);
                 boolean leveldown = newLevel != currentLevel;
                 currentLevel = newLevel;
                 amount -= amountSubtracted;
@@ -428,8 +428,8 @@ public class ToolLevellingUtil {
         int currentLevel = data.getInt(ReinforceModifier.LEVEL_KEY);
         int currentExperience = data.getInt(ReinforceModifier.EXPERIENCE_KEY);
 
-        int targetLevel = Math.min(Math.max(Levels.MIN_LEVEL, currentLevel+amount), Levels.MAX_LEVEL);
-        int targetExperience = Levels.getXpAt(targetLevel);
+        int targetLevel = Math.min(Math.max(EquipmentLevels.MIN_LEVEL, currentLevel+amount), EquipmentLevels.MAX_LEVEL);
+        int targetExperience = EquipmentLevels.getXpAt(targetLevel);
         
         return ToolLevellingUtil.addExperience(tool, targetExperience-currentExperience, player);
     }

@@ -13,7 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import pyre.tinkerslevellingaddon.ReinforceModifier;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
-import pyre.tinkerslevellingaddon.util.Levels;
+import pyre.tinkerslevellingaddon.util.EquipmentLevels;
 import pyre.tinkerslevellingaddon.util.ModUtil;
 import pyre.tinkerslevellingaddon.util.ToolLevellingUtil;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
@@ -95,7 +95,7 @@ public class TooltipEventHandler {
         
         if (level == 0) {
             infoEntries.add(ModUtil.makeTranslation("tooltip","xp", ModUtil.makeTranslation("tooltip", "xp.unused", ChatFormatting.DARK_GRAY)));
-        } else if (level == Levels.MAX_LEVEL) {
+        } else if (level == EquipmentLevels.MAX_LEVEL) {
             MutableComponent xp = ModUtil.makeText(tool.getPersistentData().getInt(ReinforceModifier.EXPERIENCE_KEY), limited ? ChatFormatting.DARK_GRAY : ChatFormatting.GOLD);
             infoEntries.add(ModUtil.makeTranslation("tooltip","xp", xp));
         } else {
