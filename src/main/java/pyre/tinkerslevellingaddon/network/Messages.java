@@ -40,6 +40,12 @@ public class Messages {
                 .encoder(AnvilClangPacket::toBytes)
                 .consumerMainThread(AnvilClangPacket::handle)
                 .add();
+        
+        net.messageBuilder(AnvilMulticlangPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(AnvilMulticlangPacket::new)
+                .encoder(AnvilMulticlangPacket::toBytes)
+                .consumerMainThread(AnvilMulticlangPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {
