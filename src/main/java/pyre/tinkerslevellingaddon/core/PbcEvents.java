@@ -1,10 +1,14 @@
 package pyre.tinkerslevellingaddon.core;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import net.endgineer.curseoftheabyss.common.Abyss;
+import net.endgineer.curseoftheabyss.core.ModVariables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -47,6 +51,53 @@ public class PbcEvents {
         if (isTitanite) {
             event.setCanceled(true);
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+
+            double layerspan = ModVariables.ABYSS.SPAN/7.0;
+            
+            double titanite_shard_chance = 0.5870 * Math.min(Abyss.pressure(pos.getY()), 2) / 2.0;
+            double large_titanite_shard_chance = 0.2456 * Math.min(Abyss.pressure(pos.getY()+2*layerspan), 2) / 2.0;
+            double titanite_chunk_chance = 0.1036 * Math.min(Abyss.pressure(pos.getY()+4*layerspan), 2) / 2.0;
+            double titanite_scale_chance = 0.0623 * Math.min(Abyss.pressure(pos.getY()+5*layerspan), 1);
+            double titanite_slab_chance = 0.0015 * Math.min(Abyss.pressure(pos.getY()+5*layerspan), 2) / 2.0;
+            
+            double total_chance = titanite_shard_chance+large_titanite_shard_chance+titanite_chunk_chance+titanite_scale_chance+titanite_slab_chance;
+            
+            Item titanite_variant = total_chance == 0 ? PbcItems.TITANITE_SHARD.get() : null;
+            if (titanite_variant == null) {
+                titanite_shard_chance /= total_chance;
+                large_titanite_shard_chance /= total_chance;
+                titanite_chunk_chance /= total_chance;
+                titanite_scale_chance /= total_chance;
+                titanite_slab_chance /= total_chance;
+
+                total_chance = 0;
+                double roll = ThreadLocalRandom.current().nextDouble();
+                
+                total_chance += titanite_shard_chance;
+                if (titanite_variant == null && roll <= total_chance) {
+                    titanite_variant = PbcItems.TITANITE_SHARD.get();
+                }
+                
+                total_chance += large_titanite_shard_chance;
+                if (titanite_variant == null && roll <= total_chance) {
+                    titanite_variant = PbcItems.LARGE_TITANITE_SHARD.get();
+                }
+                
+                total_chance += titanite_chunk_chance;
+                if (titanite_variant == null && roll <= total_chance) {
+                    titanite_variant = PbcItems.TITANITE_CHUNK.get();
+                }
+                
+                total_chance += titanite_scale_chance;
+                if (titanite_variant == null && roll <= total_chance) {
+                    titanite_variant = PbcItems.TITANITE_SCALE.get();
+                }
+                
+                total_chance += titanite_slab_chance;
+                if (titanite_variant == null && roll <= total_chance) {
+                    titanite_variant = PbcItems.TITANITE_SLAB.get();
+                }
+            }
             
             int dropCount = 1;
             
@@ -66,7 +117,7 @@ public class PbcEvents {
             }
             
             DeepslateTitaniteOreBlock block = (DeepslateTitaniteOreBlock) state.getBlock();
-            Block.popResource(level, pos, new ItemStack(PbcItems.TITANITE_SHARD.get(), Math.max(1, dropCount)));
+            Block.popResource(level, pos, new ItemStack(titanite_variant, Math.max(1, dropCount)));
             block.popExperience(level, pos, block.getExpDrop(state, level, level.random, pos, fortuneLevel, 0));
         }
     }

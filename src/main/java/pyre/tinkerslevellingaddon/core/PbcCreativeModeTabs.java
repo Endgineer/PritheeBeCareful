@@ -25,6 +25,10 @@ public class PbcCreativeModeTabs {
                 output.accept(PbcItems.REINFORCE_ITEM.get());
                 output.accept(PbcBlocks.DEEPSLATE_TITANITE_ORE.get());
                 output.accept(PbcItems.TITANITE_SHARD.get());
+                output.accept(PbcItems.LARGE_TITANITE_SHARD.get());
+                output.accept(PbcItems.TITANITE_CHUNK.get());
+                output.accept(PbcItems.TITANITE_SCALE.get());
+                output.accept(PbcItems.TITANITE_SLAB.get());
             }).build()
     );
 

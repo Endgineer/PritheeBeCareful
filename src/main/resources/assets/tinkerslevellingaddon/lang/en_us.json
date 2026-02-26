@@ -10,6 +10,10 @@
   "item.tinkerslevellingaddon.reinforce_item.1": "%1$s %2$s %3$s Reinforce Item (Unf)",
   "item.tinkerslevellingaddon.reinforce_item.2": "%1$s %2$s %3$s Reinforce Item (Fin)",
   "item.tinkerslevellingaddon.titanite_shard": "Titanite Shard",
+  "item.tinkerslevellingaddon.large_titanite_shard": "Large Titanite Shard",
+  "item.tinkerslevellingaddon.titanite_chunk": "Titanite Chunk",
+  "item.tinkerslevellingaddon.titanite_scale": "Titanite Scale",
+  "item.tinkerslevellingaddon.titanite_slab": "Titanite Slab",
   
   "block.tinkerslevellingaddon.reinforcement_anvil": "Reinforcement Anvil",
   "block.tinkerslevellingaddon.forge_chamber": "Forge Chamber",
@@ -35,6 +39,7 @@
   "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.gear_material_unmatched": "Reinforce item's material must correspond to the repair material of the gear item.",
   "message.tinkerslevellingaddon.reinforcement_anvil.reinforce_item_on_gear_item.failed_reinforce_prerequisites": "Gear item must be reinforced further before applying this level of reinforce item.",
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_reinforce_item.temperature_below_folding": "The item's temperature is too low for folding, needs %s \u00B0C.",
+  "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_reinforce_item.invalid_finish_titanite": "This item requires a %s to finish.",
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_reinforce_item.insufficient_material_ingots": "The available ingots are too few for folding, needs %s ingots.",
   "message.tinkerslevellingaddon.reinforcement_anvil.titanite_shard_on_gear_parts.material_mismatch": "Parts combined into a Reinforce Item cannot be of different material types.",
   "message.tinkerslevellingaddon.quenching_basin.outside_quenching_range": "The item's temperature must be at least %s\u00B0C and below %s\u00B0C.",

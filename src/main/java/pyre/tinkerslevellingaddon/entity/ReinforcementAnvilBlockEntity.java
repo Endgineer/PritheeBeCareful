@@ -24,8 +24,12 @@ import pyre.tinkerslevellingaddon.ReinforceModifier;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.block.ReinforcementAnvilBlock;
 import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
+import pyre.tinkerslevellingaddon.item.LargeTitaniteShardItem;
 import pyre.tinkerslevellingaddon.item.ReinforceItem;
+import pyre.tinkerslevellingaddon.item.TitaniteChunkItem;
+import pyre.tinkerslevellingaddon.item.TitaniteScaleItem;
 import pyre.tinkerslevellingaddon.item.TitaniteShardItem;
+import pyre.tinkerslevellingaddon.item.TitaniteSlabItem;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec.MaterialReinforceSpec;
 import pyre.tinkerslevellingaddon.loader.forging.models.ThermalModel;
@@ -223,10 +227,21 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                         return true;
                     }
                 } else if (slottag_b.getDouble(ReinforceItem.EXPERIENCE) == 0 && slottag_b.getInt(ReinforceItem.PROGRESS) > 0) {
+                    int reinforce = slottag_b.getInt(ReinforceItem.REINFORCE);
                     String ingotMaterial = slottag_b.getString(ReinforceItem.MATERIAL);
-                    MaterialReinforceSpec materialReinforceSpec = ForgingMaterialSpec.getMaterialReinforceSpec(ingotMaterial, slottag_b.getInt(ReinforceItem.REINFORCE));
+                    MaterialReinforceSpec materialReinforceSpec = ForgingMaterialSpec.getMaterialReinforceSpec(ingotMaterial, reinforce);
+                    
                     if (!materialReinforceSpec.canFold(slottag_b.getDouble(ReinforceItem.TEMPERATURE))) {
                         player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.titanite_shard_on_reinforce_item.temperature_below_folding", (int) materialReinforceSpec.getFoldingPoint()), true);
+                        return false;
+                    }
+
+                    int progress = slottag_b.getInt(ReinforceItem.PROGRESS);
+                    int tripCost = materialReinforceSpec.getExperienceCostPerTrip(slottag_b.getInt(ReinforceItem.COUNT));
+                    
+                    String missingTitaniteItem = this.canFinish(handitem, reinforce);
+                    if (progress <= tripCost && missingTitaniteItem != null) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.titanite_shard_on_reinforce_item.invalid_finish_titanite", Component.translatable(missingTitaniteItem).getString()), true);
                         return false;
                     }
                     
@@ -260,7 +275,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                     }
                     
                     ItemStack result = slotstack_b.copy();
-                    slottag_b.putDouble(ReinforceItem.EXPERIENCE, Math.min(materialReinforceSpec.getExperienceCostPerTrip(slottag_b.getInt(ReinforceItem.COUNT)), slottag_b.getInt(ReinforceItem.PROGRESS)));
+                    slottag_b.putDouble(ReinforceItem.EXPERIENCE, Math.min(tripCost, progress));
                     result.setTag(slottag_b);
                     this.setItem(SLOT_B, result);
                     
@@ -421,6 +436,23 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         }
         
         return -1;
+    }
+
+    private String canFinish(Item handitem, int reinforce) {
+        switch (reinforce) {
+            case 1:
+                return handitem instanceof TitaniteShardItem ? null : "item.tinkerslevellingaddon.titanite_shard";
+            case 2:
+                return handitem instanceof LargeTitaniteShardItem ? null : "item.tinkerslevellingaddon.large_titanite_shard";
+            case 3:
+                return handitem instanceof TitaniteChunkItem ? null : "item.tinkerslevellingaddon.titanite_chunk";
+            case 4:
+                return handitem instanceof TitaniteScaleItem ? null : "item.tinkerslevellingaddon.titanite_scale";
+            case 5:
+                return handitem instanceof TitaniteSlabItem ? null : "item.tinkerslevellingaddon.titanite_slab";
+        }
+        
+        throw new IllegalArgumentException("ReinforcementAnvilBlockEntity.java::canFinish: invalid reinforce case!");
     }
 
     @OnlyIn(Dist.CLIENT)
