@@ -15,13 +15,17 @@ import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 
 public class TitaniteShardItem extends Item {
     public TitaniteShardItem() {
-        super(new Item.Properties().rarity(Rarity.RARE).fireResistant());
+        this(Rarity.COMMON);
+    }
+    
+    public TitaniteShardItem(Rarity rarity) {
+        super(new Item.Properties().rarity(rarity).fireResistant());
     }
     
     @Override
     public void appendHoverText(ItemStack itemstack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
         components.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".titanite_shard.description").withStyle(ChatFormatting.DARK_GRAY));
+        components.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".titanite_shard.trivia").withStyle(ChatFormatting.DARK_GRAY));
         components.add(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".titanite_shard.usage").withStyle(ChatFormatting.DARK_GRAY));
-        super.appendHoverText(itemstack, level, components, flag);
     }
 }
