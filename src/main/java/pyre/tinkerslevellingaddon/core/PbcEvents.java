@@ -63,7 +63,7 @@ public class PbcEvents {
             double total_chance = titanite_shard_chance+large_titanite_shard_chance+titanite_chunk_chance+titanite_scale_chance+titanite_slab_chance;
             
             Item titanite_variant = total_chance == 0 ? PbcItems.TITANITE_SHARD.get() : null;
-            if (titanite_variant == null) {
+            while (titanite_variant == null) {
                 titanite_shard_chance /= total_chance;
                 large_titanite_shard_chance /= total_chance;
                 titanite_chunk_chance /= total_chance;
@@ -74,28 +74,33 @@ public class PbcEvents {
                 double roll = ThreadLocalRandom.current().nextDouble();
                 
                 total_chance += titanite_shard_chance;
-                if (titanite_variant == null && roll <= total_chance) {
+                if (roll <= total_chance) {
                     titanite_variant = PbcItems.TITANITE_SHARD.get();
+                    break;
                 }
                 
                 total_chance += large_titanite_shard_chance;
-                if (titanite_variant == null && roll <= total_chance) {
+                if (roll <= total_chance) {
                     titanite_variant = PbcItems.LARGE_TITANITE_SHARD.get();
+                    break;
                 }
                 
                 total_chance += titanite_chunk_chance;
-                if (titanite_variant == null && roll <= total_chance) {
+                if (roll <= total_chance) {
                     titanite_variant = PbcItems.TITANITE_CHUNK.get();
+                    break;
                 }
                 
                 total_chance += titanite_scale_chance;
-                if (titanite_variant == null && roll <= total_chance) {
+                if (roll <= total_chance) {
                     titanite_variant = PbcItems.TITANITE_SCALE.get();
+                    break;
                 }
                 
                 total_chance += titanite_slab_chance;
-                if (titanite_variant == null && roll <= total_chance) {
+                if (roll <= total_chance) {
                     titanite_variant = PbcItems.TITANITE_SLAB.get();
+                    break;
                 }
             }
             
