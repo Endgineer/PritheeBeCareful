@@ -58,7 +58,7 @@ public class PbcEvents {
             double large_titanite_shard_chance = 0.2456 * Math.min(Abyss.pressure(pos.getY()+2*layerspan), 2) / 2.0;
             double titanite_chunk_chance = 0.1036 * Math.min(Abyss.pressure(pos.getY()+4*layerspan), 2) / 2.0;
             double titanite_scale_chance = 0.0623 * Math.min(Abyss.pressure(pos.getY()+5*layerspan), 1);
-            double titanite_slab_chance = 0.0015 * Math.min(Abyss.pressure(pos.getY()+5*layerspan), 2) / 2.0;
+            double titanite_slab_chance = 0.0015 * Math.min(Abyss.pressure(pos.getY()+6*layerspan), 1);
             
             double total_chance = titanite_shard_chance+large_titanite_shard_chance+titanite_chunk_chance+titanite_scale_chance+titanite_slab_chance;
             
