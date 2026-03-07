@@ -22,7 +22,9 @@ public class TitaniteSlabItem extends TitaniteShardItem {
     @Override
     public void appendHoverText(ItemStack itemstack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
         components.addAll(TooltipHelper.cutTextComponent(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".titanite_slab.description"), TooltipHelper.styleFromColor(ChatFormatting.DARK_GRAY), TooltipHelper.styleFromColor(ChatFormatting.DARK_GRAY)));
+        components.add(Component.empty());
         components.addAll(TooltipHelper.cutTextComponent(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".titanite_slab.trivia"), TooltipHelper.styleFromColor(ChatFormatting.DARK_GRAY), TooltipHelper.styleFromColor(ChatFormatting.DARK_GRAY)));
+        components.add(Component.empty());
         components.addAll(TooltipHelper.cutTextComponent(Component.translatable("tooltip."+TinkersLevellingAddon.MOD_ID+".titanite_slab.usage"), TooltipHelper.styleFromColor(ChatFormatting.DARK_GRAY), TooltipHelper.styleFromColor(ChatFormatting.DARK_GRAY)));
     }
 }
