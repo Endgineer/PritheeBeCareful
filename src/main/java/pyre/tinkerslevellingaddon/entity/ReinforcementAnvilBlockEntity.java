@@ -25,10 +25,11 @@ import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.block.ReinforcementAnvilBlock;
 import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
 import pyre.tinkerslevellingaddon.item.LargeTitaniteShardItem;
+import pyre.tinkerslevellingaddon.item.TitaniteShardItem;
 import pyre.tinkerslevellingaddon.item.ReinforceItem;
 import pyre.tinkerslevellingaddon.item.TitaniteChunkItem;
 import pyre.tinkerslevellingaddon.item.TitaniteScaleItem;
-import pyre.tinkerslevellingaddon.item.TitaniteShardItem;
+import pyre.tinkerslevellingaddon.item.TitaniteBaseItem;
 import pyre.tinkerslevellingaddon.item.TitaniteSlabItem;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec.MaterialReinforceSpec;
@@ -200,33 +201,52 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                 this.setItem(SLOT_C, handstack.copyWithCount(1));
                 return true;
             }
-        } else if (handitem instanceof TitaniteShardItem) {
+        } else if (handitem instanceof TitaniteBaseItem) {
             if (ReinforceItem.isValidReinforceItem(slotstack_b)) {
                 CompoundTag slottag_b = slotstack_b.getTag();
 
                 if (slottag_b.getInt(ReinforceItem.STATUS) == ReinforceItem.ReinforceStatus.UNTOUCHED.ordinal()) {
-                    int reinforce = slottag_b.getInt(ReinforceItem.REINFORCE);
-                    if (reinforce < 5) {
-                        ItemStack result = slotstack_b.copy();
-                        int resultReinforce = reinforce+1;
-                        
-                        CompoundTag tag = result.getTag();
-                        
-                        String resultMaterial = tag.getString(ReinforceItem.MATERIAL);
-                        int resultCount = tag.getInt(ReinforceItem.COUNT);
-                        
-                        tag.putInt(ReinforceItem.REINFORCE, resultReinforce);
-                        tag.putInt(ReinforceItem.PROGRESS, ForgingMaterialSpec.getExperienceCostTotal(resultMaterial, resultReinforce, resultCount));
-                        tag.putDouble(ReinforceItem.EXPERIENCE, ForgingMaterialSpec.getExperienceCostPerTrip(resultMaterial, resultReinforce, resultCount));
-                        result.setTag(tag);
-                        
-                        player.setItemInHand(InteractionHand.MAIN_HAND, handstack.copyWithCount(handstack.getCount()-1));
-                        this.setItem(SLOT_B, result);
-                        
-                        Messages.sendAnvilMulticlang(level, worldPosition);
-                        return true;
+                    int reinforce = slottag_b.getInt(ReinforceItem.REINFORCE)+1;
+                    if (reinforce > 5) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.reinforcement_selection.max_reinforce"), true);
+                        return false;
                     }
-                } else if (slottag_b.getDouble(ReinforceItem.EXPERIENCE) == 0 && slottag_b.getInt(ReinforceItem.PROGRESS) > 0) {
+                    
+                    String missingTitaniteItem = this.canCreateReinforceItem(handitem, reinforce);
+                    if (missingTitaniteItem != null) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.reinforcement_selection.invalid_titanite", Component.translatable(missingTitaniteItem).getString(), reinforce), true);
+                        return false;
+                    }
+                    
+                    ItemStack result = slotstack_b.copy();
+                    CompoundTag tag = result.getTag();
+                    
+                    String resultMaterial = tag.getString(ReinforceItem.MATERIAL);
+                    int resultCount = tag.getInt(ReinforceItem.COUNT);
+                    
+                    tag.putInt(ReinforceItem.REINFORCE, reinforce);
+                    tag.putInt(ReinforceItem.PROGRESS, ForgingMaterialSpec.getExperienceCostTotal(resultMaterial, reinforce, resultCount));
+                    tag.putDouble(ReinforceItem.EXPERIENCE, ForgingMaterialSpec.getExperienceCostPerTrip(resultMaterial, reinforce, resultCount));
+                    result.setTag(tag);
+                    
+                    player.setItemInHand(InteractionHand.MAIN_HAND, handstack.copyWithCount(handstack.getCount()-1));
+                    this.setItem(SLOT_B, result);
+                    
+                    Messages.sendAnvilMulticlang(level, worldPosition);
+                    return true;
+                } else {
+                    double experience = slottag_b.getDouble(ReinforceItem.EXPERIENCE);
+                    if (experience > 0) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.hint.must_hammer"), true);
+                        return false;
+                    }
+                    
+                    int progress = slottag_b.getInt(ReinforceItem.PROGRESS);
+                    if (progress == 0) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.hint.must_quench"), true);
+                        return false;
+                    }
+                    
                     int reinforce = slottag_b.getInt(ReinforceItem.REINFORCE);
                     String ingotMaterial = slottag_b.getString(ReinforceItem.MATERIAL);
                     MaterialReinforceSpec materialReinforceSpec = ForgingMaterialSpec.getMaterialReinforceSpec(ingotMaterial, reinforce);
@@ -235,15 +255,13 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                         player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.titanite_shard_on_reinforce_item.temperature_below_folding", (int) materialReinforceSpec.getFoldingPoint()), true);
                         return false;
                     }
-
-                    int progress = slottag_b.getInt(ReinforceItem.PROGRESS);
-                    int tripCost = materialReinforceSpec.getExperienceCostPerTrip(slottag_b.getInt(ReinforceItem.COUNT));
                     
-                    String missingTitaniteItem = this.canFinish(handitem, reinforce);
-                    if (progress <= tripCost && missingTitaniteItem != null) {
-                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.titanite_shard_on_reinforce_item.invalid_finish_titanite", Component.translatable(missingTitaniteItem).getString()), true);
+                    if (!(handitem instanceof TitaniteShardItem)) {
+                        player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.titanite_shard_on_reinforce_item.invalid_titanite"), true);
                         return false;
                     }
+                    
+                    int tripCost = materialReinforceSpec.getExperienceCostPerTrip(slottag_b.getInt(ReinforceItem.COUNT));
                     
                     int required = slottag_b.getInt(ReinforceItem.COUNT);
                     int available = 0;
@@ -310,6 +328,13 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                         player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.titanite_shard_on_gear_parts.material_mismatch"), true);
                         return false;
                     }
+                }
+
+                int reinforce = 1;
+                String missingTitaniteItem = this.canCreateReinforceItem(handitem, reinforce);
+                if (missingTitaniteItem != null) {
+                    player.displayClientMessage(Component.translatable("message."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil.reinforcement_selection.invalid_titanite", Component.translatable(missingTitaniteItem).getString(), reinforce), true);
+                    return false;
                 }
                 
                 int materialCost = gearSpec.getMaterialCost();
@@ -438,7 +463,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
         return -1;
     }
 
-    private String canFinish(Item handitem, int reinforce) {
+    private String canCreateReinforceItem(Item handitem, int reinforce) {
         switch (reinforce) {
             case 1:
                 return handitem instanceof TitaniteShardItem ? null : "item.tinkerslevellingaddon.titanite_shard";
@@ -452,7 +477,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                 return handitem instanceof TitaniteSlabItem ? null : "item.tinkerslevellingaddon.titanite_slab";
         }
         
-        throw new IllegalArgumentException("ReinforcementAnvilBlockEntity.java::canFinish: invalid reinforce case!");
+        throw new IllegalArgumentException("ReinforcementAnvilBlockEntity.java::canCreateReinforceItem: invalid reinforce case!");
     }
 
     @OnlyIn(Dist.CLIENT)

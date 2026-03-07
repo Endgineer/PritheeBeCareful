@@ -14,7 +14,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 
-public class LargeTitaniteShardItem extends TitaniteShardItem {
+public class LargeTitaniteShardItem extends TitaniteBaseItem {
     public LargeTitaniteShardItem() {
         super(Rarity.COMMON);
     }

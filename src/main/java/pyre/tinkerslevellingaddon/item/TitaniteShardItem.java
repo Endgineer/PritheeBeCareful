@@ -8,20 +8,15 @@ import com.simibubi.create.foundation.item.TooltipHelper;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 
-public class TitaniteShardItem extends Item {
+public class TitaniteShardItem extends TitaniteBaseItem {
     public TitaniteShardItem() {
-        this(Rarity.COMMON);
-    }
-    
-    public TitaniteShardItem(Rarity rarity) {
-        super(new Item.Properties().rarity(rarity).fireResistant());
+        super(Rarity.COMMON);
     }
     
     @Override
