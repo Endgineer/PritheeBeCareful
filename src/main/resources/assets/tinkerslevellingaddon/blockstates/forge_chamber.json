@@ -1,9 +1,9 @@
 {
   "variants": {
-    "active=false,facing=north": { "model": "tinkerslevellingaddon:block/forge_chamber_inactive" },
-    "active=false,facing=south": { "model": "tinkerslevellingaddon:block/forge_chamber_inactive", "uvlock": true, "y": 180 },
-    "active=false,facing=west":  { "model": "tinkerslevellingaddon:block/forge_chamber_inactive", "uvlock": true, "y": 270 },
-    "active=false,facing=east":  { "model": "tinkerslevellingaddon:block/forge_chamber_inactive", "uvlock": true, "y": 90 },
+    "active=false,facing=north": { "model": "tinkerslevellingaddon:block/forge_chamber" },
+    "active=false,facing=south": { "model": "tinkerslevellingaddon:block/forge_chamber", "uvlock": true, "y": 180 },
+    "active=false,facing=west":  { "model": "tinkerslevellingaddon:block/forge_chamber", "uvlock": true, "y": 270 },
+    "active=false,facing=east":  { "model": "tinkerslevellingaddon:block/forge_chamber", "uvlock": true, "y": 90 },
     
     "active=true,facing=north":  { "model": "tinkerslevellingaddon:block/forge_chamber_active" },
     "active=true,facing=south":  { "model": "tinkerslevellingaddon:block/forge_chamber_active", "uvlock": true, "y": 180 },

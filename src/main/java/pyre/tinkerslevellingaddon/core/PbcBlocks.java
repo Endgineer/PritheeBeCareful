@@ -1,14 +1,12 @@
 package pyre.tinkerslevellingaddon.core;
 
-import java.util.function.Supplier;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
+import com.tterrag.registrate.util.entry.BlockEntry;
 
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.block.DeepslateTitaniteOreBlock;
 import pyre.tinkerslevellingaddon.block.ForgeChamberBlock;
@@ -18,25 +16,54 @@ import pyre.tinkerslevellingaddon.block.QuenchingBasinBlock;
 import pyre.tinkerslevellingaddon.block.ReinforcementAnvilBlock;
 
 public class PbcBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, TinkersLevellingAddon.MOD_ID);
-
-    public static final RegistryObject<Block> REINFORCEMENT_ANVIL = registerBlock("reinforcement_anvil", () -> new ReinforcementAnvilBlock());
-
-    public static final RegistryObject<Block> FORGE_CHAMBER = registerBlock("forge_chamber", () -> new ForgeChamberBlock());
-    public static final RegistryObject<Block> FORGE_HEARTH = registerBlock("forge_hearth", () -> new ForgeHearthBlock());
-    public static final RegistryObject<Block> FORGE_THROAT = registerBlock("forge_throat", () -> new ForgeThroatBlock());
-
-    public static final RegistryObject<Block> QUENCHING_BASIN = registerBlock("quenching_basin", () -> new QuenchingBasinBlock());
-
-    public static final RegistryObject<Block> DEEPSLATE_TITANITE_ORE = registerBlock("deepslate_titanite_ore", () -> new DeepslateTitaniteOreBlock());
+    private static final CreateRegistrate REGISTRATE = TinkersLevellingAddon.getRegistrate();
     
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
-        RegistryObject<T> object = BLOCKS.register(name, block);
-        PbcItems.ITEMS.register(name, () -> new BlockItem(object.get(), new Item.Properties()));
-        return object;
-    }
+    public static final BlockEntry<ReinforcementAnvilBlock> REINFORCEMENT_ANVIL = REGISTRATE.block("reinforcement_anvil", props -> new ReinforcementAnvilBlock())
+        .blockstate((context, provider) -> {})
+        .loot((table, block) -> table.dropSelf(block))
+        .simpleItem()
+        .transform(pickaxeOnly())
+        .tag(BlockTags.NEEDS_IRON_TOOL)
+        .register();
     
-    public static void register(IEventBus eventBus) {
-        BLOCKS.register(eventBus);
-    }
+    public static final BlockEntry<ForgeChamberBlock> FORGE_CHAMBER = REGISTRATE.block("forge_chamber", props -> new ForgeChamberBlock())
+        .blockstate((context, provider) -> {})
+        .loot((table, block) -> table.dropSelf(block))
+        .simpleItem()
+        .transform(pickaxeOnly())
+        .tag(BlockTags.NEEDS_IRON_TOOL)
+        .register();
+    
+    public static final BlockEntry<ForgeHearthBlock> FORGE_HEARTH = REGISTRATE.block("forge_hearth", props -> new ForgeHearthBlock())
+        .blockstate((context, provider) -> {})
+        .loot((table, block) -> table.dropSelf(block))
+        .simpleItem()
+        .transform(pickaxeOnly())
+        .tag(BlockTags.NEEDS_IRON_TOOL)
+        .register();
+    
+    public static final BlockEntry<ForgeThroatBlock> FORGE_THROAT = REGISTRATE.block("forge_throat", props -> new ForgeThroatBlock())
+        .blockstate((context, provider) -> {})
+        .loot((table, block) -> table.dropSelf(block))
+        .simpleItem()
+        .transform(pickaxeOnly())
+        .tag(BlockTags.NEEDS_IRON_TOOL)
+        .register();
+
+    public static final BlockEntry<QuenchingBasinBlock> QUENCHING_BASIN = REGISTRATE.block("quenching_basin", props -> new QuenchingBasinBlock())
+        .blockstate((context, provider) -> {})
+        .loot((table, block) -> table.dropSelf(block))
+        .simpleItem()
+        .transform(pickaxeOnly())
+        .tag(BlockTags.NEEDS_IRON_TOOL)
+        .register();
+
+    public static final BlockEntry<DeepslateTitaniteOreBlock> DEEPSLATE_TITANITE_ORE = REGISTRATE.block("deepslate_titanite_ore", props -> new DeepslateTitaniteOreBlock())
+        .loot((table, block) -> table.add(block, LootTable.lootTable().withPool(LootPool.lootPool())))
+        .simpleItem()
+        .transform(pickaxeOnly())
+        .tag(BlockTags.NEEDS_IRON_TOOL)
+        .register();
+    
+    public static void register() {}
 }

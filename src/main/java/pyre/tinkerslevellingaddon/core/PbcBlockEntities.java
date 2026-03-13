@@ -1,36 +1,39 @@
 package pyre.tinkerslevellingaddon.core;
 
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
+
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
+import pyre.tinkerslevellingaddon.client.render.ReinforcementAnvilBlockEntityRenderer;
 import pyre.tinkerslevellingaddon.entity.ForgeChamberBlockEntity;
 import pyre.tinkerslevellingaddon.entity.ForgeHearthBlockEntity;
 import pyre.tinkerslevellingaddon.entity.ForgeThroatBlockEntity;
 import pyre.tinkerslevellingaddon.entity.ReinforcementAnvilBlockEntity;
 
 public class PbcBlockEntities {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCKENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, TinkersLevellingAddon.MOD_ID);
+    private static final CreateRegistrate REGISTRATE = TinkersLevellingAddon.getRegistrate();
 
-    public static final RegistryObject<BlockEntityType<ReinforcementAnvilBlockEntity>> REINFORCEMENT_ANVIL_BLOCK_ENTITY = BLOCKENTITIES.register("reinforcement_anvil_block_entity",
-        () -> BlockEntityType.Builder.of(ReinforcementAnvilBlockEntity::new, PbcBlocks.REINFORCEMENT_ANVIL.get()).build(null)
-    );
+    public static final BlockEntityEntry<ReinforcementAnvilBlockEntity> REINFORCEMENT_ANVIL_BLOCK_ENTITY = REGISTRATE
+        .blockEntity("reinforcement_anvil_block_entity", ReinforcementAnvilBlockEntity::new)
+        .validBlocks(PbcBlocks.REINFORCEMENT_ANVIL)
+        .renderer(() -> ReinforcementAnvilBlockEntityRenderer::new)
+        .register();
 
-    public static final RegistryObject<BlockEntityType<ForgeChamberBlockEntity>> FORGE_CHAMBER_BLOCK_ENTITY = BLOCKENTITIES.register("forge_chamber_block_entity",
-        () -> BlockEntityType.Builder.of(ForgeChamberBlockEntity::new, PbcBlocks.FORGE_CHAMBER.get()).build(null)
-    );
+    public static final BlockEntityEntry<ForgeChamberBlockEntity> FORGE_CHAMBER_BLOCK_ENTITY = REGISTRATE
+        .blockEntity("forge_chamber_block_entity", ForgeChamberBlockEntity::new)
+        .validBlocks(PbcBlocks.FORGE_CHAMBER)
+        .register();
 
-    public static final RegistryObject<BlockEntityType<ForgeThroatBlockEntity>> FORGE_THROAT_BLOCK_ENTITY = BLOCKENTITIES.register("forge_throat_block_entity",
-        () -> BlockEntityType.Builder.of(ForgeThroatBlockEntity::new, PbcBlocks.FORGE_THROAT.get()).build(null)
-    );
+    public static final BlockEntityEntry<ForgeThroatBlockEntity> FORGE_THROAT_BLOCK_ENTITY = REGISTRATE
+        .blockEntity("forge_throat_block_entity", ForgeThroatBlockEntity::new)
+        .validBlocks(PbcBlocks.FORGE_THROAT)
+        .register();
+
+    public static final BlockEntityEntry<ForgeHearthBlockEntity> FORGE_HEARTH_BLOCK_ENTITY = REGISTRATE
+        .blockEntity("forge_hearth_block_entity", ForgeHearthBlockEntity::new)
+        .validBlocks(PbcBlocks.FORGE_HEARTH)
+        .register();
     
-    public static final RegistryObject<BlockEntityType<ForgeHearthBlockEntity>> FORGE_HEARTH_BLOCK_ENTITY = BLOCKENTITIES.register("forge_hearth_block_entity",
-        () -> BlockEntityType.Builder.of(ForgeHearthBlockEntity::new, PbcBlocks.FORGE_HEARTH.get()).build(null)
-    );
-    
-    public static void register(IEventBus eventBus) {
-        BLOCKENTITIES.register(eventBus);
-    }
+    public static void register(IEventBus eventBus) {}
 }

@@ -48,7 +48,7 @@ public class ForgeHearthBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ForgeHearthBlockEntity(pos, state);
+        return new ForgeHearthBlockEntity(PbcBlockEntities.FORGE_HEARTH_BLOCK_ENTITY.get(), pos, state);
     }
     
     @Override

@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -25,7 +26,6 @@ import net.minecraftforge.items.IItemHandler;
 import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.block.ForgeChamberBlock;
 import pyre.tinkerslevellingaddon.block.ForgeHearthBlock;
-import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
 import pyre.tinkerslevellingaddon.core.PbcBlocks;
 import slimeknights.mantle.block.entity.NameableBlockEntity;
 
@@ -34,8 +34,8 @@ public class ForgeHearthBlockEntity extends NameableBlockEntity {
     
     private final LazyOptional<IItemHandler> itemCapability = LazyOptional.of(this::proxyHandler);
     
-    public ForgeHearthBlockEntity(BlockPos pos, BlockState state) {
-        super(PbcBlockEntities.FORGE_HEARTH_BLOCK_ENTITY.get(), pos, state, Component.translatable("gui."+TinkersLevellingAddon.MOD_ID+".forge_hearth"));
+    public ForgeHearthBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state, Component.translatable("gui."+TinkersLevellingAddon.MOD_ID+".forge_hearth"));
     }
 
     @Override

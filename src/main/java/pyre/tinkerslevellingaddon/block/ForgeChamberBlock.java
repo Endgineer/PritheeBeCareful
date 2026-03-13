@@ -53,7 +53,7 @@ public class ForgeChamberBlock extends InventoryBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ForgeChamberBlockEntity(pos, state);
+        return new ForgeChamberBlockEntity(PbcBlockEntities.FORGE_CHAMBER_BLOCK_ENTITY.get(), pos, state);
     }
     
     @Override

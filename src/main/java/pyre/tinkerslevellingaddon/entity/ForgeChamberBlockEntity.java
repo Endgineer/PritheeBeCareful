@@ -29,6 +29,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.wrapper.InvWrapper;
@@ -36,7 +37,6 @@ import pyre.tinkerslevellingaddon.TinkersLevellingAddon;
 import pyre.tinkerslevellingaddon.block.ForgeChamberBlock;
 import pyre.tinkerslevellingaddon.block.ForgeHearthBlock;
 import pyre.tinkerslevellingaddon.block.ForgeThroatBlock;
-import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
 import pyre.tinkerslevellingaddon.core.PbcBlocks;
 import pyre.tinkerslevellingaddon.item.ReinforceItem;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpec;
@@ -60,8 +60,8 @@ public class ForgeChamberBlockEntity extends InventoryBlockEntity implements IHa
     private double fuelMaximum = 0;
     private double temperature = ThermalModel.AMBIENT_TEMPERATURE;
     
-    public ForgeChamberBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(PbcBlockEntities.FORGE_CHAMBER_BLOCK_ENTITY.get(), blockPos, blockState, Component.translatable("gui."+TinkersLevellingAddon.MOD_ID+".forge_chamber"), false, 2);
+    public ForgeChamberBlockEntity(BlockEntityType<?> type, BlockPos blockPos, BlockState blockState) {
+        super(type, blockPos, blockState, Component.translatable("gui."+TinkersLevellingAddon.MOD_ID+".forge_chamber"), false, 2);
         this.itemHandler = new InvWrapper(this);
     }
 

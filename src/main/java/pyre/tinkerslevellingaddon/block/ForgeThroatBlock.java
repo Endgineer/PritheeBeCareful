@@ -46,7 +46,7 @@ public class ForgeThroatBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ForgeThroatBlockEntity(pos, state);
+        return new ForgeThroatBlockEntity(PbcBlockEntities.FORGE_THROAT_BLOCK_ENTITY.get(), pos, state);
     }
     
     @Override

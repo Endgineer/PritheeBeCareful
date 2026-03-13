@@ -30,6 +30,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import pyre.tinkerslevellingaddon.core.PbcBlockEntities;
 import pyre.tinkerslevellingaddon.entity.ReinforcementAnvilBlockEntity;
 import slimeknights.mantle.block.RetexturedBlock;
 import slimeknights.mantle.util.RetexturedHelper;
@@ -78,7 +79,7 @@ public class ReinforcementAnvilBlock extends TableBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ReinforcementAnvilBlockEntity(pPos, pState);
+        return new ReinforcementAnvilBlockEntity(PbcBlockEntities.REINFORCEMENT_ANVIL_BLOCK_ENTITY.get(), pPos, pState);
     }
     
     @Override

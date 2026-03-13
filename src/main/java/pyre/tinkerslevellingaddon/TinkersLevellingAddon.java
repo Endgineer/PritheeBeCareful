@@ -2,7 +2,12 @@ package pyre.tinkerslevellingaddon;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.api.behaviour.spouting.BlockSpoutingBehaviour;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.simibubi.create.foundation.item.ItemDescription;
+import com.simibubi.create.foundation.item.KineticStats;
+import com.simibubi.create.foundation.item.TooltipModifier;
 
+import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -27,8 +32,6 @@ import pyre.tinkerslevellingaddon.core.PbcCreativeModeTabs;
 import pyre.tinkerslevellingaddon.core.PbcItems;
 import pyre.tinkerslevellingaddon.core.PbcMenus;
 import pyre.tinkerslevellingaddon.core.PbcSpecs;
-import pyre.tinkerslevellingaddon.data.PbcBlockTagsProvider;
-import pyre.tinkerslevellingaddon.data.PbcLootTableProvider;
 import pyre.tinkerslevellingaddon.data.PbcRecipeProvider;
 import pyre.tinkerslevellingaddon.data.PbcWorldGenProvider;
 import pyre.tinkerslevellingaddon.loader.forging.ForgingMaterialSpecManager;
@@ -48,11 +51,15 @@ public class TinkersLevellingAddon {
     public static final String NAME = "Tinkers Levelling Addon";
     public static final String MOD_ID = "tinkerslevellingaddon";
 
+    private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
+    
     public TinkersLevellingAddon() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         
+        REGISTRATE.registerEventListeners(modEventBus);
+        REGISTRATE.setCreativeTab(PbcCreativeModeTabs.MAIN);
+        
         PbcItems.register(modEventBus);
-        PbcBlocks.register(modEventBus);
         PbcBlockEntities.register(modEventBus);
         PbcCreativeModeTabs.register(modEventBus);
         PbcMenus.register(modEventBus);
@@ -87,8 +94,6 @@ public class TinkersLevellingAddon {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         
         generator.addProvider(event.includeServer(), new PbcRecipeProvider(packOutput));
-        generator.addProvider(event.includeServer(), new PbcBlockTagsProvider(packOutput, lookupProvider, existingFileHelper));
-        generator.addProvider(event.includeServer(), new PbcLootTableProvider(packOutput));
         generator.addProvider(event.includeServer(), new PbcWorldGenProvider(packOutput, lookupProvider));
         
         PbcSpecs.generateForgingMaterialSpecs();
@@ -96,5 +101,9 @@ public class TinkersLevellingAddon {
         
         PbcSpecs.generateReinforcingGearSpecs();
         generator.addProvider(event.includeServer(), new ReinforcingGearSpecProvider(packOutput));
+    }
+
+    public static CreateRegistrate getRegistrate() {
+        return REGISTRATE;
     }
 }

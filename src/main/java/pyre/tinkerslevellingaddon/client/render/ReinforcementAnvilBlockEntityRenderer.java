@@ -17,12 +17,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import pyre.tinkerslevellingaddon.block.ReinforcementAnvilBlock;
 import pyre.tinkerslevellingaddon.entity.ReinforcementAnvilBlockEntity;
+import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 
-public class ReinforcementAnvilBlockEntityRenderer implements BlockEntityRenderer<ReinforcementAnvilBlockEntity> {
+public class ReinforcementAnvilBlockEntityRenderer extends SafeBlockEntityRenderer<ReinforcementAnvilBlockEntity> {
     public ReinforcementAnvilBlockEntityRenderer(Context context) {}
 
     @Override
-    public void render(ReinforcementAnvilBlockEntity blockEntity, float partialTicks, PoseStack matrices, MultiBufferSource buffer, int light, int combinedOverlayIn) {
+    protected void renderSafe(ReinforcementAnvilBlockEntity blockEntity, float partialTicks, PoseStack matrices, MultiBufferSource buffer, int light, int combinedOverlayIn) {
         Level level = blockEntity.getLevel();
         BlockPos pos = blockEntity.getBlockPos();
         

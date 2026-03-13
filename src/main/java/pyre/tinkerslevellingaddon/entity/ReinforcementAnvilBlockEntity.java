@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -61,8 +62,8 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
     public static final int SLOT_B = 1;
     public static final int SLOT_C = 2;
     
-    public ReinforcementAnvilBlockEntity(BlockPos pos, BlockState state) {
-        super(PbcBlockEntities.REINFORCEMENT_ANVIL_BLOCK_ENTITY.get(), pos, state, Component.translatable("gui."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil"), 3, 1);
+    public ReinforcementAnvilBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state, Component.translatable("gui."+TinkersLevellingAddon.MOD_ID+".reinforcement_anvil"), 3, 1);
         this.itemHandler = new InvWrapper(this);
     }
     

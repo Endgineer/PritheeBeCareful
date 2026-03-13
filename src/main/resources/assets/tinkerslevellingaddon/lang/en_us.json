@@ -48,7 +48,7 @@
   "message.tinkerslevellingaddon.reinforcement_anvil.hint.must_quench": "The Reinforce Item must be quenched.",
   "message.tinkerslevellingaddon.quenching_basin.outside_quenching_range": "The item's temperature must be at least %s\u00B0C and below %s\u00B0C.",
   
-  "itemGroup.tinkerslevellingaddon.creative_mode_tab": "Tinkers Levelling Addon",
+  "itemGroup.tinkerslevellingaddon.main": "Prithee Be Careful",
   
   "forging.tinkerslevellingaddon.gear.dagger": "Dagger",
   "forging.tinkerslevellingaddon.gear.sword": "Sword",
