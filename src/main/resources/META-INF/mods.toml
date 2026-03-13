@@ -1,34 +1,34 @@
 modLoader="javafml"
 loaderVersion="${loader_range}"
 license="MIT, https://spdx.org/licenses/MIT.html"
-issueTrackerURL="https://github.com/Pyre540/tinkers-levelling-addon/issues"
+issueTrackerURL="https://github.com/Endgineer/tinkers-levelling-addon-pbc"
 
 [[mods]]
-modId="tinkerslevellingaddon"
+modId="pritheebecareful"
 version="${version}"
-displayName="Tinkers' Levelling Addon"
+displayName="Prithee Be Careful"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/tinkers-levelling-addon/"
 logoFile="logo.png"
 authors="Pyre540"
 description='''
-Tinkers' Construct addon that adds tool leveling system.
+I don't want to see me work squandered.
 '''
 
-[[dependencies.tinkerslevellingaddon]]
+[[dependencies.pritheebecareful]]
     modId="forge"
     mandatory=true
     versionRange="${forge_range}"
     ordering="AFTER"
     side="BOTH"
 
-[[dependencies.tinkerslevellingaddon]]
+[[dependencies.pritheebecareful]]
     modId="minecraft"
     mandatory=true
     versionRange="${minecraft_range}"
     ordering="AFTER"
     side="BOTH"
 
-[[dependencies.tinkerslevellingaddon]]
+[[dependencies.pritheebecareful]]
     modId="tconstruct"
     mandatory=true
     versionRange="${tinkers_range}"
@@ -36,7 +36,7 @@ Tinkers' Construct addon that adds tool leveling system.
     side="BOTH"
 
 
-[[dependencies.tinkerslevellingaddon]]
+[[dependencies.pritheebecareful]]
     modId="create"
     mandatory=true
     versionRange="[6.0.6,)"
@@ -44,7 +44,7 @@ Tinkers' Construct addon that adds tool leveling system.
     side="BOTH"
 
 
-[[dependencies.tinkerslevellingaddon]]
+[[dependencies.pritheebecareful]]
     modId="curseoftheabyss"
     mandatory=false
     versionRange="[1.20.1-2.3.0,)"

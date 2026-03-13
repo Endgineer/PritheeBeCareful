@@ -1,0 +1,66 @@
+package pyre.pritheebecareful.network;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.simple.SimpleChannel;
+import pyre.pritheebecareful.PritheeBeCareful;
+
+public class Messages {
+
+    private static SimpleChannel INSTANCE;
+
+    private static int packetId = 0;
+    private static int id() {
+        return packetId++;
+    }
+
+    public static void register() {
+        SimpleChannel net = NetworkRegistry.ChannelBuilder
+                .named(new ResourceLocation(PritheeBeCareful.MOD_ID, "messages"))
+                .networkProtocolVersion(() -> "1.0")
+                .clientAcceptedVersions(s -> true)
+                .serverAcceptedVersions(s -> true)
+                .simpleChannel();
+
+        INSTANCE = net;
+
+        net.messageBuilder(LevelUpPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(LevelUpPacket::new)
+                .encoder(LevelUpPacket::toBytes)
+                .consumerMainThread(LevelUpPacket::handle)
+                .add();
+        
+        net.messageBuilder(AnvilClangPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(AnvilClangPacket::new)
+                .encoder(AnvilClangPacket::toBytes)
+                .consumerMainThread(AnvilClangPacket::handle)
+                .add();
+        
+        net.messageBuilder(AnvilMulticlangPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(AnvilMulticlangPacket::new)
+                .encoder(AnvilMulticlangPacket::toBytes)
+                .consumerMainThread(AnvilMulticlangPacket::handle)
+                .add();
+    }
+
+    public static <MSG> void sendToServer(MSG message) {
+        INSTANCE.sendToServer(message);
+    }
+
+    public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
+        INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
+    }
+
+    public static <MSG> void sendAnvilClang(Level level, BlockPos blockPos, int hitEffectiveness, int takenXpPoints) {
+        INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(blockPos)), new AnvilClangPacket(blockPos, hitEffectiveness, takenXpPoints));
+    }
+
+    public static <MSG> void sendAnvilMulticlang(Level level, BlockPos blockPos) {
+        INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(blockPos)), new AnvilMulticlangPacket(blockPos));
+    }
+}

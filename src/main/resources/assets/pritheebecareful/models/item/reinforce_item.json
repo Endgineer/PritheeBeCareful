@@ -1,0 +1,40 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "pritheebecareful:item/reinforce_item_0"
+  },
+  "overrides": [
+    { "predicate": { "custom_model_data": 1}, "model": "pritheebecareful:item/reinforce_item/1" },
+    { "predicate": { "custom_model_data": 2}, "model": "pritheebecareful:item/reinforce_item/2" },
+    { "predicate": { "custom_model_data": 3}, "model": "pritheebecareful:item/reinforce_item/3" },
+    { "predicate": { "custom_model_data": 4}, "model": "pritheebecareful:item/reinforce_item/4" },
+    { "predicate": { "custom_model_data": 5}, "model": "pritheebecareful:item/reinforce_item/5" },
+    { "predicate": { "custom_model_data": 6}, "model": "pritheebecareful:item/reinforce_item/6" },
+    { "predicate": { "custom_model_data": 7}, "model": "pritheebecareful:item/reinforce_item/7" },
+    { "predicate": { "custom_model_data": 8}, "model": "pritheebecareful:item/reinforce_item/8" },
+    { "predicate": { "custom_model_data": 9}, "model": "pritheebecareful:item/reinforce_item/9" },
+    { "predicate": { "custom_model_data": 10}, "model": "pritheebecareful:item/reinforce_item/10" },
+    { "predicate": { "custom_model_data": 11}, "model": "pritheebecareful:item/reinforce_item/11" },
+    { "predicate": { "custom_model_data": 12}, "model": "pritheebecareful:item/reinforce_item/12" },
+    { "predicate": { "custom_model_data": 13}, "model": "pritheebecareful:item/reinforce_item/13" },
+    { "predicate": { "custom_model_data": 14}, "model": "pritheebecareful:item/reinforce_item/14" },
+    { "predicate": { "custom_model_data": 15}, "model": "pritheebecareful:item/reinforce_item/15" },
+    { "predicate": { "custom_model_data": 16}, "model": "pritheebecareful:item/reinforce_item/16" },
+    { "predicate": { "custom_model_data": 17}, "model": "pritheebecareful:item/reinforce_item/17" },
+    { "predicate": { "custom_model_data": 18}, "model": "pritheebecareful:item/reinforce_item/18" },
+    { "predicate": { "custom_model_data": 19}, "model": "pritheebecareful:item/reinforce_item/19" },
+    { "predicate": { "custom_model_data": 20}, "model": "pritheebecareful:item/reinforce_item/20" },
+    { "predicate": { "custom_model_data": 21}, "model": "pritheebecareful:item/reinforce_item/21" },
+    { "predicate": { "custom_model_data": 22}, "model": "pritheebecareful:item/reinforce_item/22" },
+    { "predicate": { "custom_model_data": 23}, "model": "pritheebecareful:item/reinforce_item/23" },
+    { "predicate": { "custom_model_data": 24}, "model": "pritheebecareful:item/reinforce_item/24" },
+    { "predicate": { "custom_model_data": 25}, "model": "pritheebecareful:item/reinforce_item/25" },
+    { "predicate": { "custom_model_data": 26}, "model": "pritheebecareful:item/reinforce_item/26" },
+    { "predicate": { "custom_model_data": 27}, "model": "pritheebecareful:item/reinforce_item/27" },
+    { "predicate": { "custom_model_data": 28}, "model": "pritheebecareful:item/reinforce_item/28" },
+    { "predicate": { "custom_model_data": 29}, "model": "pritheebecareful:item/reinforce_item/29" },
+    { "predicate": { "custom_model_data": 30}, "model": "pritheebecareful:item/reinforce_item/30" },
+    { "predicate": { "custom_model_data": 31}, "model": "pritheebecareful:item/reinforce_item/31" },
+    { "predicate": { "custom_model_data": 32}, "model": "pritheebecareful:item/reinforce_item/32" }
+  ]
+}

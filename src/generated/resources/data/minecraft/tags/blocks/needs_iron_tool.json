@@ -1,10 +1,10 @@
 {
   "values": [
-    "tinkerslevellingaddon:reinforcement_anvil",
-    "tinkerslevellingaddon:forge_chamber",
-    "tinkerslevellingaddon:forge_hearth",
-    "tinkerslevellingaddon:forge_throat",
-    "tinkerslevellingaddon:quenching_basin",
-    "tinkerslevellingaddon:deepslate_titanite_ore"
+    "pritheebecareful:reinforcement_anvil",
+    "pritheebecareful:forge_chamber",
+    "pritheebecareful:forge_hearth",
+    "pritheebecareful:forge_throat",
+    "pritheebecareful:quenching_basin",
+    "pritheebecareful:deepslate_titanite_ore"
   ]
 }

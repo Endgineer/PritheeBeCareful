@@ -1,0 +1,14 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": false,
+  "inputs": [
+    {
+      "item": "pritheebecareful:titanite_shard"
+    }
+  ],
+  "level": 1,
+  "result": "pritheebecareful:reinforce",
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

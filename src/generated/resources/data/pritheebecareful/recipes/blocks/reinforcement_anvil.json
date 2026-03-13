@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "create:railway_casing"
+    },
+    "s": {
+      "tag": "tconstruct:seared_blocks"
+    },
+    "t": {
+      "item": "pritheebecareful:titanite_shard"
+    }
+  },
+  "pattern": [
+    "ccc",
+    "tst",
+    "sss"
+  ],
+  "result": {
+    "item": "pritheebecareful:reinforcement_anvil"
+  },
+  "show_notification": true
+}

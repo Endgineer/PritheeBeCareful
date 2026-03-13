@@ -1,4 +1,4 @@
-// 1.20.1	2026-02-25T16:31:45.1701136	Registries
-db0c46c346420b0c108a39180bfbe655f8928aa1 data/tinkerslevellingaddon/forge/biome_modifier/deepslate_titanite_ore_biomemodifier.json
-93b492ae977eb3450a5a0b44197d9d0abc5bbe4e data/tinkerslevellingaddon/worldgen/configured_feature/deepslate_titanite_ore.json
-a6e2d51dc46992e967d9996f510286b8e8b81515 data/tinkerslevellingaddon/worldgen/placed_feature/deepslate_titanite_ore_placed.json
+// 1.20.1	2026-03-13T00:37:19.1992555	Registries
+aed4c57a7593601167aa84fb429a45b0dd7e9aad data/pritheebecareful/forge/biome_modifier/deepslate_titanite_ore_biomemodifier.json
+b8b1106cad719908f121747eeca87013b524b8d9 data/pritheebecareful/worldgen/configured_feature/deepslate_titanite_ore.json
+dedbce9d075ebb8522276c73b4e2ecb78902d1af data/pritheebecareful/worldgen/placed_feature/deepslate_titanite_ore_placed.json

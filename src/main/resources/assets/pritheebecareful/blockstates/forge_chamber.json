@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "active=false,facing=north": { "model": "pritheebecareful:block/forge_chamber" },
+    "active=false,facing=south": { "model": "pritheebecareful:block/forge_chamber", "uvlock": true, "y": 180 },
+    "active=false,facing=west":  { "model": "pritheebecareful:block/forge_chamber", "uvlock": true, "y": 270 },
+    "active=false,facing=east":  { "model": "pritheebecareful:block/forge_chamber", "uvlock": true, "y": 90 },
+    
+    "active=true,facing=north":  { "model": "pritheebecareful:block/forge_chamber_active" },
+    "active=true,facing=south":  { "model": "pritheebecareful:block/forge_chamber_active", "uvlock": true, "y": 180 },
+    "active=true,facing=west":   { "model": "pritheebecareful:block/forge_chamber_active", "uvlock": true, "y": 270 },
+    "active=true,facing=east":   { "model": "pritheebecareful:block/forge_chamber_active", "uvlock": true, "y": 90 }
+  }
+}

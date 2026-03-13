@@ -1,0 +1,19 @@
+// 1.20.1	2026-03-13T00:37:19.2055048	Registrate Provider for pritheebecareful [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+1b3a8034073f6fbe35bf10277e44e636f0fb59c3 assets/pritheebecareful/blockstates/deepslate_titanite_ore.json
+e20a0a5382d1ccb30536fb8f35b2300765732e37 assets/pritheebecareful/lang/en_ud.json
+e1c28a92b99ff900915190e2f81b56cc19c04483 assets/pritheebecareful/lang/en_us.json
+a78897034a61d66e1951142f567f91d44f4299b1 assets/pritheebecareful/models/block/deepslate_titanite_ore.json
+da0e3dc69e62d88d3f25443587182616a7a46cbf assets/pritheebecareful/models/item/deepslate_titanite_ore.json
+a50fa407f57cfc6c7316355657683333eaa52579 assets/pritheebecareful/models/item/forge_chamber.json
+9b6cda97034cafe41235c36c6120e182449f8e14 assets/pritheebecareful/models/item/forge_hearth.json
+3d6f6ddd772dc2de25e698e8fbf67f705ca00b81 assets/pritheebecareful/models/item/forge_throat.json
+04ec6c68b3ee8bfc76cd1deef68e2a34c0dc1c21 assets/pritheebecareful/models/item/quenching_basin.json
+dcd341bfa6223c87ec2bb4bd9a599b9a78c65048 assets/pritheebecareful/models/item/reinforcement_anvil.json
+2170bcaf6bf40b8d4dd1bd3de216648c21fff614 data/minecraft/tags/blocks/mineable/pickaxe.json
+2170bcaf6bf40b8d4dd1bd3de216648c21fff614 data/minecraft/tags/blocks/needs_iron_tool.json
+0c4aa2ed9c1140711a29a52f4edd189a923f37c7 data/pritheebecareful/loot_tables/blocks/deepslate_titanite_ore.json
+04d55614b2eb9435410f0e4c812d4c73b08786fe data/pritheebecareful/loot_tables/blocks/forge_chamber.json
+a40f73c2e5e1d4e3a97d6c1263b3036fbfe6c224 data/pritheebecareful/loot_tables/blocks/forge_hearth.json
+216e6faf1655dc605d6e9efbc74552fa7b5c88da data/pritheebecareful/loot_tables/blocks/forge_throat.json
+39521b4e52e40b42890d4c7ed6592bd17168b9ee data/pritheebecareful/loot_tables/blocks/quenching_basin.json
+46bb7f37a2c5dbb1ec79a96d57e042f877fac815 data/pritheebecareful/loot_tables/blocks/reinforcement_anvil.json

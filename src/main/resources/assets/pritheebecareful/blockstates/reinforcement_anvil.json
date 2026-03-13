@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "pritheebecareful:block/reinforcement_anvil", "y":  90 },
+    "facing=south": { "model": "pritheebecareful:block/reinforcement_anvil", "y": 270 },
+    "facing=west":  { "model": "pritheebecareful:block/reinforcement_anvil" },
+    "facing=east":  { "model": "pritheebecareful:block/reinforcement_anvil", "y": 180 }
+  }
+}
