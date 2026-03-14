@@ -1,6 +1,6 @@
 # Prithee Be Careful
 
-Inspired by the smithing system of Runescape 3 and the reinforce system of Dark Souls 3. The mod takes [Pyre540's Tinkers Levelling Addon](https://github.com/Pyre540/tinkers-levelling-addon/releases) and reimagines the improving system.
+Inspired by the smithing system of Runescape 3 and the reinforce system of Dark Souls 3. The mod takes [Pyre540's Tinkers Levelling Addon](https://github.com/Pyre540/tinkers-levelling-addon) and reimagines the improving system.
 
 ## Credits
 - Much of the code - [Pyre540's Tinkers Levelling Addon](https://github.com/Pyre540/tinkers-levelling-addon)
