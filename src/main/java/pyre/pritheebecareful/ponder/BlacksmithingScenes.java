@@ -2,6 +2,7 @@ package pyre.pritheebecareful.ponder;
 
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 
+import net.createmod.ponder.api.PonderPalette;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.minecraft.core.BlockPos;
@@ -67,6 +68,39 @@ public class BlacksmithingScenes {
         scene.world().showSection(util.select().layers(3, 3), Direction.DOWN);
         scene.world().showSection(util.select().layers(0, 3), Direction.UP);
         scene.idle(10);
+
+        BlockPos hearthPos = new BlockPos(2,2,2);
+        BlockPos chamberPos = new BlockPos(2,3,2);
+        BlockPos blasterPos = new BlockPos(2,0,2);
+        
+        scene.overlay().showText(120)
+            .text("The Blacksmithing Forge is built of three blocks and is used to heat Reinforce Items for metalworking")
+            .placeNearTarget()
+            .attachKeyFrame()
+            .pointAt(util.vector().topOf(chamberPos));
+        scene.idle(140);
+        
+        scene.overlay().showText(120)
+            .text("The forge must be fueled with coal, either manually or via a back port, and takes a long time to heat up")
+            .placeNearTarget()
+            .attachKeyFrame()
+            .pointAt(util.vector().topOf(hearthPos));
+        scene.idle(140);
+        
+        scene.overlay().showText(120)
+            .text("A blasting setup must bellow into the bottom of the hearth to push the forge to higher temperatures")
+            .placeNearTarget()
+            .attachKeyFrame()
+            .pointAt(util.vector().topOf(blasterPos));
+        scene.idle(140);
+        
+        scene.overlay().showText(120)
+            .colored(PonderPalette.RED)
+            .text("Reinforce Items should not be heated beyond their breakdown temperatures, as this will undo reinforce progress")
+            .placeNearTarget()
+            .attachKeyFrame()
+            .pointAt(util.vector().topOf(chamberPos));
+        scene.idle(140);
     }
     
     public static void scene3(SceneBuilder builder, SceneBuildingUtil util) {
