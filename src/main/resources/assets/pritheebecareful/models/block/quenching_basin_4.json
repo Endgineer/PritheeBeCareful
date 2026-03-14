@@ -1,5 +1,4 @@
 {
-  "render_type": "translucent",
   "parent": "block/block",
   "textures": {
     "top":    "pritheebecareful:block/quenching_basin_top",

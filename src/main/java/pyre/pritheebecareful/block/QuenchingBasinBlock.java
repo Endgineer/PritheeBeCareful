@@ -44,16 +44,17 @@ import pyre.pritheebecareful.loader.forging.ForgingMaterialSpec.MaterialReinforc
 public class QuenchingBasinBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     
-    private static final VoxelShape SHAPE = Shapes.join(
-        Shapes.block(),
-        Shapes.or(
-            Block.box(0.0D, 0.0D, 5.0D, 16.0D, 2.0D, 11.0D),
-            Block.box(5.0D, 0.0D, 0.0D, 11.0D, 2.0D, 16.0D),
-            Block.box(2.0D, 0.0D, 3.0D, 14.0D, 3.0D, 14.0D),
-            Block.box(7.0D, 5.0D, 0.0D, 9.0D, 13.0D, 16.0D),
-            Block.box(0.0D, 5.0D, 7.0D, 16.0D, 13.0D, 9.0D),
-            Block.box(2.0D, 4.0D, 2.0D, 14.0D, 16.0D, 14.0D)),
-        BooleanOp.ONLY_FIRST);
+    private static final VoxelShape SHAPE = Shapes.or(
+        Block.box(0, 0, 0, 5, 2, 5),
+        Block.box(11, 0, 0, 16, 2, 5),
+        Block.box(0, 0, 11, 5, 2, 16),
+        Block.box(11, 0, 11, 16, 2, 16),
+        Block.box(0, 2, 0, 16, 16, 2),
+        Block.box(0, 2, 14, 16, 16, 16),
+        Block.box(0, 2, 2, 2, 16, 14),
+        Block.box(14, 2, 2, 16, 16, 14),
+        Block.box(2, 2, 2, 14, 4, 14)
+    );
     
     public static final IntegerProperty LEVEL = IntegerProperty.create("level", 0, 4);
     
