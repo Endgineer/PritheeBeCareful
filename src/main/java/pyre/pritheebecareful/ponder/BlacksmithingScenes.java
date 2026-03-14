@@ -76,5 +76,21 @@ public class BlacksmithingScenes {
         scene.world().showSection(util.select().layer(0), Direction.UP);
         scene.world().showSection(util.select().layers(1, 3), Direction.DOWN);
         scene.idle(10);
+
+        BlockPos basinPos = new BlockPos(2,1,2);
+        
+        scene.overlay().showText(80)
+            .text("The Quenching Basin is used for quenching Reinforce Items")
+            .placeNearTarget()
+            .attachKeyFrame()
+            .pointAt(util.vector().topOf(basinPos));
+        scene.idle(100);
+        
+        scene.overlay().showText(120)
+            .text("When a Reinforce Item has been depleted of progress, right click it into a Quenching Basin containing water to quench and finish it")
+            .placeNearTarget()
+            .attachKeyFrame()
+            .pointAt(util.vector().topOf(basinPos));
+        scene.idle(140);
     }
 }

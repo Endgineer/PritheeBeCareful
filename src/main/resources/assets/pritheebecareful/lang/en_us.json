@@ -97,7 +97,13 @@
   "pritheebecareful.ponder.reinforcement_anvil.text_5": "When a Reinforce Item has hit a progress wall, right click it with a Titanite Shard to fold it, provided you have enough of the gear's material ingots in your inventory",
   "pritheebecareful.ponder.reinforcement_anvil.text_6": "With a finished Reinforce Item in hand, place the gear item onto the anvil and right click the anvil with the Reinforce Item to apply it",
   "pritheebecareful.ponder.blacksmithing_forge.header": "Blacksmithing: Blacksmithing Forge",
+  "pritheebecareful.ponder.blacksmithing_forge.text_1": "The Blacksmithing Forge is used for",
+  "pritheebecareful.ponder.blacksmithing_forge.text_2": "The forge requires coal to generate heat",
+  "pritheebecareful.ponder.blacksmithing_forge.text_3": "The bellows are optional and speed up heating",
+  "pritheebecareful.ponder.blacksmithing_forge.text_4": "Reinforce Items should not be heated to their breakdown temp and beyond",
   "pritheebecareful.ponder.quenching_basin.header": "Blacksmithing: Quenching Basin",
+  "pritheebecareful.ponder.quenching_basin.text_1": "The Quenching Basin is used for quenching Reinforce Items",
+  "pritheebecareful.ponder.quenching_basin.text_2": "When a Reinforce Item has been depleted of progress, right click it into a Quenching Basin containing water to quench and finish it",
   
   "tooltip.pritheebecareful.forge.forge_temperature": "Temperature: %s \u00B0C",
   "tooltip.pritheebecareful.forge.item_temperature": "Item: %s \u00B0C",
