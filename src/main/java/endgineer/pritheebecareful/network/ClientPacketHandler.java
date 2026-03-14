@@ -1,0 +1,30 @@
+package endgineer.pritheebecareful.network;
+
+import endgineer.pritheebecareful.ReinforceModifier;
+import endgineer.pritheebecareful.config.Config;
+import endgineer.pritheebecareful.util.ModUtil;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.sounds.SoundEvent;
+
+public class ClientPacketHandler {
+
+    public static void handleLevelUpMessage(int level, Component toolName) {
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player == null) {
+            return;
+        }
+        if (Config.enableLevelUpMessage.get()) {
+            MutableComponent message = ModUtil.makeTranslation("message", "level_up." + level / 10, toolName);
+            message.withStyle(style -> style.withColor(ReinforceModifier.REINFORCE_MODIFIER_COLOR));
+            player.displayClientMessage(message, false);
+        }
+        SoundEvent soundEvent = Config.levelUpSound.get().getSoundEvent();
+        if (soundEvent != null) {
+            player.level().playSound(player, player.getX(), player.getY(), player.getZ(),
+                    soundEvent, player.getSoundSource(), 1, 1);
+        }
+    }
+}

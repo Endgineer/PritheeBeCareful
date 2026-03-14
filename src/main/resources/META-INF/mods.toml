@@ -7,9 +7,9 @@ issueTrackerURL="https://github.com/Endgineer/tinkers-levelling-addon-pbc"
 modId="pritheebecareful"
 version="${version}"
 displayName="Prithee Be Careful"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/tinkers-levelling-addon/"
+displayURL="https://github.com/Endgineer/tinkers-levelling-addon-pbc"
 logoFile="logo.png"
-authors="Pyre540"
+authors="Endgineer"
 description='''
 I don't want to see me work squandered.
 '''
