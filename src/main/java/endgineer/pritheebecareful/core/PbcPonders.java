@@ -14,7 +14,7 @@ import net.createmod.ponder.api.registration.SharedTextRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
 
 public class PbcPonders implements PonderPlugin {
-    public static ResourceLocation BLACKSMITHING = new ResourceLocation(PritheeBeCareful.MOD_ID, "blacksmithing");
+    public static ResourceLocation BLACKSMITHING = ResourceLocation.fromNamespaceAndPath(PritheeBeCareful.MOD_ID, "blacksmithing");
     
     @Override
     public String getModId() {

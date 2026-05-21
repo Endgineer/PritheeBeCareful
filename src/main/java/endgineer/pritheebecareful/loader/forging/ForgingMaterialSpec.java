@@ -148,7 +148,7 @@ public class ForgingMaterialSpec {
     private TagKey<Item> materialIngot;
     
     private ForgingMaterialSpec(String ingotTag, JsonArray materialReinforceSpecs) {
-        this.materialIngot = TagKey.create(Registries.ITEM, new ResourceLocation(ingotTag));
+        this.materialIngot = TagKey.create(Registries.ITEM, ResourceLocation.parse(ingotTag));
         
         this.materialReinforceSpecs = new MaterialReinforceSpec[5];
         for(int i = 0; i < 5; i++) {

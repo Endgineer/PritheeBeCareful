@@ -1,13 +1,13 @@
 package endgineer.pritheebecareful.setup;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -44,8 +44,7 @@ public class TooltipEventHandler {
                     .withStyle(s -> s.withUnderlined(true));
 
     public static void prepareTooltipInfo(Player player, ItemStack stack, List<Component> tooltip) {
-        KeyModifier activeModifierKey = KeyModifier.getActiveModifier();
-        if (player == null || activeModifierKey == KeyModifier.CONTROL || activeModifierKey == KeyModifier.SHIFT) {
+        if (player == null || Screen.hasControlDown() || Screen.hasShiftDown()) {
             return;
         }
 
@@ -63,7 +62,7 @@ public class TooltipEventHandler {
 
         List<Component> infoEntries = new ArrayList<>();
         ToolStack tool = ToolStack.from(stack);
-        if (activeModifierKey == KeyModifier.ALT) {
+        if (Screen.hasAltDown()) {
             infoEntries.add(tooltip.get(0));
             infoEntries.addAll(prepareLevelInfo(tool));
             tooltip.clear();

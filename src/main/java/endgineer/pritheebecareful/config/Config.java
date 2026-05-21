@@ -6,13 +6,14 @@ import endgineer.pritheebecareful.PritheeBeCareful;
 import endgineer.pritheebecareful.setup.Sounds;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import slimeknights.tconstruct.library.tools.stat.FloatToolStat;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import static endgineer.pritheebecareful.util.ToolLevellingUtil.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Config {
@@ -672,9 +673,9 @@ public class Config {
                 .defineEnum("sound", LevelUpSound.SNARE_DRUM, EnumGetMethod.NAME_IGNORECASE, LevelUpSound.values());
     }
 
-    public static void init() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SERVER_CONFIG);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_CONFIG);
+    public static void init(FMLJavaModLoadingContext context) {
+        context.registerConfig(ModConfig.Type.SERVER, SERVER_CONFIG);
+        context.registerConfig(ModConfig.Type.CLIENT, CLIENT_CONFIG);
     }
 
     public static List<String> getToolsSlotsOrder() {
@@ -682,7 +683,7 @@ public class Config {
         if (slotsOrder.isEmpty()) {
             slotsOrder = DEFAULT_TOOLS_SLOTS_ORDER;
         }
-        return (List<String>) slotsOrder;
+        return new ArrayList<>(slotsOrder);
     }
 
     public static List<String> getToolsSlotsRandomPool() {
@@ -690,7 +691,7 @@ public class Config {
         if (slotsRandomPool.isEmpty()) {
             slotsRandomPool = DEFAULT_TOOLS_SLOTS_RANDOM_POOL;
         }
-        return (List<String>) slotsRandomPool;
+        return new ArrayList<>(slotsRandomPool);
     }
 
     public static List<String> getToolsStatsOrder() {
@@ -698,7 +699,7 @@ public class Config {
         if (statsOrder.isEmpty()) {
             statsOrder = DEFAULT_TOOLS_STATS_ORDER;
         }
-        return (List<String>) statsOrder;
+        return new ArrayList<>(statsOrder);
     }
 
     public static List<String> getToolsStatsRandomPool() {
@@ -706,7 +707,7 @@ public class Config {
         if (statsRandomPool.isEmpty()) {
             statsRandomPool = DEFAULT_TOOLS_STATS_RANDOM_POOL;
         }
-        return (List<String>) statsRandomPool;
+        return new ArrayList<>(statsRandomPool);
     }
 
     public static List<String> getArmorSlotsOrder() {
@@ -714,7 +715,7 @@ public class Config {
         if (slotsOrder.isEmpty()) {
             slotsOrder = DEFAULT_ARMOR_SLOTS_ORDER;
         }
-        return (List<String>) slotsOrder;
+        return new ArrayList<>(slotsOrder);
     }
 
     public static List<String> getArmorSlotsRandomPool() {
@@ -722,7 +723,7 @@ public class Config {
         if (slotsRandomPool.isEmpty()) {
             slotsRandomPool = DEFAULT_ARMOR_SLOTS_RANDOM_POOL;
         }
-        return (List<String>) slotsRandomPool;
+        return new ArrayList<>(slotsRandomPool);
     }
 
     public static List<String> getArmorStatsOrder() {
@@ -730,7 +731,7 @@ public class Config {
         if (statsOrder.isEmpty()) {
             statsOrder = DEFAULT_ARMOR_STATS_ORDER;
         }
-        return (List<String>) statsOrder;
+        return new ArrayList<>(statsOrder);
     }
 
     public static List<String> getArmorStatsRandomPool() {
@@ -738,7 +739,7 @@ public class Config {
         if (statsRandomPool.isEmpty()) {
             statsRandomPool = DEFAULT_ARMOR_STATS_RANDOM_POOL;
         }
-        return (List<String>) statsRandomPool;
+        return new ArrayList<>(statsRandomPool);
     }
     
     public static List<String> getRangedSlotsOrder() {
@@ -746,7 +747,7 @@ public class Config {
         if (slotsOrder.isEmpty()) {
             slotsOrder = DEFAULT_RANGED_SLOTS_ORDER;
         }
-        return (List<String>) slotsOrder;
+        return new ArrayList<>(slotsOrder);
     }
     
     public static List<String> getRangedSlotsRandomPool() {
@@ -754,7 +755,7 @@ public class Config {
         if (slotsRandomPool.isEmpty()) {
             slotsRandomPool = DEFAULT_RANGED_SLOTS_RANDOM_POOL;
         }
-        return (List<String>) slotsRandomPool;
+        return new ArrayList<>(slotsRandomPool);
     }
 
     public static List<String> getRangedStatsOrder() {
@@ -762,7 +763,7 @@ public class Config {
         if (statsOrder.isEmpty()) {
             statsOrder = DEFAULT_RANGED_STATS_ORDER;
         }
-        return (List<String>) statsOrder;
+        return new ArrayList<>(statsOrder);
     }
 
     public static List<String> getRangedStatsRandomPool() {
@@ -770,7 +771,7 @@ public class Config {
         if (statsRandomPool.isEmpty()) {
             statsRandomPool = DEFAULT_RANGED_STATS_RANDOM_POOL;
         }
-        return (List<String>) statsRandomPool;
+        return new ArrayList<>(statsRandomPool);
     }
     
     public static List<String> getStaffSlotsOrder() {
@@ -778,7 +779,7 @@ public class Config {
         if (slotsOrder.isEmpty()) {
             slotsOrder = DEFAULT_STAFF_SLOTS_ORDER;
         }
-        return (List<String>) slotsOrder;
+        return new ArrayList<>(slotsOrder);
     }
     
     public static List<String> getStaffSlotsRandomPool() {
@@ -786,7 +787,7 @@ public class Config {
         if (slotsRandomPool.isEmpty()) {
             slotsRandomPool = DEFAULT_STAFF_SLOTS_RANDOM_POOL;
         }
-        return (List<String>) slotsRandomPool;
+        return new ArrayList<>(slotsRandomPool);
     }
     
     public static List<String> getStaffStatsOrder() {
@@ -794,7 +795,7 @@ public class Config {
         if (statsOrder.isEmpty()) {
             statsOrder = DEFAULT_STAFF_STATS_ORDER;
         }
-        return (List<String>) statsOrder;
+        return new ArrayList<>(statsOrder);
     }
     
     public static List<String> getStaffStatsRandomPool() {
@@ -802,7 +803,7 @@ public class Config {
         if (statsRandomPool.isEmpty()) {
             statsRandomPool = DEFAULT_STAFF_STATS_RANDOM_POOL;
         }
-        return (List<String>) statsRandomPool;
+        return new ArrayList<>(statsRandomPool);
     }
 
     public static double getToolStatValue(FloatToolStat stat) {

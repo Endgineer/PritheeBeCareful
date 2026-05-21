@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 public class ModUtil {
     
     public static ResourceLocation getResource(String name) {
-        return new ResourceLocation(PritheeBeCareful.MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(PritheeBeCareful.MOD_ID, name);
     }
     
     public static boolean canTranslate(String base, String name) {

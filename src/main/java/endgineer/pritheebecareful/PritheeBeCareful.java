@@ -3,9 +3,6 @@ package endgineer.pritheebecareful;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.api.behaviour.spouting.BlockSpoutingBehaviour;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.item.ItemDescription;
-import com.simibubi.create.foundation.item.KineticStats;
-import com.simibubi.create.foundation.item.TooltipModifier;
 
 import endgineer.pritheebecareful.command.ModCommands;
 import endgineer.pritheebecareful.config.Config;
@@ -25,13 +22,11 @@ import endgineer.pritheebecareful.network.Messages;
 import endgineer.pritheebecareful.setup.Registration;
 import endgineer.pritheebecareful.setup.SpoutFilling;
 import endgineer.pritheebecareful.worldgen.PbcConfiguredFeatures;
-import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -55,8 +50,8 @@ public class PritheeBeCareful {
 
     private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
     
-    public PritheeBeCareful() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public PritheeBeCareful(FMLJavaModLoadingContext context) {
+        IEventBus modEventBus = context.getModEventBus();
         
         REGISTRATE.registerEventListeners(modEventBus);
         REGISTRATE.setCreativeTab(PbcCreativeModeTabs.MAIN);
@@ -67,8 +62,8 @@ public class PritheeBeCareful {
         PbcMenus.register(modEventBus);
         PbcConfiguredFeatures.register(modEventBus);
         
-        Config.init();
-        Registration.init();
+        Config.init(context);
+        Registration.init(modEventBus);
         Messages.register();
         ModCommands.init();
         
@@ -95,7 +90,6 @@ public class PritheeBeCareful {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         
         generator.addProvider(event.includeServer(), new PbcRecipeProvider(packOutput));
         generator.addProvider(event.includeServer(), new PbcWorldGenProvider(packOutput, lookupProvider));

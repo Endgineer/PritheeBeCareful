@@ -16,7 +16,7 @@ public class PbcCreativeModeTabs {
     public static final RegistryObject<CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register("main",
         () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup."+PritheeBeCareful.MOD_ID+".main"))
-            .withTabsBefore(new ResourceLocation("create", "palettes"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath("create", "palettes"))
             .icon(() -> new ItemStack(PbcBlocks.REINFORCEMENT_ANVIL.get()))
             .displayItems((parameters, output) -> {
                 output.accept(PbcBlocks.REINFORCEMENT_ANVIL.get(), CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);

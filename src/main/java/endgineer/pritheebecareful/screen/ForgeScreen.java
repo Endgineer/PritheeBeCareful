@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 import slimeknights.tconstruct.library.client.GuiUtil;
 
 public class ForgeScreen extends AbstractContainerScreen<ForgeContainerMenu> {
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(PritheeBeCareful.MOD_ID, "textures/gui/forge.png");
+    private static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(PritheeBeCareful.MOD_ID, "textures/gui/forge.png");
     
     public ForgeScreen(ForgeContainerMenu menu, Inventory inventory, Component name) {
         super(menu, inventory, name);

@@ -43,7 +43,6 @@ import com.simibubi.create.foundation.utility.CreateLang;
 import endgineer.pritheebecareful.PritheeBeCareful;
 import endgineer.pritheebecareful.ReinforceModifier;
 import endgineer.pritheebecareful.block.ReinforcementAnvilBlock;
-import endgineer.pritheebecareful.core.PbcBlockEntities;
 import endgineer.pritheebecareful.item.LargeTitaniteShardItem;
 import endgineer.pritheebecareful.item.ReinforceItem;
 import endgineer.pritheebecareful.item.TitaniteBaseItem;
@@ -353,7 +352,7 @@ public class ReinforcementAnvilBlockEntity extends TableBlockEntity implements I
                 tag.putInt(ReinforceItem.STATUS, ReinforceItem.ReinforceStatus.UNTOUCHED.ordinal());
                 tag.putInt(ReinforceItem.CLOCK, 0);
                 
-                ItemStack result = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(PritheeBeCareful.MOD_ID+":reinforce_item")));
+                ItemStack result = new ItemStack(ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath(PritheeBeCareful.MOD_ID, "reinforce_item")));
                 result.setTag(tag);
                 
                 player.setItemInHand(InteractionHand.MAIN_HAND, handstack.copyWithCount(handstack.getCount()-1));

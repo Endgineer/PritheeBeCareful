@@ -394,7 +394,7 @@ public class ReinforceModifier extends Modifier implements PlantHarvestModifierH
         }
         IToolStackView tool = event.getTool();
         if (Config.enableWarpingXp.get() && event.getEntity() instanceof ServerPlayer player &&
-                event.getEntry().getId().equals(TinkerModifiers.warping.getId()) &&
+                event.getModifier().getId().equals(TinkerModifiers.warping.getId()) &&
                 tool.getModifierLevel(Registration.REINFORCE.get().getId()) > 0) {
             addExperience((ToolStack) tool, 1 + Config.bonusWarpingXp.get(), player);
         }
