@@ -41,8 +41,8 @@ public class ReinforcedScalingStatBoostModule implements ToolStatsModifierHook, 
         
         int reinforce = persistentData.getInt(REINFORCE_KEY);
         if (reinforce == 0) return;
-
-        float result = 1.0f + (reinforce * 0.03f);
+        
+        float result = 1.0f + (float) (0.01*Math.pow(2, reinforce-1));
         
         ToolStats.DURABILITY.multiply(builder, result);
         ToolStats.USE_ITEM_SPEED.multiply(builder, result);
